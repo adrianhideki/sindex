@@ -1,0 +1,14 @@
+C:\Users\Hideki\source\repos\sindex\bin\Debug\sindex.exe.config
+C:\Users\Hideki\source\repos\sindex\bin\Debug\sindex.exe
+C:\Users\Hideki\source\repos\sindex\bin\Debug\sindex.pdb
+C:\Users\Hideki\source\repos\sindex\bin\Debug\De.TorstenMandelkow.MetroChart.dll
+C:\Users\Hideki\source\repos\sindex\bin\Debug\MetroFramework.Design.dll
+C:\Users\Hideki\source\repos\sindex\bin\Debug\MetroFramework.dll
+C:\Users\Hideki\source\repos\sindex\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Hideki\source\repos\sindex\obj\Debug\sindex.csprojAssemblyReference.cache
+C:\Users\Hideki\source\repos\sindex\obj\Debug\sindex.frmMain.resources
+C:\Users\Hideki\source\repos\sindex\obj\Debug\sindex.Properties.Resources.resources
+C:\Users\Hideki\source\repos\sindex\obj\Debug\sindex.csproj.GenerateResource.cache
+C:\Users\Hideki\source\repos\sindex\obj\Debug\sindex.csproj.CopyComplete
+C:\Users\Hideki\source\repos\sindex\obj\Debug\sindex.exe
+C:\Users\Hideki\source\repos\sindex\obj\Debug\sindex.pdb
