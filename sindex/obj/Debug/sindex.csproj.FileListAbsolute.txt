@@ -26,3 +26,5 @@ C:\Temp\tcc\sindex\obj\Debug\sindex.csproj.GenerateResource.cache
 C:\Temp\tcc\sindex\obj\Debug\sindex.csproj.CopyComplete
 C:\Temp\tcc\sindex\obj\Debug\sindex.exe
 C:\Temp\tcc\sindex\obj\Debug\sindex.pdb
+C:\Temp\tcc\sindex\bin\Debug\Dapper.dll
+C:\Temp\tcc\sindex\bin\Debug\Dapper.xml

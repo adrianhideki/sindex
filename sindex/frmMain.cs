@@ -20,5 +20,19 @@ namespace sindex
             this.Theme = metroStyleManager.Theme;
             this.Style = metroStyleManager.Style;
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            dbConnect db = new dbConnect(txtUser.Text, txtPassword.Text, txtServer.Text);
+            var sqlVersion = db.executeQuery("SELECT @@VERSION AS Version", new Dapper.DynamicParameters(), "master");
+            string version = "";
+
+            foreach (dynamic row  in sqlVersion)
+            {
+                version = row.Version;
+            }
+
+            lblVersao.Text = version;
+        }
     }
 }

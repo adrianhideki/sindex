@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
 using System.Data;
+using Dapper;
 
 namespace sindex
 {
@@ -27,51 +27,20 @@ namespace sindex
             return String.Format("Data Source = {0}; Initial Catalog = {1}; User ID = {2}; Password = {3};", this.server, dbName, this.user, this.pass);
         }
 
-        public SqlDataReader executeDataReader(string query, List<SqlParameter> parameters) {
-            using (SqlConnection connection = new SqlConnection(this.getConnectionString("master")))
+        public dynamic executeQuery(string query, DynamicParameters parameters, string dbName)
+        {
+            using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-
-                foreach(SqlParameter p in parameters)
-                {
-                    command.Parameters.Add(p);
-                }
-                
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                return reader;
+                var result = connection.Query(query, parameters);
+                return result;
             }
         }
-
-        public DataSet executeDataSet(string query, List<SqlParameter> parameters)
+        public int executeCommand(string query, DynamicParameters parameters, string dbName)
         {
-            using (SqlConnection connection = new SqlConnection(this.getConnectionString("master")))
+            using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
             {
-                var dataAdapter = new SqlDataAdapter(query, connection);
-
-
-                foreach (SqlParameter p in parameters)
-                {
-                    dataAdapter.SelectCommand.Parameters.Add(p);
-                }
-
-                var commandBuilder = new SqlCommandBuilder(dataAdapter);
-                var ds = new DataSet();
-
-                dataAdapter.Fill(ds);
-                return ds;
-            }
-        }
-
-        public void executeNonQuery(string query)
-        {
-            using (SqlConnection connection = new SqlConnection(this.getConnectionString("master")))
-            {
-                SqlCommand command = new SqlCommand("SELECT @@SPID as spid", connection);
-                command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
+                var result = connection.Execute(query, parameters);
+                return result;
             }
         }
 

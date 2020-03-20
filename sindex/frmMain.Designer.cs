@@ -37,6 +37,9 @@
             this.pnlLogin = new MetroFramework.Controls.MetroPanel();
             this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.lblVersao = new MetroFramework.Controls.MetroLabel();
+            this.txtServer = new MetroFramework.Controls.MetroTextBox();
+            this.lblServidor = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlLogin.SuspendLayout();
             this.SuspendLayout();
@@ -129,6 +132,9 @@
             // 
             this.pnlLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlLogin.Controls.Add(this.lblServidor);
+            this.pnlLogin.Controls.Add(this.txtServer);
+            this.pnlLogin.Controls.Add(this.lblVersao);
             this.pnlLogin.Controls.Add(this.btnLogin);
             this.pnlLogin.Controls.Add(this.metroLabel3);
             this.pnlLogin.Controls.Add(this.lblSenha);
@@ -154,6 +160,7 @@
             this.btnLogin.TabIndex = 7;
             this.btnLogin.Text = "Entrar";
             this.btnLogin.UseSelectable = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // metroLabel3
             // 
@@ -168,6 +175,52 @@
             this.metroLabel3.TabIndex = 5;
             this.metroLabel3.Text = "sindex";
             this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblVersao
+            // 
+            this.lblVersao.Location = new System.Drawing.Point(21, 404);
+            this.lblVersao.Name = "lblVersao";
+            this.lblVersao.Size = new System.Drawing.Size(240, 123);
+            this.lblVersao.TabIndex = 8;
+            // 
+            // txtServer
+            // 
+            // 
+            // 
+            // 
+            this.txtServer.CustomButton.Image = null;
+            this.txtServer.CustomButton.Location = new System.Drawing.Point(218, 1);
+            this.txtServer.CustomButton.Name = "";
+            this.txtServer.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtServer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtServer.CustomButton.TabIndex = 1;
+            this.txtServer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtServer.CustomButton.UseSelectable = true;
+            this.txtServer.CustomButton.Visible = false;
+            this.txtServer.Lines = new string[0];
+            this.txtServer.Location = new System.Drawing.Point(21, 211);
+            this.txtServer.MaxLength = 32767;
+            this.txtServer.Name = "txtServer";
+            this.txtServer.PasswordChar = '\0';
+            this.txtServer.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtServer.SelectedText = "";
+            this.txtServer.SelectionLength = 0;
+            this.txtServer.SelectionStart = 0;
+            this.txtServer.ShortcutsEnabled = true;
+            this.txtServer.Size = new System.Drawing.Size(240, 23);
+            this.txtServer.TabIndex = 9;
+            this.txtServer.UseSelectable = true;
+            this.txtServer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtServer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // lblServidor
+            // 
+            this.lblServidor.AutoSize = true;
+            this.lblServidor.Location = new System.Drawing.Point(21, 187);
+            this.lblServidor.Name = "lblServidor";
+            this.lblServidor.Size = new System.Drawing.Size(63, 19);
+            this.lblServidor.TabIndex = 10;
+            this.lblServidor.Text = "Servidor:";
             // 
             // frmMain
             // 
@@ -195,6 +248,9 @@
         private MetroFramework.Controls.MetroPanel pnlLogin;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroButton btnLogin;
+        private MetroFramework.Controls.MetroLabel lblVersao;
+        private MetroFramework.Controls.MetroTextBox txtServer;
+        private MetroFramework.Controls.MetroLabel lblServidor;
     }
 }
 
