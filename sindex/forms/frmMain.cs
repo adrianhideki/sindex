@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework.Controls;
+using sindex.model;
 
 namespace sindex
 {
@@ -24,7 +25,19 @@ namespace sindex
         private void btnLogin_Click(object sender, EventArgs e)
         {
             dbConnect db = new dbConnect(txtUser.Text, txtPassword.Text, txtServer.Text);
-            var sqlVersion = db.executeQuery("SELECT @@VERSION AS Version", new Dapper.DynamicParameters(), "master");
+
+            string errMsg = "";
+            int errCode = 0;
+
+            var sqlVersion = db.executeQuery("SELECT @@VERSION AS Version", new Dapper.DynamicParameters(), "master", out errMsg, out errCode);
+
+            if (errCode != 0)
+            {
+                metroFunctions.ShowMessage(this, errMsg, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             string version = "";
 
             foreach (dynamic row  in sqlVersion)
