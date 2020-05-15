@@ -28,3 +28,4 @@ C:\Temp\tcc\sindex\obj\Debug\sindex.exe
 C:\Temp\tcc\sindex\obj\Debug\sindex.pdb
 C:\Temp\tcc\sindex\bin\Debug\Dapper.dll
 C:\Temp\tcc\sindex\bin\Debug\Dapper.xml
+C:\Temp\tcc\sindex\obj\Debug\sindex.csproj.CoreCompileInputs.cache

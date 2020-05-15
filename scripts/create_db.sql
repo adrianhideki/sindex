@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS dbo.[server];
 DROP TABLE IF EXISTS dbo.[configuration];
 GO
 CREATE TABLE dbo.[server](
-  server_id   int PRIMARY KEY NOT NULL
+  server_id   int identity PRIMARY KEY NOT NULL
  ,server_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime NULL
 );
