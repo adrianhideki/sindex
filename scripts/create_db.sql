@@ -67,7 +67,10 @@ CREATE TABLE dbo.[file](
  ,file_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,file_size_kb numeric(18,6) NOT NULL
  ,filegroup_uid int NOT NULL
+ ,file_path varchar(500) COLLATE Latin1_General_CI_AS
+ ,file_growth_size_kb numeric(18,6) NOT NULL
  ,update_date datetime
+ ,database_uid int NOT NULL
 )
 GO
 CREATE TABLE dbo.[table](
