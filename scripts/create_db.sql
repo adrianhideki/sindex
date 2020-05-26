@@ -81,6 +81,7 @@ CREATE TABLE dbo.[table](
  ,update_date datetime
  ,create_date datetime
  ,type varchar(10) COLLATE Latin1_General_CI_AS NOT NULL
+ ,database_uid int NOT NULL
 );
 GO
 CREATE TABLE dbo.[stat](
