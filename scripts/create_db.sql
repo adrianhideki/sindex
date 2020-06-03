@@ -26,6 +26,7 @@ GO
 CREATE TABLE dbo.[configuration](
   configuration_id int identity(1,1) PRIMARY KEY NOT NULL
  ,configuration_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
+ ,configuration_description varchar(512) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime NULL
 );
 GO
@@ -94,6 +95,8 @@ CREATE TABLE dbo.[stat](
  ,table_uid int NOT NULL
  ,filter varchar(4000) COLLATE Latin1_General_CI_AS
  ,is_autocreated bit NOT NULL
+ ,database_uid int NOT NULL
+ ,columns varchar(5000) NOT NULL
 );
 GO
 CREATE TABLE dbo.[constraint](
@@ -111,6 +114,7 @@ CREATE TABLE dbo.[constraint](
  ,parent_columns varchar(4000) NULL
  ,is_disabled bit NOT NULL
  ,is_not_trusted bit NOT NULL
+ ,database_uid int NOT NULL
 );
 GO
 CREATE TABLE dbo.[index](
@@ -131,4 +135,5 @@ CREATE TABLE dbo.[index](
  ,filter_condition varchar(1000) COLLATE Latin1_General_CI_AS
  ,script_create varchar(8000)
  ,script_drop varchar(1000)
+ ,database_uid int NOT NULL
 );

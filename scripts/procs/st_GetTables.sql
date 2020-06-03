@@ -41,11 +41,11 @@ BEGIN
         ,create_date = tables.create_date
         ,type = tables.type
         ,db_uid = @db_uid
-  FROM sys.tables 
-       INNER JOIN sys.indexes
+  FROM [db].sys.tables 
+       INNER JOIN [db].sys.indexes
        ON indexes.object_id = tables.object_id AND
           indexes.type IN (0,1)
-       INNER JOIN sys.filegroups
+       INNER JOIN [db].sys.filegroups
        ON filegroups.data_space_id = indexes.data_space_id
        INNER JOIN sindex.dbo.[filegroup]
        ON [filegroup].filegroup_name COLLATE Latin1_General_CI_AS = filegroups.name COLLATE Latin1_General_CI_AS AND
@@ -57,7 +57,7 @@ BEGIN
 
   DELETE FROM sindex.dbo.[table]
   WHERE NOT EXISTS(SELECT 1
-                   FROM sys.tables
+                   FROM [db].sys.tables
                    WHERE tables.name COLLATE Latin1_General_CI_AS = [table].table_name COLLATE Latin1_General_CI_AS)
     AND [table].database_uid = @db_uid;
 
@@ -70,12 +70,12 @@ BEGIN
         ,type          = tables.type
         ,database_uid  = @db_uid
   FROM sindex.dbo.[table]
-       INNER JOIN sys.tables 
+       INNER JOIN [db].sys.tables 
        ON tables.name COLLATE Latin1_General_CI_AS = [table].table_name COLLATE Latin1_General_CI_AS
-       INNER JOIN sys.indexes
+       INNER JOIN [db].sys.indexes
        ON indexes.object_id = tables.object_id AND
           indexes.type IN (0,1)
-       INNER JOIN sys.filegroups
+       INNER JOIN [db].sys.filegroups
        ON filegroups.data_space_id = indexes.data_space_id
        INNER JOIN sindex.dbo.[filegroup]
        ON [filegroup].filegroup_name COLLATE Latin1_General_CI_AS = filegroups.name COLLATE Latin1_General_CI_AS AND
