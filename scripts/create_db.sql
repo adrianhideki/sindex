@@ -37,6 +37,7 @@ CREATE TABLE dbo.[server_configurations](
  ,update_date datetime NULL
  PRIMARY KEY(configuration_id, server_id)
 );
+
 GO
 CREATE TABLE dbo.[database](
   database_id int NOT NULL
@@ -48,14 +49,16 @@ CREATE TABLE dbo.[database](
 GO
 CREATE TABLE dbo.[database_configurations](
   configuration_id int NOT NULL
- ,database_uid int NOT NULL
+ ,database_id int NULL
  ,configuration_value varchar(255) COLLATE Latin1_General_CI_AS
  ,update_date datetime
+ ,database_uid int NOT NULL
  ,PRIMARY KEY(configuration_id, database_uid)
 );
 GO
 CREATE TABLE dbo.[filegroup](
   filegroup_uid int identity(1,1) NOT NULL PRIMARY KEY
+ ,database_id int NULL
  ,database_uid int NOT NULL
  ,filegroup_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,filegroup_type varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
@@ -137,3 +140,62 @@ CREATE TABLE dbo.[index](
  ,script_drop varchar(1000)
  ,database_uid int NOT NULL
 );
+GO
+
+/*
+ALTER TABLE dbo.[server_configurations]
+ADD CONSTRAINT FK_server_server_configurations 
+FOREIGN KEY (server_id) REFERENCES dbo.[server] (server_id);
+
+ALTER TABLE dbo.[server_configurations]
+ADD CONSTRAINT FK_Configuration_server_configurations 
+FOREIGN KEY(configuration_id) REFERENCES dbo.[configuration] (configuration_id);
+
+ALTER TABLE dbo.[database]
+ADD CONSTRAINT FK_Server_Database 
+FOREIGN KEY(server_id) REFERENCES dbo.[server] (server_id);
+
+ALTER TABLE dbo.[database_configurations]
+ADD CONSTRAINT FK_Database_database_configurations
+FOREIGN KEY(database_uid) REFERENCES dbo.[database] (database_uid);
+
+ALTER TABLE dbo.[database_configurations]
+ADD CONSTRAINT FK_configuration_database_configurations
+FOREIGN KEY(configuration_id) REFERENCES dbo.[configuration] (configuration_id);
+
+ALTER TABLE dbo.[filegroup]
+ADD CONSTRAINT FK_Database_filegroup
+FOREIGN KEY(database_uid) REFERENCES dbo.[database] (database_uid);
+
+ALTER TABLE dbo.[file]
+ADD CONSTRAINT FK_filegroup_file
+FOREIGN KEY(filegroup_uid) REFERENCES dbo.[filegroup] (filegroup_uid);
+
+ALTER TABLE dbo.[table]
+ADD CONSTRAINT FK_Table_filegroup
+FOREIGN KEY(filegroup_uid) REFERENCES dbo.[filegroup] (filegroup_uid);
+
+ALTER TABLE dbo.[stat]
+ADD CONSTRAINT FK_stat_table
+FOREIGN KEY (table_uid) REFERENCES dbo.[table] (table_uid);
+
+ALTER TABLE dbo.[constraint]
+ADD CONSTRAINT FK_constraint_parent_table
+FOREIGN KEY (parent_table_uid) REFERENCES dbo.[table] (table_uid);
+
+ALTER TABLE dbo.[constraint]
+ADD CONSTRAINT FK_constraint_referenced_table
+FOREIGN KEY (referenced_table_uid) REFERENCES dbo.[table] (table_uid);
+
+ALTER TABLE dbo.[index]
+ADD CONSTRAINT FK_index_table
+FOREIGN KEY (table_uid) REFERENCES dbo.[table] (table_uid);
+
+EXEC dbo.st_GetServers;
+EXEC dbo.st_GetDatabases;
+EXEC dbo.st_GetFilegroups;
+EXEC dbo.st_GetFiles;
+EXEC dbo.st_GetTables;
+EXEC dbo.st_GetStats;
+EXEC dbo.st_GetConstraints
+*/
