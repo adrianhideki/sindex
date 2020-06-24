@@ -1,3 +1,4 @@
+--EXEC dbo.st_GetConstraints
 CREATE PROCEDURE dbo.st_GetConstraints
 AS
 BEGIN

@@ -123,21 +123,21 @@ GO
 CREATE TABLE dbo.[index](
   index_uid int identity(1,1)
  ,table_uid int NOT NULL
- ,filegroup_id int NOT NULL
+ ,filegroup_uid int NOT NULL
  ,index_id int NOT NULL
  ,update_date datetime
  ,create_date datetime
- ,index_name datetime
- ,type varchar(10) COLLATE Latin1_General_CI_AS
+ ,index_name varchar(100)
+ ,type varchar(50) COLLATE Latin1_General_CI_AS
  ,key_columns varchar(max) COLLATE Latin1_General_CI_AS
- ,include_columns varchar(MAX) COLLATE Latin1_General_CI_AS
+ ,include_columns varchar(max) COLLATE Latin1_General_CI_AS
  ,fill_factor int
  ,is_primary_key bit
  ,is_unique_constraint bit
  ,is_disabled bit
  ,filter_condition varchar(1000) COLLATE Latin1_General_CI_AS
- ,script_create varchar(8000)
- ,script_drop varchar(1000)
+ ,script_create varchar(max)
+ ,script_drop varchar(max)
  ,database_uid int NOT NULL
 );
 GO
