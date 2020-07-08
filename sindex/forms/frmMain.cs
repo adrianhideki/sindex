@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework.Controls;
 using sindex.model;
+using sindex.forms;
 
 namespace sindex
 {
     public partial class frmMain : MetroForm
     {
+        Credentials credentials;
+
         public frmMain()
         {
             InitializeComponent();
@@ -22,9 +25,10 @@ namespace sindex
             this.Style = metroStyleManager.Style;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
-            dbConnect db = new dbConnect(txtUser.Text, txtPassword.Text, txtServer.Text);
+            credentials = new Credentials(txtUser.Text, txtPassword.Text, txtServer.Text);
+            dbConnect db = new dbConnect(credentials);
 
             string errMsg = "";
             int errCode = 0;
@@ -46,6 +50,45 @@ namespace sindex
             }
 
             lblVersao.Text = version;
+
+            await Task.Delay(1000);
+
+            pnlLogin.Visible = false;
+
+            LoadTables();
+        }
+
+        private void LoadForm(Form frm, Control parent)
+        {
+            frm.TopLevel = false;
+            frm.TopMost = true;
+            parent.Controls.Add(frm);
+            frm.Dock = DockStyle.Fill;
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.Show();
+        }
+
+        private async void LoadTables()
+        {
+            frmLoadTables frm = new frmLoadTables(metroStyleManager, credentials);
+            frm.FormClosing += new FormClosingEventHandler(frmLoad_FormClosing);
+            LoadForm(frm, this);
+        }
+
+        private void frmLoad_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            LoadDatabaseScreen();
+        }
+
+        private void LoadDatabaseScreen()
+        {
+            frmDatabases frm = new frmDatabases(metroStyleManager, credentials);
+            LoadForm(frm, this);
+        }
+
+        private void frmMain_MaximumSizeChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
