@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>performance.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
@@ -81,6 +84,13 @@
     <Compile Include="forms\frmLoadTables.Designer.cs">
       <DependentUpon>frmLoadTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="model\ConfigurationFile.cs" />
     <Compile Include="model\Credentials.cs" />
     <Compile Include="model\dbConnect.cs" />
     <Compile Include="forms\frmMain.cs">
@@ -89,6 +99,7 @@
     <Compile Include="forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\Encrypt.cs" />
     <Compile Include="model\metroFunctions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmLoadTables.resx">
       <DependentUpon>frmLoadTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -124,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="performance.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

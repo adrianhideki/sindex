@@ -5,6 +5,8 @@ BEGIN
   CREATE DATABASE sindex;
 END
 GO
+USE sindex;
+GO
 DROP TABLE IF EXISTS dbo.[index];
 DROP TABLE IF EXISTS dbo.[constraint];
 DROP TABLE IF EXISTS dbo.[stat];

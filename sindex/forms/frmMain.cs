@@ -11,51 +11,72 @@ using MetroFramework.Forms;
 using MetroFramework.Controls;
 using sindex.model;
 using sindex.forms;
+using static System.Net.WebRequestMethods;
+using System.IO;
 
 namespace sindex
 {
     public partial class frmMain : MetroForm
     {
         Credentials credentials;
+        public string jsonPath = "";
+        private static string passPharse = "s1nd3x@hideki";
+        public ConfigurationFile configuration = null; 
 
         public frmMain()
         {
             InitializeComponent();
+            configuration = new ConfigurationFile();
             this.Theme = metroStyleManager.Theme;
             this.Style = metroStyleManager.Style;
+            jsonPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            jsonPath += "\\sindex.config";
+
+            if (System.IO.File.Exists(jsonPath))
+            {
+                StreamReader sr = new StreamReader(jsonPath);
+                string configFile = sr.ReadToEnd();
+                configFile = StringCrypt.Decrypt(configFile, passPharse);
+                configuration.LoadFromJson(configFile);
+            }
+
+            Form frm = new frmLogin(this.metroStyleManager, configuration, this);
+            LoadForm(frm, pnlLogin);
         }
 
-        private async void btnLogin_Click(object sender, EventArgs e)
+        public void ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
-            credentials = new Credentials(txtUser.Text, txtPassword.Text, txtServer.Text);
-            dbConnect db = new dbConnect(credentials);
+            metroFunctions.ShowMessage(this, message, title, buttons, icon);
+        }
 
-            string errMsg = "";
-            int errCode = 0;
+    private async void btnLogin_Click(object sender, EventArgs e)
+        {
+            //credentials = new Credentials(txtUser.Text, txtPassword.Text, txtServer.Text);
+            //dbConnect db = new dbConnect(credentials);
 
-            var sqlVersion = db.executeQuery("SELECT @@VERSION AS Version", new Dapper.DynamicParameters(), "master", out errMsg, out errCode);
+            //string errMsg = "";
+            //int errCode = 0;
 
-            if (errCode != 0)
-            {
-                metroFunctions.ShowMessage(this, errMsg, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //var sqlVersion = db.executeQuery("SELECT @@VERSION AS Version", new Dapper.DynamicParameters(), "master", out errMsg, out errCode);
+
+            //if (errCode != 0)
+            //{
+            //    metroFunctions.ShowMessage(this, errMsg, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
 
-            string version = "";
+            //string version = "";
 
-            foreach (dynamic row  in sqlVersion)
-            {
-                version = row.Version;
-            }
+            //foreach (dynamic row  in sqlVersion)
+            //{
+            //    version = row.Version;
+            //}
 
-            lblVersao.Text = version;
+            //lblVersao.Text = version;
+            //pnlLogin.Visible = false;
 
-            await Task.Delay(1000);
-
-            pnlLogin.Visible = false;
-
-            LoadTables();
+            //LoadTables();
         }
 
         private void LoadForm(Form frm, Control parent)
@@ -87,6 +108,11 @@ namespace sindex
         }
 
         private void frmMain_MaximumSizeChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCriarConta_Click(object sender, EventArgs e)
         {
 
         }
