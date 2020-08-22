@@ -3,13 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 
 namespace sindex.model
 {
     public class ConfigurationFile
     {
-        List<User> users;
+        public List<User> users;
+        public int currentUser { get; set; }
 
         public ConfigurationFile()
         {
@@ -17,6 +20,8 @@ namespace sindex.model
             {
                 users = new List<User>();
             }
+
+            currentUser = -1;
         }
 
         public string ToJson()
@@ -57,15 +62,41 @@ namespace sindex.model
 
             return _out;
         }
+
+        public void Login(string user, string senha)
+        {
+            int i = getUserIndex(user);
+
+            if (i < 0) throw new Exception("Credenciais inválidas!");
+
+            if (users[i].Login(senha))
+            {
+                this.currentUser = i;
+            } else
+            {
+                throw new Exception("Credenciais inválidas!");
+            }
+        }
     }
 
     public class User
     {
         public string user { get; set; }
         public string password { get; set; }
+        public string passwordTwo { get; set; }
         public string email { get; set; }
         public bool darkTheme { get; set; }
-        List <Enviroment> enviroments { get; set; }
+        public List <Enviroment> enviroments { get; set; }
+
+        public bool Login(string password)
+        {
+            return this.password == password;
+        }
+
+        public User()
+        {
+
+        }
 
         public User(string user, string password, string passwordTwo, string email, bool darkTheme)
         {
@@ -94,6 +125,11 @@ namespace sindex.model
                 throw new Exception("Informe o e-mail!");
             }
 
+            if (!ValidarEmail(email))
+            {
+                throw new Exception("E-mail inválido!");
+            }
+
             this.user = user;
             this.password = password;
             this.email = email;
@@ -103,6 +139,11 @@ namespace sindex.model
 
         public void AddEnviroment(Enviroment env)
         {
+            if (enviroments == null)
+            {
+                enviroments = new List<Enviroment>();
+            }
+
             enviroments.Add(env);
         }
 
@@ -111,9 +152,41 @@ namespace sindex.model
             enviroments.RemoveAt(index);
         }
 
+        public List<Enviroment> GetEnviroments()
+        {
+            return this.enviroments;
+        }
+
         public void UpdateEnviroment(int index, Enviroment env)
         {
             enviroments[index] = env;
+        }
+
+        public bool ValidarEmail(string email)
+        {
+            try
+            {
+                Regex expressaoRegex = new Regex(@"\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}");
+
+                if (expressaoRegex.IsMatch(email))
+                {
+                    // o email é valido
+                    return true;
+                }
+                else
+                {
+                    // o email é inválido
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void AtualizarSenha(string senhaNova){
+            this.password = senhaNova;
         }
     }
 
@@ -123,6 +196,7 @@ namespace sindex.model
         public string server { get; set; }
         public string user { get; set; }
         public string password { get; set; }
+        public string database { get; set; }
 
         public string GetConnectionString(string database)
         {

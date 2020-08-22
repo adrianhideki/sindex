@@ -41,7 +41,29 @@ namespace sindex.forms
             try
             {
                 conf.AddUser(new User(txtCadUser.Text, txtCadSenha.Text, txtCadConfirmarSenha.Text, txtCadEmail.Text, true));
+                tbLogin.SelectTab(tabLogin);
+                main.SaveConfig();
+
+                txtCadUser.Clear();
+                txtCadSenha.Clear();
+                txtCadConfirmarSenha.Clear();
+                txtCadEmail.Clear();
             } catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conf.Login(txtUser.Text, txtPassword.Text);
+                main.SetVisiblePanelLogin(false);
+                main.LoadEnviroment();
+                this.Close();
+            }
+            catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

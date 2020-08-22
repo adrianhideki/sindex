@@ -13,6 +13,7 @@ using sindex.model;
 using sindex.forms;
 using static System.Net.WebRequestMethods;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace sindex
 {
@@ -21,7 +22,7 @@ namespace sindex
         Credentials credentials;
         public string jsonPath = "";
         private static string passPharse = "s1nd3x@hideki";
-        public ConfigurationFile configuration = null; 
+        public ConfigurationFile configuration = null;
 
         public frmMain()
         {
@@ -32,16 +33,34 @@ namespace sindex
             jsonPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
             jsonPath += "\\sindex.config";
 
+            LoadConfig();
+            Form frm = new frmLogin(this.metroStyleManager, configuration, this);
+            LoadForm(frm, pnlLogin);
+        }
+
+        public void SaveConfig()
+        {
+            string json = JsonConvert.SerializeObject(configuration, Formatting.Indented);
+            json = StringCrypt.Encrypt(json, passPharse);
+
+            System.IO.File.WriteAllText(jsonPath, json);
+        }
+
+        public void LoadConfig()
+        {
             if (System.IO.File.Exists(jsonPath))
             {
                 StreamReader sr = new StreamReader(jsonPath);
                 string configFile = sr.ReadToEnd();
                 configFile = StringCrypt.Decrypt(configFile, passPharse);
                 configuration.LoadFromJson(configFile);
+                sr.Close();
+                sr.Dispose();
             }
+        }
 
-            Form frm = new frmLogin(this.metroStyleManager, configuration, this);
-            LoadForm(frm, pnlLogin);
+        public void SetVisiblePanelLogin (bool val){
+            pnlLogin.Visible = val;
         }
 
         public void ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
@@ -49,34 +68,10 @@ namespace sindex
             metroFunctions.ShowMessage(this, message, title, buttons, icon);
         }
 
-    private async void btnLogin_Click(object sender, EventArgs e)
+        public void LoadEnviroment()
         {
-            //credentials = new Credentials(txtUser.Text, txtPassword.Text, txtServer.Text);
-            //dbConnect db = new dbConnect(credentials);
-
-            //string errMsg = "";
-            //int errCode = 0;
-
-            //var sqlVersion = db.executeQuery("SELECT @@VERSION AS Version", new Dapper.DynamicParameters(), "master", out errMsg, out errCode);
-
-            //if (errCode != 0)
-            //{
-            //    metroFunctions.ShowMessage(this, errMsg, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
-
-
-            //string version = "";
-
-            //foreach (dynamic row  in sqlVersion)
-            //{
-            //    version = row.Version;
-            //}
-
-            //lblVersao.Text = version;
-            //pnlLogin.Visible = false;
-
-            //LoadTables();
+            Form frm = new frmAmbientes(this.metroStyleManager, configuration, this);
+            LoadForm(frm, this);
         }
 
         private void LoadForm(Form frm, Control parent)
@@ -89,7 +84,7 @@ namespace sindex
             frm.Show();
         }
 
-        private async void LoadTables()
+        public async void LoadTables()
         {
             frmLoadTables frm = new frmLoadTables(metroStyleManager, credentials);
             frm.FormClosing += new FormClosingEventHandler(frmLoad_FormClosing);
@@ -108,11 +103,6 @@ namespace sindex
         }
 
         private void frmMain_MaximumSizeChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCriarConta_Click(object sender, EventArgs e)
         {
 
         }
