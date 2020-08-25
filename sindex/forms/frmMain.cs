@@ -22,12 +22,12 @@ namespace sindex
         Credentials credentials;
         public string jsonPath = "";
         private static string passPharse = "s1nd3x@hideki";
-        public ConfigurationFile configuration = null;
+        public Configuration configuration = null;
 
         public frmMain()
         {
             InitializeComponent();
-            configuration = new ConfigurationFile();
+            configuration = new Configuration();
             this.Theme = metroStyleManager.Theme;
             this.Style = metroStyleManager.Style;
             jsonPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);

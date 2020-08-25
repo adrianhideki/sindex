@@ -96,7 +96,7 @@
     <Compile Include="forms\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="model\ConfigurationFile.cs" />
+    <Compile Include="model\Configuration.cs" />
     <Compile Include="model\Credentials.cs" />
     <Compile Include="model\dbConnect.cs" />
     <Compile Include="forms\frmMain.cs">

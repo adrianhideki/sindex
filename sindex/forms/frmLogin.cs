@@ -15,9 +15,9 @@ namespace sindex.forms
 {
     public partial class frmLogin : Form
     {
-        private ConfigurationFile conf;
+        private Configuration conf;
         private frmMain main;
-        public frmLogin(MetroStyleManager metroStyleManager, ConfigurationFile conf, frmMain main)
+        public frmLogin(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
             InitializeComponent();
             this.metroStyleManager = metroStyleManager;

@@ -9,12 +9,13 @@ using System.Windows.Media.Animation;
 
 namespace sindex.model
 {
-    public class ConfigurationFile
+    public class Configuration
     {
         public List<User> users;
         public int currentUser { get; set; }
+        public int currentConfiguration { get; set; }
 
-        public ConfigurationFile()
+        public Configuration()
         {
             if (users == null)
             {
@@ -22,6 +23,7 @@ namespace sindex.model
             }
 
             currentUser = -1;
+            currentConfiguration = -1;
         }
 
         public string ToJson()
@@ -31,7 +33,7 @@ namespace sindex.model
 
         public void LoadFromJson(string json)
         {
-            ConfigurationFile configuration = JsonConvert.DeserializeObject<ConfigurationFile>(json);
+            Configuration configuration = JsonConvert.DeserializeObject<Configuration>(json);
             this.users = configuration.users;
         }
 
@@ -159,7 +161,11 @@ namespace sindex.model
 
         public void UpdateEnviroment(int index, Enviroment env)
         {
-            enviroments[index] = env;
+            enviroments[index].database = env.database;
+            enviroments[index].server = env.server;
+            enviroments[index].user = env.user;
+            enviroments[index].password = env.password;
+            enviroments[index].database = env.database;
         }
 
         public bool ValidarEmail(string email)

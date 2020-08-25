@@ -14,43 +14,57 @@ namespace sindex.forms
 {
     public partial class frmAmbientes : Form
     {
-        private ConfigurationFile conf;
+        private Configuration conf;
         private frmMain main;
         List<Enviroment> enviroments = null;
 
-        public frmAmbientes(MetroStyleManager metroStyleManager, ConfigurationFile conf, frmMain main)
+        public frmAmbientes(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
-            InitializeComponent();
-            this.metroStyleManager = metroStyleManager;
-            this.Refresh();
-
-            this.conf = conf;
-            this.main = main;
-
-            enviroments = this.conf.users[conf.currentUser].GetEnviroments();
-
-            if(enviroments == null)
+            try
             {
-                enviroments = new List<Enviroment>();
+                InitializeComponent();
+                this.metroStyleManager = metroStyleManager;
+                this.Refresh();
+
+                this.conf = conf;
+                this.main = main;
+
+                enviroments = this.conf.users[conf.currentUser].GetEnviroments();
+
+                if (enviroments == null)
+                {
+                    enviroments = new List<Enviroment>();
+                }
+
+                for (int i = 0; i < enviroments.Count; i++)
+                {
+                    cbxAmbiente.Items.Add(enviroments[i].name);
+                }
             }
-
-            for (int i = 0; i < enviroments.Count; i++)
+            catch (Exception err)
             {
-                cbxAmbiente.Items.Add(enviroments[i].name);
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void cbxAmbiente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (enviroments.Count > 0)
+            try
             {
-                int index = cbxAmbiente.SelectedIndex;
+                if (enviroments.Count > 0)
+                {
+                    int index = cbxAmbiente.SelectedIndex;
 
-                txtNome.Text = enviroments[index].name;
-                txtServidor.Text = enviroments[index].server;
-                txtUsuario.Text = enviroments[index].user;
-                txtSenha.Text = enviroments[index].password;
-                txtDatabase.Text = enviroments[index].database;
+                    txtNome.Text = enviroments[index].name;
+                    txtServidor.Text = enviroments[index].server;
+                    txtUsuario.Text = enviroments[index].user;
+                    txtSenha.Text = enviroments[index].password;
+                    txtDatabase.Text = enviroments[index].database;
+                }
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -64,7 +78,6 @@ namespace sindex.forms
                 env.user = txtUsuario.Text;
                 env.password = txtSenha.Text;
                 env.database = txtDatabase.Text;
-                enviroments.Add(env);
 
                 conf.users[conf.currentUser].AddEnviroment(env);
                 cbxAmbiente.Items.Add(env.name);
@@ -89,7 +102,6 @@ namespace sindex.forms
                     env.user = txtUsuario.Text;
                     env.password = txtSenha.Text;
                     env.database = txtDatabase.Text;
-                    enviroments.Add(env);
 
                     conf.users[conf.currentUser].UpdateEnviroment(index, env);
                     cbxAmbiente.Items[index] = env.name;
@@ -111,7 +123,7 @@ namespace sindex.forms
                 {
                     int index = cbxAmbiente.SelectedIndex;
 
-                    enviroments.RemoveAt(index);
+                    //enviroments.RemoveAt(index);
                     conf.users[conf.currentUser].RemoveEnviroment(index);
                     main.SaveConfig();
 
@@ -123,6 +135,46 @@ namespace sindex.forms
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void btnTestarCon_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dbConnect dbConnect = new dbConnect(new Credentials(txtUsuario.Text, txtSenha.Text, txtServidor.Text));
+                dbConnect.executeQuery("SELECT 1", new Dapper.DynamicParameters(), txtDatabase.Text, out string errMsg, out int errCode);
+
+                if (errCode != 0)
+                {
+                    throw new Exception(errMsg);
+                }
+
+                main.ShowMessage("Conexão válida!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (enviroments.Count > 0 && cbxAmbiente.SelectedIndex >= 0)
+                {
+                    this.conf.currentConfiguration = cbxAmbiente.SelectedIndex;
+                    this.Close();
+                } 
+                else 
+                {
+                    throw new Exception("Selecione um ambiente válido");
+                }
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
