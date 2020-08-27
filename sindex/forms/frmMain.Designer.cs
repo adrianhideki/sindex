@@ -48,9 +48,9 @@
             this.pnlLogin.HorizontalScrollbarBarColor = true;
             this.pnlLogin.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlLogin.HorizontalScrollbarSize = 10;
-            this.pnlLogin.Location = new System.Drawing.Point(1, 9);
+            this.pnlLogin.Location = new System.Drawing.Point(1, 8);
             this.pnlLogin.Name = "pnlLogin";
-            this.pnlLogin.Size = new System.Drawing.Size(365, 598);
+            this.pnlLogin.Size = new System.Drawing.Size(365, 599);
             this.pnlLogin.TabIndex = 11;
             this.pnlLogin.VerticalScrollbarBarColor = true;
             this.pnlLogin.VerticalScrollbarHighlightOnWheel = false;

@@ -208,5 +208,15 @@ namespace sindex.model
         {
             return String.Format("Data Source = {0}; Initial Catalog = {1}; User ID = {2}; Password = {3};", this.server, database, this.user, this.password);
         }
+
+        public Credentials GetCredentials()
+        {
+            return new Credentials(this.user, this.password, this.server);
+        }
+
+        public string GetDatabase()
+        {
+            return this.database;
+        }
     }
 }
