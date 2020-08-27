@@ -1,4 +1,6 @@
---EXEC dbo.st_GetIndexes
+IF OBJECT_ID('dbo.st_GetIndexes') IS NOT NULL
+  DROP PROCEDURE dbo.st_GetIndexes;
+GO
 CREATE PROCEDURE dbo.st_GetIndexes
 AS
 BEGIN
@@ -13,7 +15,7 @@ BEGIN
             ,[database].database_uid
       FROM sys.databases
            INNER JOIN dbo.[database]
-           ON [database].database_id = databases.database_id
+           ON [database].database_name COLLATE Latin1_General_CI_AS = databases.name COLLATE Latin1_General_CI_AS
       WHERE EXISTS(SELECT *
                    FROM dbo.fn_GetServerId() fn
                    WHERE fn.server_id = [database].server_id);
@@ -125,7 +127,7 @@ BEGIN
                             ,inc_cols = ISNULL(STUFF(fn_inc.cols,1,1,''''),'''')
                       ) _colunas
          INNER JOIN [sindex].[dbo].[table]
-         ON [table].table_id = objects.object_id AND
+         ON [table].object_id = objects.object_id AND
             [table].database_uid = @db_uid
          INNER JOIN [sindex].[dbo].[filegroup]
          ON [filegroup].filegroup_name COLLATE Latin1_General_CI_AS = filegroups.name COLLATE Latin1_General_CI_AS AND
@@ -143,7 +145,7 @@ BEGIN
                         INNER JOIN [db].sys.objects
                         ON objects.object_id = indexes.object_id
                         INNER JOIN [sindex].[dbo].[table]
-                        ON [table].table_id = objects.object_id AND
+                        ON [table].object_id = objects.object_id AND
                            [table].database_uid = @db_uid
                    WHERE indexes.name COLLATE Latin1_General_CI_AS = [index].index_name COLLATE Latin1_General_CI_AS
                      AND [table].table_uid = [index].table_uid)
@@ -196,7 +198,7 @@ BEGIN
                           ,inc_cols = ISNULL(STUFF(fn_inc.cols,1,1,''''),'''')
                     ) _colunas
        INNER JOIN [sindex].[dbo].[table]
-       ON [table].table_id = objects.object_id AND
+       ON [table].object_id = objects.object_id AND
           [table].database_uid = @db_uid
        INNER JOIN [sindex].[dbo].[filegroup]
        ON [filegroup].filegroup_name COLLATE Latin1_General_CI_AS = filegroups.name COLLATE Latin1_General_CI_AS AND

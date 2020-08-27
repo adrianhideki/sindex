@@ -1,3 +1,6 @@
+IF OBJECT_ID('dbo.st_GetFilegroups') IS NOT NULL
+  DROP PROCEDURE dbo.st_GetFilegroups;
+GO
 CREATE PROCEDURE dbo.st_GetFilegroups
 AS
 BEGIN
@@ -12,7 +15,7 @@ BEGIN
             ,[database].database_uid
       FROM sys.databases
            INNER JOIN dbo.[database]
-           ON [database].database_id = databases.database_id
+           ON [database].database_name COLLATE Latin1_General_CI_AS = databases.name COLLATE Latin1_General_CI_AS
       WHERE EXISTS(SELECT *
                    FROM dbo.fn_GetServerId() fn
                    WHERE fn.server_id = [database].server_id);

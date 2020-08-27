@@ -15,7 +15,6 @@ C:\Users\Hideki\source\repos\sindex\obj\Debug\sindex.pdb
 C:\Temp\tcc\sindex\bin\Debug\sindex.exe.config
 C:\Temp\tcc\sindex\bin\Debug\sindex.exe
 C:\Temp\tcc\sindex\bin\Debug\sindex.pdb
-C:\Temp\tcc\sindex\bin\Debug\De.TorstenMandelkow.MetroChart.dll
 C:\Temp\tcc\sindex\bin\Debug\MetroFramework.Design.dll
 C:\Temp\tcc\sindex\bin\Debug\MetroFramework.dll
 C:\Temp\tcc\sindex\bin\Debug\MetroFramework.Fonts.dll
@@ -35,3 +34,5 @@ C:\Temp\tcc\sindex\bin\Debug\Newtonsoft.Json.xml
 C:\Temp\tcc\sindex\obj\Debug\sindex.forms.frmLogin.resources
 C:\Temp\tcc\sindex\obj\Debug\sindex.csproj.CoreCompileInputs.cache
 C:\Temp\tcc\sindex\obj\Debug\sindex.forms.frmAmbientes.resources
+C:\Temp\tcc\sindex\bin\Debug\DoddleReport.dll
+C:\Temp\tcc\sindex\bin\Debug\DoddleReport.xml

@@ -1,3 +1,6 @@
+IF OBJECT_ID('dbo.st_GetTables') IS NOT NULL
+  DROP PROCEDURE dbo.st_GetTables;
+GO
 CREATE PROCEDURE dbo.st_GetTables
 AS
 BEGIN
@@ -12,7 +15,7 @@ BEGIN
             ,[database].database_uid
       FROM sys.databases
            INNER JOIN dbo.[database]
-           ON [database].database_id = databases.database_id
+           ON [database].database_name COLLATE Latin1_General_CI_AS = databases.name COLLATE Latin1_General_CI_AS
       WHERE EXISTS(SELECT *
                    FROM dbo.fn_GetServerId() fn
                    WHERE fn.server_id = [database].server_id);
@@ -26,7 +29,7 @@ BEGIN
   BEGIN
     SELECT @cmd = '
   INSERT INTO sindex.dbo.[table](
-    table_id
+    object_id
    ,filegroup_uid
    ,table_name
    ,update_date
@@ -34,7 +37,7 @@ BEGIN
    ,type
    ,database_uid
   )
-  SELECT table_id = tables.object_id
+  SELECT object_id = tables.object_id
         ,filegroup_uid =  [filegroup].filegroup_uid
         ,table_name = tables.name
         ,update_date = GETDATE()
@@ -62,7 +65,7 @@ BEGIN
     AND [table].database_uid = @db_uid;
 
   UPDATE [table]
-     SET table_id      = tables.object_id
+     SET object_id     = tables.object_id
         ,filegroup_uid = [filegroup].database_uid
         ,table_name    = tables.name
         ,update_date   = GETDATE()
@@ -81,7 +84,7 @@ BEGIN
        ON [filegroup].filegroup_name COLLATE Latin1_General_CI_AS = filegroups.name COLLATE Latin1_General_CI_AS AND
           [filegroup].database_uid = @db_uid
   WHERE [table].database_uid = @db_uid
-    AND EXISTS(SELECT 1 WHERE [table].table_id <> tables.object_id
+    AND EXISTS(SELECT 1 WHERE [table].object_id <> tables.object_id
                UNION ALL
                SELECT 1 WHERE [table].filegroup_uid <> [filegroup].database_uid
                UNION ALL

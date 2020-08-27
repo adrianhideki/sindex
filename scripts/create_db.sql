@@ -42,25 +42,22 @@ CREATE TABLE dbo.[server_configurations](
 
 GO
 CREATE TABLE dbo.[database](
-  database_id int NOT NULL
+  database_uid int identity(1,1) PRIMARY KEY NOT NULL
  ,server_id int NOT NULL
  ,database_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime NULL
- ,database_uid int identity(1,1) PRIMARY KEY NOT NULL
 );
 GO
 CREATE TABLE dbo.[database_configurations](
   configuration_id int NOT NULL
- ,database_id int NULL
+ ,database_uid int NOT NULL
  ,configuration_value varchar(255) COLLATE Latin1_General_CI_AS
  ,update_date datetime
- ,database_uid int NOT NULL
  ,PRIMARY KEY(configuration_id, database_uid)
 );
 GO
 CREATE TABLE dbo.[filegroup](
   filegroup_uid int identity(1,1) NOT NULL PRIMARY KEY
- ,database_id int NULL
  ,database_uid int NOT NULL
  ,filegroup_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,filegroup_type varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
@@ -68,8 +65,7 @@ CREATE TABLE dbo.[filegroup](
 );
 GO
 CREATE TABLE dbo.[file](
-  file_id int NOT NULL
- ,file_uid int identity(1,1) PRIMARY KEY NOT NULL
+  file_uid int identity(1,1) PRIMARY KEY NOT NULL
  ,file_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,file_size_kb numeric(18,6) NOT NULL
  ,filegroup_uid int NOT NULL
@@ -80,8 +76,8 @@ CREATE TABLE dbo.[file](
 )
 GO
 CREATE TABLE dbo.[table](
-  table_id int NOT NULL
- ,table_uid int identity(1,1) PRIMARY KEY NOT NULL
+  table_uid int identity(1,1) PRIMARY KEY NOT NULL
+ ,object_id int
  ,filegroup_uid int NOT NULL
  ,table_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime
@@ -90,9 +86,9 @@ CREATE TABLE dbo.[table](
  ,database_uid int NOT NULL
 );
 GO
+
 CREATE TABLE dbo.[stat](
-  stat_id int NOT NULL
- ,stat_uid int NOT NULL identity(1,1) PRIMARY KEY
+  stat_uid int NOT NULL identity(1,1) PRIMARY KEY
  ,stat_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime
  ,create_date datetime NOT NULL
@@ -105,8 +101,8 @@ CREATE TABLE dbo.[stat](
 );
 GO
 CREATE TABLE dbo.[constraint](
-  constraint_id int NOT NULL
- ,constraint_uid int identity(1,1) PRIMARY KEY 
+  constraint_uid int identity(1,1) PRIMARY KEY 
+ ,object_id int
  ,constraint_name varchar(255) COLLATE Latin1_General_CI_AS
  ,update_date datetime
  ,create_date datetime NOT NULL
@@ -125,7 +121,6 @@ GO
 CREATE TABLE dbo.[index](
   index_uid int identity(1,1)
  ,table_uid int NOT NULL
- ,filegroup_uid int NOT NULL
  ,index_id int NOT NULL
  ,update_date datetime
  ,create_date datetime
@@ -141,6 +136,7 @@ CREATE TABLE dbo.[index](
  ,script_create varchar(max)
  ,script_drop varchar(max)
  ,database_uid int NOT NULL
+ ,filegroup_uid int NOT NULL
 );
 GO
 
@@ -199,5 +195,6 @@ EXEC dbo.st_GetFilegroups;
 EXEC dbo.st_GetFiles;
 EXEC dbo.st_GetTables;
 EXEC dbo.st_GetStats;
-EXEC dbo.st_GetConstraints
+EXEC dbo.st_GetConstraints;
+EXEC dbo.st_GetIndexes;
 */

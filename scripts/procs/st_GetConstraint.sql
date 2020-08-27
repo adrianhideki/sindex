@@ -1,4 +1,6 @@
---EXEC dbo.st_GetConstraints
+IF OBJECT_ID('dbo.st_GetConstraints') IS NOT NULL
+  DROP PROCEDURE dbo.st_GetConstraints;
+GO
 CREATE PROCEDURE dbo.st_GetConstraints
 AS
 BEGIN
@@ -13,7 +15,7 @@ BEGIN
             ,[database].database_uid
       FROM sys.databases
            INNER JOIN dbo.[database]
-           ON [database].database_id = databases.database_id
+           ON [database].database_name COLLATE Latin1_General_CI_AS = databases.name COLLATE Latin1_General_CI_AS
       WHERE EXISTS(SELECT *
                    FROM dbo.fn_GetServerId() fn
                    WHERE fn.server_id = [database].server_id);
@@ -28,7 +30,7 @@ BEGIN
 
     SELECT @cmd = '
   INSERT INTO sindex.dbo.[constraint](
-    constraint_id
+    object_id
    ,constraint_name
    ,update_date
    ,create_date
@@ -44,7 +46,7 @@ BEGIN
    ,database_uid
   )
 
-  SELECT constraint_id        = foreign_keys.object_id
+  SELECT object_id            = foreign_keys.object_id
         ,constraint_name      = foreign_keys.name
         ,update_date          = GETDATE()
         ,create_date          = foreign_keys.create_date
@@ -60,10 +62,10 @@ BEGIN
         ,database_uid         = @db_uid
   FROM [db].sys.foreign_keys
        INNER JOIN sindex.dbo.[table] AS [ref_table]
-       ON [ref_table].table_id     = foreign_keys.referenced_object_id AND
+       ON [ref_table].object_id    = foreign_keys.referenced_object_id AND
           [ref_table].database_uid = @db_uid
        INNER JOIN sindex.dbo.[table] AS [par_table]
-       ON [par_table].table_id     = foreign_keys.parent_object_id AND
+       ON [par_table].object_id    = foreign_keys.parent_object_id AND
           [par_table].database_uid = @db_uid
        CROSS APPLY (
          SELECT '','' + columns.name
@@ -98,7 +100,7 @@ BEGIN
     AND [constraint].database_uid = @db_uid;
 
   UPDATE [constraint]
-     SET constraint_id        = foreign_keys.object_id
+     SET object_id            = foreign_keys.object_id
         ,constraint_name      = foreign_keys.name
         ,update_date          = GETDATE()
         ,create_date          = foreign_keys.create_date
@@ -115,10 +117,10 @@ BEGIN
        INNER JOIN [db].sys.foreign_keys
        ON foreign_keys.name COLLATE Latin1_General_CI_AS = [constraint].constraint_name COLLATE Latin1_General_CI_AS
        INNER JOIN sindex.dbo.[table] AS [ref_table]
-       ON [ref_table].table_id     = foreign_keys.referenced_object_id AND
+       ON [ref_table].object_id    = foreign_keys.referenced_object_id AND
           [ref_table].database_uid = @db_uid
        INNER JOIN sindex.dbo.[table] AS [par_table]
-       ON [par_table].table_id     = foreign_keys.parent_object_id AND
+       ON [par_table].object_id    = foreign_keys.parent_object_id AND
           [par_table].database_uid = @db_uid
        CROSS APPLY (
          SELECT '','' + columns.name
@@ -141,7 +143,7 @@ BEGIN
          FOR XML PATH ('''')
        ) ref_columns (col)
   WHERE [constraint].database_uid = @db_uid
-    AND EXISTS(SELECT 1  WHERE [constraint].constraint_id        <> foreign_keys.object_id        UNION ALL
+    AND EXISTS(SELECT 1  WHERE [constraint].object_id            <> foreign_keys.object_id        UNION ALL
                SELECT 1  WHERE [constraint].constraint_name COLLATE Latin1_General_CI_AS <> foreign_keys.name COLLATE Latin1_General_CI_AS UNION ALL
                SELECT 1  WHERE [constraint].create_date          <> foreign_keys.create_date      UNION ALL
                SELECT 1  WHERE [constraint].type                 <> ''FK''                          UNION ALL

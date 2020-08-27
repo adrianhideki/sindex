@@ -1,3 +1,6 @@
+IF OBJECT_ID('dbo.st_GetStats') IS NOT NULL
+  DROP PROCEDURE dbo.st_GetStats;
+GO
 CREATE PROCEDURE dbo.st_GetStats
 AS
 BEGIN
@@ -12,7 +15,7 @@ BEGIN
             ,[database].database_uid
       FROM sys.databases
            INNER JOIN dbo.[database]
-           ON [database].database_id = databases.database_id
+           ON [database].database_name COLLATE Latin1_General_CI_AS = databases.name COLLATE Latin1_General_CI_AS
       WHERE EXISTS(SELECT *
                    FROM dbo.fn_GetServerId() fn
                    WHERE fn.server_id = [database].server_id);
@@ -26,8 +29,7 @@ BEGIN
   BEGIN
     SELECT @cmd = '
   INSERT INTO sindex.dbo.[stat](
-    stat_id
-   ,stat_name
+    stat_name
    ,update_date
    ,create_date
    ,type
@@ -37,8 +39,7 @@ BEGIN
    ,database_uid
    ,columns
   )
-  SELECT stat_id        = stats.stats_id
-        ,stat_name      = stats.name
+  SELECT stat_name      = stats.name
         ,update_date    = GETDATE()
         ,create_date    = GETDATE()
         ,type           = ''''
@@ -57,7 +58,7 @@ BEGIN
                     ORDER BY stats_columns.stats_column_id
                     FOR XML PATH ('''')) _columns (col)
        INNER JOIN sindex.dbo.[table]
-       ON [table].table_id     = stats.object_id AND
+       ON [table].object_id    = stats.object_id AND
           [table].database_uid = @db_uid
   WHERE NOT EXISTS(SELECT 1
                    FROM sindex.dbo.[stat]
@@ -71,10 +72,9 @@ BEGIN
     AND [stat].database_uid = @db_uid;
 
   UPDATE [stat]
-     SET stat_id        = stats.stats_id
-        ,update_date    = GETDATE()
+     SET update_date    = GETDATE()
         ,type           = ''''
-        ,table_uid      = [table].table_id
+        ,table_uid      = [table].table_uid
         ,filter         = stats.filter_definition
         ,is_autocreated = stats.auto_created
         ,[columns]      = ISNULL(STUFF(_columns.col,1,1,''''),'''')
@@ -90,12 +90,10 @@ BEGIN
                     ORDER BY stats_columns.stats_column_id
                     FOR XML PATH ('''')) _columns (col)
        INNER JOIN sindex.dbo.[table]
-       ON [table].table_id     = stats.object_id AND
+       ON [table].object_id    = stats.object_id AND
           [table].database_uid = @db_uid
   WHERE [table].database_uid = @db_uid
-    AND EXISTS(SELECT 1 WHERE [stat].stat_id <> stats.stats_id
-               UNION ALL
-               SELECT 1 WHERE [stat].table_uid <> [table].table_uid
+    AND EXISTS(SELECT 1 WHERE [stat].table_uid <> [table].table_uid
                UNION ALL
                SELECT 1 WHERE [stat].filter COLLATE Latin1_General_CI_AS <> stats.filter_definition COLLATE Latin1_General_CI_AS
                UNION ALL

@@ -1,3 +1,6 @@
+IF OBJECT_ID('dbo.st_GetFiles') IS NOT NULL
+  DROP PROCEDURE dbo.st_GetFiles;
+GO
 CREATE PROCEDURE dbo.st_GetFiles
 AS
 BEGIN
@@ -12,7 +15,7 @@ BEGIN
             ,[database].database_uid
       FROM sys.databases
            INNER JOIN dbo.[database]
-           ON [database].database_id = databases.database_id
+           ON [database].database_name COLLATE Latin1_General_CI_AS = databases.name COLLATE Latin1_General_CI_AS
       WHERE EXISTS(SELECT *
                    FROM dbo.fn_GetServerId() fn
                    WHERE fn.server_id = [database].server_id);
@@ -26,8 +29,7 @@ BEGIN
   BEGIN
     SELECT @cmd = '
     INSERT INTO sindex.dbo.[file](
-      file_id
-     ,file_name
+      file_name
      ,file_size_kb
      ,filegroup_uid
      ,update_date
@@ -35,8 +37,7 @@ BEGIN
      ,file_growth_size_kb
      ,database_uid
     )
-    SELECT file_id = database_files.file_id
-          ,file_name = database_files.name
+    SELECT file_name = database_files.name
           ,file_size_kb = (database_files.size * 8.)
           ,filegroup_uid = [filegroup].filegroup_uid
           ,update_date = GETDATE()
@@ -51,7 +52,7 @@ BEGIN
             [filegroup].filegroup_name COLLATE Latin1_General_CI_AS = filegroups.name COLLATE Latin1_General_CI_AS
     WHERE NOT EXISTS (SELECT 1
                       FROM sindex.dbo.[file]
-                      WHERE [file].file_id       = database_files.file_id
+                      WHERE [file].file_name COLLATE Latin1_General_CI_AS = database_files.name COLLATE Latin1_General_CI_AS
                         AND [file].filegroup_uid = [filegroup].filegroup_uid);
 
     DELETE [file] 
@@ -64,8 +65,8 @@ BEGIN
                           INNER JOIN sindex.dbo.[filegroup]
                           ON [filegroup].database_uid   = @db_uid AND
                              [filegroup].filegroup_name COLLATE Latin1_General_CI_AS = filegroups.name COLLATE Latin1_General_CI_AS
-                     WHERE database_files.file_id    = [file].file_id
-                       AND [filegroup].filegroup_uid = [file].filegroup_uid);
+                     WHERE database_files.name COLLATE Latin1_General_CI_AS = [file].file_name COLLATE Latin1_General_CI_AS
+                       AND [filegroup].filegroup_uid                        = [file].filegroup_uid);
 
     UPDATE [file]
        SET file_name           = database_files.name
@@ -75,7 +76,7 @@ BEGIN
           ,file_growth_size_kb = (database_files.growth * 8.)
     FROM sindex.dbo.[file]
          INNER JOIN [db].sys.database_files
-         ON database_files.file_id = [file].file_id
+         ON database_files.name COLLATE Latin1_General_CI_AS = [file].file_name COLLATE Latin1_General_CI_AS
          INNER JOIN [db].sys.filegroups
          ON filegroups.data_space_id = database_files.data_space_id
          INNER JOIN sindex.dbo.[filegroup]
