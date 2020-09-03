@@ -1,7 +1,7 @@
 ﻿using MetroFramework;
 using MetroFramework.Components;
 using MetroFramework.Forms;
-using sindex.model;
+using sindex.utils;
 using sindex.repository;
 using System;
 using System.Collections.Generic;
@@ -18,12 +18,19 @@ namespace sindex.forms
     public partial class frmLoadTables : Form
     {
         Credentials cred;
-        public frmLoadTables(MetroStyleManager metroStyleManager, Credentials cred)
+        Configuration conf;
+        frmMain main;
+        string databaseName;
+
+        public frmLoadTables(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
             InitializeComponent();
             this.metroStyleManager = metroStyleManager;
 
-            this.cred = cred;
+            this.main = main;
+            this.cred = main.cred;
+            this.databaseName = main.GetDatabaseName();
+
             this.Refresh();
             LoadProcs();
         }
@@ -31,14 +38,12 @@ namespace sindex.forms
         private async void LoadProcs()
         {
             Task t = Task.Run(() => {
-                dbTables.LoadServer(cred);
-                dbTables.LoadDatabases(cred);
-                dbTables.LoadFilegroups(cred);
-                dbTables.LoadFiles(cred);
-                dbTables.LoadTables(cred);
-                dbTables.LoadConstraints(cred);
-                dbTables.LoadStats(cred);
-                dbTables.LoadIndexes(cred);
+                dbTables.LoadFilegroups(cred, databaseName);
+                dbTables.LoadFiles(cred, databaseName);
+                dbTables.LoadTables(cred, databaseName);
+                dbTables.LoadConstraints(cred, databaseName);
+                dbTables.LoadStats(cred, databaseName);
+                dbTables.LoadIndexes(cred, databaseName);
 
             });
 

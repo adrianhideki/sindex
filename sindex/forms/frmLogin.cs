@@ -1,6 +1,6 @@
 ﻿using MetroFramework;
 using MetroFramework.Components;
-using sindex.model;
+using sindex.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework.Controls;
-using sindex.model;
+using sindex.utils;
 using sindex.forms;
 using static System.Net.WebRequestMethods;
 using System.IO;
@@ -23,6 +23,31 @@ namespace sindex
         public string jsonPath = "";
         private static string passPharse = "s1nd3x@hideki";
         public Configuration configuration = null;
+        public string databaseSindex = "";
+        public dbConnect dbCon;
+        public Credentials cred;
+
+        public void SetConnectionSettings()
+        {
+            databaseSindex = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].GetDatabase();
+            cred = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].GetCredentials();
+            dbCon = new dbConnect(cred);
+        }
+
+        public Credentials GetCredentials()
+        {
+            return this.cred;
+        }
+
+        public dbConnect GetDbConnect()
+        {
+            return this.dbCon;
+        }
+
+        public string GetDatabaseName()
+        {
+            return this.databaseSindex;
+        }
 
         public frmMain()
         {
@@ -84,21 +109,9 @@ namespace sindex
             frm.Show();
         }
 
-        public async void LoadTables()
+        public void LoadDatabase()
         {
-            frmLoadTables frm = new frmLoadTables(metroStyleManager, credentials);
-            frm.FormClosing += new FormClosingEventHandler(frmLoad_FormClosing);
-            LoadForm(frm, this);
-        }
-
-        private void frmLoad_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            LoadDatabaseScreen();
-        }
-
-        private void LoadDatabaseScreen()
-        {
-            frmDatabases frm = new frmDatabases(metroStyleManager, credentials);
+            frmDatabases frm = new frmDatabases(metroStyleManager, configuration,this);
             LoadForm(frm, this);
         }
 

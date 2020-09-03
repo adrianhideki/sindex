@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 
-namespace sindex.model
+namespace sindex.utils
 {
     public class Configuration
     {

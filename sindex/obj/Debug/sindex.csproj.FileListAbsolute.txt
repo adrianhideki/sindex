@@ -32,7 +32,6 @@ C:\Temp\tcc\sindex\obj\Debug\sindex.forms.frmDatabases.resources
 C:\Temp\tcc\sindex\bin\Debug\Newtonsoft.Json.dll
 C:\Temp\tcc\sindex\bin\Debug\Newtonsoft.Json.xml
 C:\Temp\tcc\sindex\obj\Debug\sindex.forms.frmLogin.resources
-C:\Temp\tcc\sindex\obj\Debug\sindex.csproj.CoreCompileInputs.cache
 C:\Temp\tcc\sindex\obj\Debug\sindex.forms.frmAmbientes.resources
 C:\Temp\tcc\sindex\bin\Debug\DoddleReport.dll
 C:\Temp\tcc\sindex\bin\Debug\DoddleReport.xml

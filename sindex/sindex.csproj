@@ -101,17 +101,20 @@
     <Compile Include="forms\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="model\Configuration.cs" />
-    <Compile Include="model\Credentials.cs" />
-    <Compile Include="model\dbConnect.cs" />
+    <Compile Include="model\ConfigurationModel.cs" />
+    <Compile Include="model\ServerModel.cs" />
+    <Compile Include="utils\Configuration.cs" />
+    <Compile Include="utils\Credentials.cs" />
+    <Compile Include="model\DatabaseModel.cs" />
+    <Compile Include="utils\dbConnect.cs" />
     <Compile Include="forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="model\Encrypt.cs" />
-    <Compile Include="model\metroFunctions.cs" />
+    <Compile Include="utils\Encrypt.cs" />
+    <Compile Include="utils\metroFunctions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="repository\dbTables.cs" />

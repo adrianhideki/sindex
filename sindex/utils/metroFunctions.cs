@@ -7,7 +7,7 @@ using MetroFramework;
 using MetroFramework.Forms;
 using System.Windows.Forms;
 
-namespace sindex.model
+namespace sindex.utils
 {
     public static class metroFunctions
     {

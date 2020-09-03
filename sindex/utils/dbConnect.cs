@@ -9,7 +9,7 @@ using Dapper;
 using sindex.model;
 using Newtonsoft.Json;
 
-namespace sindex
+namespace sindex.utils
 {
     public class dbConnect
     {

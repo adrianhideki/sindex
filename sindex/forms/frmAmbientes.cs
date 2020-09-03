@@ -1,5 +1,5 @@
 ﻿using MetroFramework.Components;
-using sindex.model;
+using sindex.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -164,6 +164,9 @@ namespace sindex.forms
                 if (enviroments.Count > 0 && cbxAmbiente.SelectedIndex >= 0)
                 {
                     this.conf.currentConfiguration = cbxAmbiente.SelectedIndex;
+
+                    main.SetConnectionSettings();
+                    main.LoadDatabase();
                     this.Close();
                 } 
                 else 

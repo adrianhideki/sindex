@@ -1,6 +1,6 @@
 ﻿using DoddleReport.Configuration;
 using MetroFramework.Components;
-using sindex.model;
+using sindex.utils;
 using sindex.repository;
 using System;
 using System.Collections.Generic;
@@ -36,7 +36,7 @@ namespace sindex.forms
             {
                 path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\scripts";
 
-                arquivos = Directory.GetFiles(path);
+                arquivos = Directory.GetFiles(path).OrderBy(f=>f).ToArray();
 
                 if (arquivos.Length == 0)
                 {
@@ -44,6 +44,7 @@ namespace sindex.forms
                 }
 
                 CreateObjects();
+                LoadDatabases();
             }
             catch (Exception err)
             {
@@ -53,12 +54,16 @@ namespace sindex.forms
             //grdDatabases.DataSource = dbTables.GetDatabases(cred);
         }
 
+        public void LoadDatabases()
+        {
+            dbTables.LoadServer(main.GetCredentials(), main.GetDatabaseName());
+            dbTables.LoadDatabases(main.GetCredentials(), main.GetDatabaseName());
+        }
+
         public void CreateObjects()
         {
-            string database = conf.users[conf.currentUser].enviroments[conf.currentConfiguration].GetDatabase();
-            dbConnect db = new dbConnect(conf.users[conf.currentUser].enviroments[conf.currentConfiguration].GetCredentials());
 
-            DataTable dt = db.executeDataTable("SELECT * FROM sys.tables WHERE name = 'index'", new Dapper.DynamicParameters(), database, out string errMsg, out int errCode);
+            DataTable dt = main.GetDbConnect().executeDataTable("SELECT * FROM sys.tables WHERE name = 'index'", new Dapper.DynamicParameters(), main.GetDatabaseName(), out string errMsg, out int errCode);
 
             if (errCode != 0)
             {
@@ -68,7 +73,21 @@ namespace sindex.forms
             //Cria tabelas
             if (dt.Rows.Count == 0)
             {
+                foreach(string f in arquivos)
+                {
+                    StreamReader sr = new StreamReader(f);
+                    string script = sr.ReadToEnd();
 
+                    errMsg = "";
+                    errCode = 0;
+
+                    main.dbCon.executeCommand(script, new Dapper.DynamicParameters(), main.databaseSindex, out errMsg, out errCode);
+
+                    if (errCode != 0)
+                    {
+                        throw new Exception(errMsg);
+                    }
+                }
             }
         }
     }
