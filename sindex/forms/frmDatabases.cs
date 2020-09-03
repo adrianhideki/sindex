@@ -1,5 +1,4 @@
-﻿using DoddleReport.Configuration;
-using MetroFramework.Components;
+﻿using MetroFramework.Components;
 using sindex.utils;
 using sindex.repository;
 using System;
