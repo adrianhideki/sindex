@@ -7,10 +7,12 @@ BEGIN
     server_id
    ,database_name
    ,update_date
+   ,ativo
   )
   SELECT server_id     = fn.server_id
         ,database_name = databases.name
         ,update_date   = GETDATE()
+        ,ativo         = 0
   FROM sys.databases
        CROSS APPLY dbo.fn_GetServerId() fn
   WHERE NOT EXISTS(SELECT 1
