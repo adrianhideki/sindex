@@ -89,5 +89,10 @@ namespace sindex.forms
                 }
             }
         }
+
+        private void frmDatabases_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
