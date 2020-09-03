@@ -36,7 +36,7 @@ namespace sindex.forms
             {
                 path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\scripts";
 
-                arquivos = Directory.GetFiles(path).OrderBy(f=>f).ToArray();
+                arquivos = Directory.GetFiles(path,"*.sql",SearchOption.AllDirectories).OrderBy(f=>f).ToArray();
 
                 if (arquivos.Length == 0)
                 {

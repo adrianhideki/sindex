@@ -1,6 +1,3 @@
-IF OBJECT_ID('dbo.st_GetFilegroups') IS NOT NULL
-  DROP PROCEDURE dbo.st_GetFilegroups;
-GO
 CREATE PROCEDURE dbo.st_GetFilegroups
 AS
 BEGIN
