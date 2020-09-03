@@ -7,31 +7,42 @@ END
 GO
 USE sindex;
 GO
-DROP TABLE IF EXISTS dbo.[index];
-DROP TABLE IF EXISTS dbo.[constraint];
-DROP TABLE IF EXISTS dbo.[stat];
-DROP TABLE IF EXISTS dbo.[table];
-DROP TABLE IF EXISTS dbo.[file];
-DROP TABLE IF EXISTS dbo.[filegroup];
-DROP TABLE IF EXISTS dbo.[server_configurations];
-DROP TABLE IF EXISTS dbo.[database_configurations];
-DROP TABLE IF EXISTS dbo.[database];
-DROP TABLE IF EXISTS dbo.[server];
-DROP TABLE IF EXISTS dbo.[configuration];
+IF OBJECT_ID('[dbo].[st_GetServers]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetServers];
+IF OBJECT_ID('[dbo].[st_GetDatabases]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetDatabases];
+IF OBJECT_ID('[dbo].[st_GetFilegroups]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetFilegroups];
+IF OBJECT_ID('[dbo].[st_GetFiles]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetFiles];
+IF OBJECT_ID('[dbo].[st_GetTables]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetTables];
+IF OBJECT_ID('[dbo].[st_GetStats]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetStats];
+IF OBJECT_ID('[dbo].[st_GetConstraints]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetConstraints];
+IF OBJECT_ID('[dbo].[st_GetIndexes]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetIndexes];
+
+IF OBJECT_ID('[dbo].[server]') IS NOT NULL DROP TABLE [dbo].[server];
+IF OBJECT_ID('[dbo].[configuration]') IS NOT NULL DROP TABLE [dbo].[configuration];
+IF OBJECT_ID('[dbo].[server_configurations]') IS NOT NULL DROP TABLE [dbo].[server_configurations];
+IF OBJECT_ID('[dbo].[database]') IS NOT NULL DROP TABLE [dbo].[database];
+IF OBJECT_ID('[dbo].[database_configurations]') IS NOT NULL DROP TABLE [dbo].[database_configurations];
+IF OBJECT_ID('[dbo].[filegroup]') IS NOT NULL DROP TABLE [dbo].[filegroup];
+IF OBJECT_ID('[dbo].[file]') IS NOT NULL DROP TABLE [dbo].[file];
+IF OBJECT_ID('[dbo].[table]') IS NOT NULL DROP TABLE [dbo].[table];
+IF OBJECT_ID('[dbo].[stat]') IS NOT NULL DROP TABLE [dbo].[stat];
+IF OBJECT_ID('[dbo].[constraint]') IS NOT NULL DROP TABLE [dbo].[constraint];
+IF OBJECT_ID('[dbo].[index]') IS NOT NULL DROP TABLE [dbo].[index];
+
+IF OBJECT_ID('[dbo].[fn_GetServerId]') IS NOT NULL DROP FUNCTION [dbo].[fn_GetServerId];
 GO
 CREATE TABLE dbo.[server](
   server_id   int identity(1,1) PRIMARY KEY NOT NULL
  ,server_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime NULL
 );
-GO
+
 CREATE TABLE dbo.[configuration](
   configuration_id int identity(1,1) PRIMARY KEY NOT NULL
  ,configuration_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,configuration_description varchar(512) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime NULL
 );
-GO
+
 CREATE TABLE dbo.[server_configurations](
   configuration_id int NOT NULL
  ,server_id int NOT NULL
@@ -40,14 +51,15 @@ CREATE TABLE dbo.[server_configurations](
  PRIMARY KEY(configuration_id, server_id)
 );
 
-GO
+
 CREATE TABLE dbo.[database](
   database_uid int identity(1,1) PRIMARY KEY NOT NULL
  ,server_id int NOT NULL
  ,database_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime NULL
+ ,ativo bit NULL
 );
-GO
+
 CREATE TABLE dbo.[database_configurations](
   configuration_id int NOT NULL
  ,database_uid int NOT NULL
@@ -55,7 +67,7 @@ CREATE TABLE dbo.[database_configurations](
  ,update_date datetime
  ,PRIMARY KEY(configuration_id, database_uid)
 );
-GO
+
 CREATE TABLE dbo.[filegroup](
   filegroup_uid int identity(1,1) NOT NULL PRIMARY KEY
  ,database_uid int NOT NULL
@@ -63,7 +75,7 @@ CREATE TABLE dbo.[filegroup](
  ,filegroup_type varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
  ,update_date datetime
 );
-GO
+
 CREATE TABLE dbo.[file](
   file_uid int identity(1,1) PRIMARY KEY NOT NULL
  ,file_name varchar(255) COLLATE Latin1_General_CI_AS NOT NULL
@@ -74,7 +86,7 @@ CREATE TABLE dbo.[file](
  ,update_date datetime
  ,database_uid int NOT NULL
 )
-GO
+
 CREATE TABLE dbo.[table](
   table_uid int identity(1,1) PRIMARY KEY NOT NULL
  ,object_id int
@@ -85,7 +97,7 @@ CREATE TABLE dbo.[table](
  ,type varchar(10) COLLATE Latin1_General_CI_AS NOT NULL
  ,database_uid int NOT NULL
 );
-GO
+
 
 CREATE TABLE dbo.[stat](
   stat_uid int NOT NULL identity(1,1) PRIMARY KEY
@@ -99,7 +111,7 @@ CREATE TABLE dbo.[stat](
  ,database_uid int NOT NULL
  ,columns varchar(5000) NOT NULL
 );
-GO
+
 CREATE TABLE dbo.[constraint](
   constraint_uid int identity(1,1) PRIMARY KEY 
  ,object_id int
@@ -117,7 +129,7 @@ CREATE TABLE dbo.[constraint](
  ,is_not_trusted bit NOT NULL
  ,database_uid int NOT NULL
 );
-GO
+
 CREATE TABLE dbo.[index](
   index_uid int identity(1,1)
  ,table_uid int NOT NULL
@@ -138,7 +150,7 @@ CREATE TABLE dbo.[index](
  ,database_uid int NOT NULL
  ,filegroup_uid int NOT NULL
 );
-GO
+
 
 /*
 ALTER TABLE dbo.[server_configurations]

@@ -1,6 +1,3 @@
-IF OBJECT_ID('dbo.st_GetServers') IS NOT NULL
-  DROP PROCEDURE dbo.st_GetServers;
-GO
 CREATE PROCEDURE dbo.st_GetServers
 AS
 BEGIN

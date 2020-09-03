@@ -1,6 +1,3 @@
-IF OBJECT_ID('dbo.st_GetIndexes') IS NOT NULL
-  DROP PROCEDURE dbo.st_GetIndexes;
-GO
 CREATE PROCEDURE dbo.st_GetIndexes
 AS
 BEGIN
@@ -16,7 +13,8 @@ BEGIN
       FROM sys.databases
            INNER JOIN dbo.[database]
            ON [database].database_name COLLATE Latin1_General_CI_AS = databases.name COLLATE Latin1_General_CI_AS
-      WHERE EXISTS(SELECT *
+      WHERE [database].ativo = 1
+        AND EXISTS(SELECT *
                    FROM dbo.fn_GetServerId() fn
                    WHERE fn.server_id = [database].server_id);
 
