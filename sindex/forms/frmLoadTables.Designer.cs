@@ -50,13 +50,13 @@
             // lblTitulo
             // 
             this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblTitulo.AutoSize = true;
             this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblTitulo.Location = new System.Drawing.Point(193, 116);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(212, 25);
             this.lblTitulo.TabIndex = 2;
             this.lblTitulo.Text = "Carregando informações...";
+            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // metroStyleManager
             // 
@@ -98,7 +98,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.metroPanel1.ResumeLayout(false);
-            this.metroPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

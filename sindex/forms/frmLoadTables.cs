@@ -39,12 +39,28 @@ namespace sindex.forms
 
         private async void LoadProcs()
         {
+            string status = "Carregando informações";
+
             Task t = Task.Run(() => {
+                status = "Apagando dados...";
+                dbTables.DeleteDataFromDisabledDatabases(cred, databaseName);
+
+                status = "Carregando filegroups...";
                 dbTables.LoadFilegroups(cred, databaseName);
+
+                status = "Carregando files...";
                 dbTables.LoadFiles(cred, databaseName);
+
+                status = "Carregando tabelas...";
                 dbTables.LoadTables(cred, databaseName);
+
+                status = "Carregando restrições...";
                 dbTables.LoadConstraints(cred, databaseName);
+
+                status = "Carregando estatísticas...";
                 dbTables.LoadStats(cred, databaseName);
+
+                status = "Carregando índices...";
                 dbTables.LoadIndexes(cred, databaseName);
                 Task.Delay(500);
             });
@@ -52,6 +68,7 @@ namespace sindex.forms
             while (!t.IsCompleted)
             {
                 await Task.Delay(300);
+                lblTitulo.Text = status;
             }
 
             this.Close();

@@ -41,7 +41,6 @@ namespace sindex
             SetMenuDesing();
             LoadConfig();
 
-            HideMenu(false);
             LoadLogin();
         }
 
@@ -95,32 +94,36 @@ namespace sindex
         #region LoadForms
         private void LoadForm(Form frm, Control parent, DockStyle dockStyle = DockStyle.Fill)
         {
-            frm.TopLevel = false;
-            frm.TopMost = true;
-            parent.Controls.Add(frm);
-            frm.Dock = dockStyle;
-            frm.StartPosition = FormStartPosition.CenterParent;
-            frm.Show();
+            if (CurrentForm != null)
+                CurrentForm.Close();
+
+            CurrentForm = frm;
+            CurrentForm.TopLevel = false;
+            CurrentForm.TopMost = true;
+            parent.Controls.Add(CurrentForm);
+            CurrentForm.Dock = dockStyle;
+            CurrentForm.StartPosition = FormStartPosition.CenterParent;
+            CurrentForm.Show();
         }
         public void LoadLogin()
         {
-            CurrentForm = new frmLogin(this.metroStyleManager, configuration, this);
-            LoadForm(CurrentForm, pnlForm, DockStyle.Left);
+            this.configuration.currentUser = -1;
+            this.configuration.currentConfiguration = -1;
+
+            HideMenu(false);
+            LoadForm(new frmLogin(this.metroStyleManager, configuration, this), pnlForm, DockStyle.Left);
         }
         public void LoadEnviroment()
         {
-            CurrentForm = new frmAmbientes(this.metroStyleManager, configuration, this);
-            LoadForm(CurrentForm, pnlForm);
+            LoadForm(new frmAmbientes(this.metroStyleManager, configuration, this), pnlForm);
         }
         public void LoadTables()
         {
-            CurrentForm = new frmLoadTables(metroStyleManager, configuration, this);
-            LoadForm(CurrentForm, pnlForm);
+            LoadForm(new frmLoadTables(metroStyleManager, configuration, this), pnlForm);
         }
         public void LoadDatabase()
         {
-            CurrentForm = new frmDatabases(metroStyleManager, configuration, this);
-            LoadForm(CurrentForm, pnlForm);
+            LoadForm(new frmDatabases(metroStyleManager, configuration, this), pnlForm);
         }
         #endregion
 
@@ -170,5 +173,25 @@ namespace sindex
             ShowSubMenu(pnlSubMenuMonitoramento);
         }
         #endregion
+
+        private void btnMenuSair_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMenuLogout_Click(object sender, EventArgs e)
+        {
+            LoadLogin();
+        }
+
+        private void btnAmbientes_Click(object sender, EventArgs e)
+        {
+            LoadEnviroment();
+        }
+
+        private void btnBanco_Click(object sender, EventArgs e)
+        {
+            LoadDatabase();
+        }
     }
 }

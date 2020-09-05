@@ -123,6 +123,20 @@ namespace sindex.repository
                 throw new Exception(errMsg);
             }
         }
+        public static void DeleteDataFromDisabledDatabases(Credentials cred, string database)
+        {
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+            string errMsg = "";
+            int returnCode = 0;
+
+            db.executeQuery("EXEC dbo.st_GetIndexes", param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+        }
 
         public static DataTable GetDatabases(Credentials cred, string database)
         {

@@ -162,6 +162,7 @@
             this.btnAmbientes.Text = "Ambientes";
             this.btnAmbientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAmbientes.UseVisualStyleBackColor = true;
+            this.btnAmbientes.Click += new System.EventHandler(this.btnAmbientes_Click);
             // 
             // btnBanco
             // 
@@ -180,6 +181,7 @@
             this.btnBanco.Text = "Bancos de dados";
             this.btnBanco.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBanco.UseVisualStyleBackColor = true;
+            this.btnBanco.Click += new System.EventHandler(this.btnBanco_Click);
             // 
             // btnMenuTuning
             // 
@@ -349,6 +351,7 @@
             this.btnMenuLogout.Text = "Logout";
             this.btnMenuLogout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMenuLogout.UseVisualStyleBackColor = true;
+            this.btnMenuLogout.Click += new System.EventHandler(this.btnMenuLogout_Click);
             // 
             // btnMenuSair
             // 
@@ -367,6 +370,7 @@
             this.btnMenuSair.Text = "Sair";
             this.btnMenuSair.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMenuSair.UseVisualStyleBackColor = true;
+            this.btnMenuSair.Click += new System.EventHandler(this.btnMenuSair_Click);
             // 
             // pnlMenu
             // 

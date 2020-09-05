@@ -142,21 +142,39 @@ namespace sindex.forms
                     grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex);
                 }
 
-                if (grdDatabases.Columns.Count > 0)
-                {
-                    grdDatabases.Columns[0].HeaderText = "Database ID";
-                    grdDatabases.Columns[1].HeaderText = "Servidor";
-                    grdDatabases.Columns[1].Visible = false;
-                    grdDatabases.Columns[2].HeaderText = "Banco de Dados";
-                    grdDatabases.Columns[2].Width = 300;
-                    grdDatabases.Columns[3].HeaderText = "Última Atualização";
-                    grdDatabases.Columns[4].HeaderText = "Monitorar";
-                }
-
+                ResizeGrid();
             }
             catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ResizeGrid()
+        {
+            if (grdDatabases.Columns.Count > 0)
+            {
+                grdDatabases.Columns[0].HeaderText = "Database ID";
+                grdDatabases.Columns[0].Visible = true;
+
+                grdDatabases.Columns[1].HeaderText = "Servidor";
+                grdDatabases.Columns[1].Visible = false;
+
+                grdDatabases.Columns[2].HeaderText = "Banco de Dados";
+                grdDatabases.Columns[2].Visible = true;
+
+                grdDatabases.Columns[3].HeaderText = "Última Atualização";
+                grdDatabases.Columns[3].Visible = true;
+
+                grdDatabases.Columns[4].HeaderText = "Monitorar";
+                grdDatabases.Columns[4].Visible = true;
+
+                int widthMedia = (grdDatabases.Width / (grdDatabases.Columns.GetColumnCount(DataGridViewElementStates.Visible))) - 10;
+
+                grdDatabases.Columns[0].Width = widthMedia;
+                grdDatabases.Columns[2].Width = widthMedia;
+                grdDatabases.Columns[3].Width = widthMedia;
+                grdDatabases.Columns[4].Width = widthMedia;
             }
         }
 
@@ -245,6 +263,11 @@ namespace sindex.forms
         {
             this.Close();
             main.LoadTables();
+        }
+
+        private void frmDatabases_Resize(object sender, EventArgs e)
+        {
+            ResizeGrid();
         }
     }
 }
