@@ -26,7 +26,49 @@ namespace sindex
         public string databaseSindex = "";
         public dbConnect dbCon;
         public Credentials cred;
+        private Form CurrentForm;
 
+        public frmMain()
+        {
+            InitializeComponent();
+            configuration = new Configuration();
+            this.Theme = metroStyleManager.Theme;
+            this.Style = metroStyleManager.Style;
+
+            jsonPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+            jsonPath += "\\sindex.config";
+
+            SetMenuDesing();
+            LoadConfig();
+
+            HideMenu(false);
+            LoadLogin();
+        }
+
+        #region Configurações
+        public void SaveConfig()
+        {
+            string json = JsonConvert.SerializeObject(configuration, Formatting.Indented);
+            json = StringCrypt.Encrypt(json, passPharse);
+
+            System.IO.File.WriteAllText(jsonPath, json);
+        }
+        public void LoadConfig()
+        {
+            if (System.IO.File.Exists(jsonPath))
+            {
+                StreamReader sr = new StreamReader(jsonPath);
+                string configFile = sr.ReadToEnd();
+                configFile = StringCrypt.Decrypt(configFile, passPharse);
+                configuration.LoadFromJson(configFile);
+                sr.Close();
+                sr.Dispose();
+            }
+        }
+        public void ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+        {
+            metroFunctions.ShowMessage(this, message, title, buttons, icon);
+        }
         public void SetConnectionSettings()
         {
             databaseSindex = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].GetDatabase();
@@ -48,76 +90,85 @@ namespace sindex
         {
             return this.databaseSindex;
         }
+        #endregion
 
-        public frmMain()
-        {
-            InitializeComponent();
-            configuration = new Configuration();
-            this.Theme = metroStyleManager.Theme;
-            this.Style = metroStyleManager.Style;
-            jsonPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-            jsonPath += "\\sindex.config";
-
-            LoadConfig();
-            Form frm = new frmLogin(this.metroStyleManager, configuration, this);
-            LoadForm(frm, pnlLogin);
-        }
-
-        public void SaveConfig()
-        {
-            string json = JsonConvert.SerializeObject(configuration, Formatting.Indented);
-            json = StringCrypt.Encrypt(json, passPharse);
-
-            System.IO.File.WriteAllText(jsonPath, json);
-        }
-
-        public void LoadConfig()
-        {
-            if (System.IO.File.Exists(jsonPath))
-            {
-                StreamReader sr = new StreamReader(jsonPath);
-                string configFile = sr.ReadToEnd();
-                configFile = StringCrypt.Decrypt(configFile, passPharse);
-                configuration.LoadFromJson(configFile);
-                sr.Close();
-                sr.Dispose();
-            }
-        }
-
-        public void SetVisiblePanelLogin (bool val){
-            pnlLogin.Visible = val;
-        }
-
-        public void ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
-        {
-            metroFunctions.ShowMessage(this, message, title, buttons, icon);
-        }
-
-        public void LoadEnviroment()
-        {
-            Form frm = new frmAmbientes(this.metroStyleManager, configuration, this);
-            LoadForm(frm, this);
-        }
-
-        private void LoadForm(Form frm, Control parent)
+        #region LoadForms
+        private void LoadForm(Form frm, Control parent, DockStyle dockStyle = DockStyle.Fill)
         {
             frm.TopLevel = false;
             frm.TopMost = true;
             parent.Controls.Add(frm);
-            frm.Dock = DockStyle.Fill;
+            frm.Dock = dockStyle;
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.Show();
         }
-
+        public void LoadLogin()
+        {
+            CurrentForm = new frmLogin(this.metroStyleManager, configuration, this);
+            LoadForm(CurrentForm, pnlForm, DockStyle.Left);
+        }
+        public void LoadEnviroment()
+        {
+            CurrentForm = new frmAmbientes(this.metroStyleManager, configuration, this);
+            LoadForm(CurrentForm, pnlForm);
+        }
+        public void LoadTables()
+        {
+            CurrentForm = new frmLoadTables(metroStyleManager, configuration, this);
+            LoadForm(CurrentForm, pnlForm);
+        }
         public void LoadDatabase()
         {
-            frmDatabases frm = new frmDatabases(metroStyleManager, configuration,this);
-            LoadForm(frm, this);
+            CurrentForm = new frmDatabases(metroStyleManager, configuration, this);
+            LoadForm(CurrentForm, pnlForm);
         }
+        #endregion
 
-        private void frmMain_MaximumSizeChanged(object sender, EventArgs e)
+        #region menuItens
+        private void hideSubMenu()
         {
-
+            if (pnlSubMenuConfig.Visible) pnlSubMenuConfig.Visible = false;
+            if (pnlSubMenuTuning.Visible) pnlSubMenuTuning.Visible = false;
+            if (pnlSubMenuMonitoramento.Visible) pnlSubMenuMonitoramento.Visible = false;
         }
+
+        public void HideMenu(bool val)
+        {
+            pnlMenu.Visible = val;
+            pnlBgMenu.Visible = val;
+            this.Refresh();
+        }
+
+        private void ShowSubMenu(Panel subMenu)
+        {
+            if (!subMenu.Visible)
+            {
+                hideSubMenu();
+                subMenu.Visible = true;
+            }
+            else
+            {
+                subMenu.Visible = false;
+            }
+        }
+        private void SetMenuDesing()
+        {
+            pnlSubMenuConfig.Visible = false;
+            pnlSubMenuTuning.Visible = false;
+            pnlSubMenuMonitoramento.Visible = false;
+        }
+        private void btnMenuConfiguracoes_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(pnlSubMenuConfig);
+        }
+        private void btnMenuTuning_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(pnlSubMenuTuning);
+        }
+        private void btnMenuMonitoramento_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(pnlSubMenuMonitoramento);
+        }
+        #endregion
     }
 }

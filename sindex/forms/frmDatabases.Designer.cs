@@ -33,24 +33,25 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlBackground = new MetroFramework.Controls.MetroPanel();
-            this.grdDatabases = new MetroFramework.Controls.MetroGrid();
-            this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.lnkSalvarFechar = new MetroFramework.Controls.MetroLink();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.txtFiltrar = new MetroFramework.Controls.MetroTextBox();
+            this.chkMarcarTodos = new MetroFramework.Controls.MetroCheckBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.grdDatabases = new MetroFramework.Controls.MetroGrid();
+            this.mnuGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.marcarSelecionadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desmarcarSelecionadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.database_uid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.database_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.update_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ativo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.server_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkMarcarTodos = new MetroFramework.Controls.MetroCheckBox();
-            this.txtFiltrar = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.mnuGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.marcarSelecionadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.desmarcarSelecionadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDatabases)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.mnuGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBackground
@@ -58,6 +59,7 @@
             this.pnlBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlBackground.Controls.Add(this.lnkSalvarFechar);
             this.pnlBackground.Controls.Add(this.metroLabel2);
             this.pnlBackground.Controls.Add(this.txtFiltrar);
             this.pnlBackground.Controls.Add(this.chkMarcarTodos);
@@ -73,6 +75,83 @@
             this.pnlBackground.VerticalScrollbarBarColor = true;
             this.pnlBackground.VerticalScrollbarHighlightOnWheel = false;
             this.pnlBackground.VerticalScrollbarSize = 10;
+            // 
+            // lnkSalvarFechar
+            // 
+            this.lnkSalvarFechar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lnkSalvarFechar.Location = new System.Drawing.Point(822, 553);
+            this.lnkSalvarFechar.Name = "lnkSalvarFechar";
+            this.lnkSalvarFechar.Size = new System.Drawing.Size(145, 23);
+            this.lnkSalvarFechar.TabIndex = 7;
+            this.lnkSalvarFechar.Text = "Salvar e Fechar";
+            this.lnkSalvarFechar.UseSelectable = true;
+            this.lnkSalvarFechar.Click += new System.EventHandler(this.lnkSalvarFechar_Click);
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(12, 517);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(67, 19);
+            this.metroLabel2.TabIndex = 6;
+            this.metroLabel2.Text = "Pesquisar:";
+            // 
+            // txtFiltrar
+            // 
+            this.txtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            // 
+            // 
+            // 
+            this.txtFiltrar.CustomButton.Image = null;
+            this.txtFiltrar.CustomButton.Location = new System.Drawing.Point(321, 1);
+            this.txtFiltrar.CustomButton.Name = "";
+            this.txtFiltrar.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtFiltrar.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtFiltrar.CustomButton.TabIndex = 1;
+            this.txtFiltrar.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtFiltrar.CustomButton.UseSelectable = true;
+            this.txtFiltrar.CustomButton.Visible = false;
+            this.txtFiltrar.Lines = new string[0];
+            this.txtFiltrar.Location = new System.Drawing.Point(85, 516);
+            this.txtFiltrar.MaxLength = 32767;
+            this.txtFiltrar.Name = "txtFiltrar";
+            this.txtFiltrar.PasswordChar = '\0';
+            this.txtFiltrar.PromptText = "Pesquisar...";
+            this.txtFiltrar.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtFiltrar.SelectedText = "";
+            this.txtFiltrar.SelectionLength = 0;
+            this.txtFiltrar.SelectionStart = 0;
+            this.txtFiltrar.ShortcutsEnabled = true;
+            this.txtFiltrar.Size = new System.Drawing.Size(343, 23);
+            this.txtFiltrar.TabIndex = 5;
+            this.txtFiltrar.UseSelectable = true;
+            this.txtFiltrar.WaterMark = "Pesquisar...";
+            this.txtFiltrar.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtFiltrar.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtFiltrar.TextChanged += new System.EventHandler(this.txtFiltrar_TextChanged);
+            // 
+            // chkMarcarTodos
+            // 
+            this.chkMarcarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkMarcarTodos.AutoSize = true;
+            this.chkMarcarTodos.Location = new System.Drawing.Point(873, 521);
+            this.chkMarcarTodos.Name = "chkMarcarTodos";
+            this.chkMarcarTodos.Size = new System.Drawing.Size(94, 15);
+            this.chkMarcarTodos.TabIndex = 4;
+            this.chkMarcarTodos.Text = "Marcar Todos";
+            this.chkMarcarTodos.UseSelectable = true;
+            this.chkMarcarTodos.Click += new System.EventHandler(this.chkMarcarTodos_Click);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel1.Location = new System.Drawing.Point(12, 11);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(432, 25);
+            this.metroLabel1.TabIndex = 3;
+            this.metroLabel1.Text = "Selecione o(s) banco(s) de dados que deseja monitorar:";
             // 
             // grdDatabases
             // 
@@ -136,19 +215,31 @@
             this.grdDatabases.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdDatabases_CellContentClick);
             this.grdDatabases.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grdDatabases_CellMouseDoubleClick);
             // 
+            // mnuGrid
+            // 
+            this.mnuGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.marcarSelecionadosToolStripMenuItem,
+            this.desmarcarSelecionadosToolStripMenuItem});
+            this.mnuGrid.Name = "mnuGrid";
+            this.mnuGrid.Size = new System.Drawing.Size(203, 48);
+            // 
+            // marcarSelecionadosToolStripMenuItem
+            // 
+            this.marcarSelecionadosToolStripMenuItem.Name = "marcarSelecionadosToolStripMenuItem";
+            this.marcarSelecionadosToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.marcarSelecionadosToolStripMenuItem.Text = "Marcar Selecionados";
+            this.marcarSelecionadosToolStripMenuItem.Click += new System.EventHandler(this.marcarSelecionadosToolStripMenuItem_Click);
+            // 
+            // desmarcarSelecionadosToolStripMenuItem
+            // 
+            this.desmarcarSelecionadosToolStripMenuItem.Name = "desmarcarSelecionadosToolStripMenuItem";
+            this.desmarcarSelecionadosToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.desmarcarSelecionadosToolStripMenuItem.Text = "Desmarcar Selecionados";
+            this.desmarcarSelecionadosToolStripMenuItem.Click += new System.EventHandler(this.desmarcarSelecionadosToolStripMenuItem_Click);
+            // 
             // metroStyleManager
             // 
-            this.metroStyleManager.Owner = null;
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.metroLabel1.Location = new System.Drawing.Point(12, 11);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(432, 25);
-            this.metroLabel1.TabIndex = 3;
-            this.metroLabel1.Text = "Selecione o(s) banco(s) de dados que deseja monitorar:";
+            this.metroStyleManager.Owner = this;
             // 
             // database_uid
             // 
@@ -161,7 +252,7 @@
             this.database_name.DataPropertyName = "database_name";
             this.database_name.HeaderText = "Banco de Dados";
             this.database_name.Name = "database_name";
-            this.database_name.Width = 540;
+            this.database_name.Width = 300;
             // 
             // update_date
             // 
@@ -185,84 +276,6 @@
             this.server_id.Name = "server_id";
             this.server_id.Visible = false;
             // 
-            // chkMarcarTodos
-            // 
-            this.chkMarcarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkMarcarTodos.AutoSize = true;
-            this.chkMarcarTodos.Location = new System.Drawing.Point(873, 521);
-            this.chkMarcarTodos.Name = "chkMarcarTodos";
-            this.chkMarcarTodos.Size = new System.Drawing.Size(94, 15);
-            this.chkMarcarTodos.TabIndex = 4;
-            this.chkMarcarTodos.Text = "Marcar Todos";
-            this.chkMarcarTodos.UseSelectable = true;
-            this.chkMarcarTodos.Click += new System.EventHandler(this.chkMarcarTodos_Click);
-            // 
-            // txtFiltrar
-            // 
-            this.txtFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            // 
-            // 
-            // 
-            this.txtFiltrar.CustomButton.Image = null;
-            this.txtFiltrar.CustomButton.Location = new System.Drawing.Point(321, 1);
-            this.txtFiltrar.CustomButton.Name = "";
-            this.txtFiltrar.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtFiltrar.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtFiltrar.CustomButton.TabIndex = 1;
-            this.txtFiltrar.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtFiltrar.CustomButton.UseSelectable = true;
-            this.txtFiltrar.CustomButton.Visible = false;
-            this.txtFiltrar.Lines = new string[0];
-            this.txtFiltrar.Location = new System.Drawing.Point(85, 516);
-            this.txtFiltrar.MaxLength = 32767;
-            this.txtFiltrar.Name = "txtFiltrar";
-            this.txtFiltrar.PasswordChar = '\0';
-            this.txtFiltrar.PromptText = "Pesquisar...";
-            this.txtFiltrar.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtFiltrar.SelectedText = "";
-            this.txtFiltrar.SelectionLength = 0;
-            this.txtFiltrar.SelectionStart = 0;
-            this.txtFiltrar.ShortcutsEnabled = true;
-            this.txtFiltrar.Size = new System.Drawing.Size(343, 23);
-            this.txtFiltrar.TabIndex = 5;
-            this.txtFiltrar.UseSelectable = true;
-            this.txtFiltrar.WaterMark = "Pesquisar...";
-            this.txtFiltrar.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtFiltrar.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtFiltrar.TextChanged += new System.EventHandler(this.txtFiltrar_TextChanged);
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(12, 517);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(67, 19);
-            this.metroLabel2.TabIndex = 6;
-            this.metroLabel2.Text = "Pesquisar:";
-            // 
-            // mnuGrid
-            // 
-            this.mnuGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.marcarSelecionadosToolStripMenuItem,
-            this.desmarcarSelecionadosToolStripMenuItem});
-            this.mnuGrid.Name = "mnuGrid";
-            this.mnuGrid.Size = new System.Drawing.Size(203, 48);
-            // 
-            // marcarSelecionadosToolStripMenuItem
-            // 
-            this.marcarSelecionadosToolStripMenuItem.Name = "marcarSelecionadosToolStripMenuItem";
-            this.marcarSelecionadosToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.marcarSelecionadosToolStripMenuItem.Text = "Marcar Selecionados";
-            this.marcarSelecionadosToolStripMenuItem.Click += new System.EventHandler(this.marcarSelecionadosToolStripMenuItem_Click);
-            // 
-            // desmarcarSelecionadosToolStripMenuItem
-            // 
-            this.desmarcarSelecionadosToolStripMenuItem.Name = "desmarcarSelecionadosToolStripMenuItem";
-            this.desmarcarSelecionadosToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.desmarcarSelecionadosToolStripMenuItem.Text = "Desmarcar Selecionados";
-            this.desmarcarSelecionadosToolStripMenuItem.Click += new System.EventHandler(this.desmarcarSelecionadosToolStripMenuItem_Click);
-            // 
             // frmDatabases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,8 +289,8 @@
             this.pnlBackground.ResumeLayout(false);
             this.pnlBackground.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDatabases)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.mnuGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -288,16 +301,17 @@
         private MetroFramework.Components.MetroStyleManager metroStyleManager;
         private MetroFramework.Controls.MetroGrid grdDatabases;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn database_uid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn database_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn update_date;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ativo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn server_id;
         private MetroFramework.Controls.MetroTextBox txtFiltrar;
         private MetroFramework.Controls.MetroCheckBox chkMarcarTodos;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private System.Windows.Forms.ContextMenuStrip mnuGrid;
         private System.Windows.Forms.ToolStripMenuItem marcarSelecionadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem desmarcarSelecionadosToolStripMenuItem;
+        private MetroFramework.Controls.MetroLink lnkSalvarFechar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn database_uid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn database_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn update_date;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ativo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn server_id;
     }
 }

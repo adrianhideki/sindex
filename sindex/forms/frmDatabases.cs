@@ -25,7 +25,9 @@ namespace sindex.forms
         public frmDatabases(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
             InitializeComponent();
-            this.metroStyleManager = metroStyleManager;
+            this.metroStyleManager.Theme = metroStyleManager.Theme;
+            this.metroStyleManager.Style = metroStyleManager.Style;
+
             this.Refresh();
 
             this.conf = conf;
@@ -54,7 +56,7 @@ namespace sindex.forms
 
         public void GetDatabases()
         {
-            grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex);
+            UpdateDataSource();
         }
 
         public void LoadDatabases()
@@ -103,7 +105,7 @@ namespace sindex.forms
         {
             try
             {
-                grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex, txtFiltrar.Text);
+                UpdateDataSource();
             }
             catch (Exception err)
             {
@@ -139,6 +141,18 @@ namespace sindex.forms
                 {
                     grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex);
                 }
+
+                if (grdDatabases.Columns.Count > 0)
+                {
+                    grdDatabases.Columns[0].HeaderText = "Database ID";
+                    grdDatabases.Columns[1].HeaderText = "Servidor";
+                    grdDatabases.Columns[1].Visible = false;
+                    grdDatabases.Columns[2].HeaderText = "Banco de Dados";
+                    grdDatabases.Columns[2].Width = 300;
+                    grdDatabases.Columns[3].HeaderText = "Última Atualização";
+                    grdDatabases.Columns[4].HeaderText = "Monitorar";
+                }
+
             }
             catch (Exception err)
             {
@@ -225,6 +239,12 @@ namespace sindex.forms
         private void grdDatabases_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void lnkSalvarFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            main.LoadTables();
         }
     }
 }

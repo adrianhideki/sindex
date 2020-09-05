@@ -40,7 +40,7 @@
             // spnLoading
             // 
             this.spnLoading.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.spnLoading.Location = new System.Drawing.Point(249, 121);
+            this.spnLoading.Location = new System.Drawing.Point(253, 155);
             this.spnLoading.Maximum = 100;
             this.spnLoading.Name = "spnLoading";
             this.spnLoading.Size = new System.Drawing.Size(91, 90);
@@ -49,10 +49,10 @@
             // 
             // lblTitulo
             // 
-            this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.lblTitulo.Location = new System.Drawing.Point(200, 83);
+            this.lblTitulo.Location = new System.Drawing.Point(193, 116);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(212, 25);
             this.lblTitulo.TabIndex = 2;

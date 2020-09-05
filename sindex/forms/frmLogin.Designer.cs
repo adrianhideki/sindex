@@ -113,6 +113,7 @@
             // 
             // lnkCadastrarConta
             // 
+            this.lnkCadastrarConta.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnkCadastrarConta.Location = new System.Drawing.Point(221, 398);
             this.lnkCadastrarConta.Name = "lnkCadastrarConta";
             this.lnkCadastrarConta.Size = new System.Drawing.Size(101, 23);

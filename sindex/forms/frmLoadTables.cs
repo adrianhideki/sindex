@@ -25,7 +25,9 @@ namespace sindex.forms
         public frmLoadTables(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
             InitializeComponent();
-            this.metroStyleManager = metroStyleManager;
+            this.metroStyleManager.Theme = metroStyleManager.Theme;
+            this.metroStyleManager.Style = metroStyleManager.Style;
+
 
             this.main = main;
             this.cred = main.cred;
@@ -44,12 +46,14 @@ namespace sindex.forms
                 dbTables.LoadConstraints(cred, databaseName);
                 dbTables.LoadStats(cred, databaseName);
                 dbTables.LoadIndexes(cred, databaseName);
-
+                Task.Delay(500);
             });
 
-            t.Wait();
+            while (!t.IsCompleted)
+            {
+                await Task.Delay(300);
+            }
 
-            await Task.Delay(1000);
             this.Close();
         }
     }

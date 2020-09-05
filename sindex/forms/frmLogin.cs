@@ -20,8 +20,12 @@ namespace sindex.forms
         public frmLogin(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
             InitializeComponent();
-            this.metroStyleManager = metroStyleManager;
+
+            this.metroStyleManager.Theme = metroStyleManager.Theme;
+            this.metroStyleManager.Style = metroStyleManager.Style;
+
             this.Refresh();
+
             this.conf = conf;
             this.main = main;
         }
@@ -59,7 +63,7 @@ namespace sindex.forms
             try
             {
                 conf.Login(txtUser.Text, txtPassword.Text);
-                main.SetVisiblePanelLogin(false);
+                main.HideMenu(true);
                 main.LoadEnviroment();
                 this.Close();
             }

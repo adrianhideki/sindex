@@ -23,7 +23,10 @@ namespace sindex.forms
             try
             {
                 InitializeComponent();
-                this.metroStyleManager = metroStyleManager;
+
+                this.metroStyleManager.Theme = metroStyleManager.Theme;
+                this.metroStyleManager.Style = metroStyleManager.Style;
+
                 this.Refresh();
 
                 this.conf = conf;
