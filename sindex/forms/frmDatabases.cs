@@ -44,13 +44,17 @@ namespace sindex.forms
 
                 CreateObjects();
                 LoadDatabases();
+                GetDatabases();
             }
             catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
-            //grdDatabases.DataSource = dbTables.GetDatabases(cred);
+        public void GetDatabases()
+        {
+            grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex);
         }
 
         public void LoadDatabases()
@@ -91,6 +95,134 @@ namespace sindex.forms
         }
 
         private void frmDatabases_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtFiltrar_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex, txtFiltrar.Text);
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void chkMarcarTodos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                grdDatabases.SelectAll();
+
+                SetDataBaseEnabled(chkMarcarTodos.Checked);
+
+                UpdateDataSource();
+                grdDatabases.ClearSelection();
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UpdateDataSource()
+        {
+            try
+            {
+                if (txtFiltrar.Text != "")
+                {
+                    grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex, txtFiltrar.Text);
+                } else
+                {
+                    grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex);
+                }
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void grdDatabases_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            SetDataBaseEnabled();
+        }
+
+        private void SetDataBaseEnabled(bool value)
+        {
+            int[] rows = new int[grdDatabases.SelectedRows.Count];
+            int x = 0;
+            bool index0 = false;
+
+            foreach (DataGridViewRow r in grdDatabases.SelectedRows)
+            {
+                dbTables.SetDatabaseEnabled(main.cred, main.databaseSindex, Int32.Parse(r.Cells[0].Value.ToString()), value);
+                rows[x] = r.Index;
+                x++;
+
+                if (r.Index == 0)
+                {
+                    index0 = true;
+                }
+            }
+
+            UpdateDataSource();
+
+            if (!index0)
+            {
+                grdDatabases.Rows[0].Selected = false;
+            }
+
+            for (int i = 0; i < rows.Length; i++)
+            {
+                grdDatabases.Rows[rows[i]].Selected = true;
+            }
+        }
+        private void SetDataBaseEnabled()
+        {
+            int[] rows = new int[grdDatabases.SelectedRows.Count];
+            int x = 0;
+            bool index0 = false;
+
+            foreach (DataGridViewRow r in grdDatabases.SelectedRows)
+            {
+                dbTables.SetDatabaseEnabled(main.cred, main.databaseSindex, Int32.Parse(r.Cells[0].Value.ToString()), !Boolean.Parse(r.Cells[4].Value.ToString()));
+                rows[x] = r.Index;
+                x++;
+
+                if (r.Index == 0)
+                {
+                    index0 = true;
+                }
+            }
+
+            UpdateDataSource();
+
+            if (!index0)
+            {
+                grdDatabases.Rows[0].Selected = false;
+            }
+
+            for (int i = 0; i < rows.Length; i++)
+            {
+                grdDatabases.Rows[rows[i]].Selected = true;
+            }
+        }
+
+        private void marcarSelecionadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetDataBaseEnabled(true);
+        }
+
+        private void desmarcarSelecionadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetDataBaseEnabled(false);
+        }
+
+        private void grdDatabases_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

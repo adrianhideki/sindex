@@ -40,11 +40,45 @@ namespace sindex.forms
                 {
                     cbxAmbiente.Items.Add(enviroments[i].name);
                 }
+
+                if (enviroments.Count > 0)
+                {
+                    cbxAmbiente.SelectedIndex = 0;
+                } else
+                {
+                    setEnabledButtons(false);
+                }
             }
             catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool validaNomeAmbiente(string nome)
+        {
+            bool _out = false;
+
+            if (enviroments.Count > 0)
+            {
+                for (int i = 0; i < enviroments.Count; i++)
+                {
+                    if (enviroments[i].name == nome)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return _out;
+        }
+
+        private void setEnabledButtons(bool val)
+        {
+
+            btnSelecionarAmbiente.Enabled = val;
+            btnExcluir.Enabled = val;
+            btnAtualizar.Enabled = val;
         }
 
         private void cbxAmbiente_SelectedIndexChanged(object sender, EventArgs e)
@@ -60,6 +94,10 @@ namespace sindex.forms
                     txtUsuario.Text = enviroments[index].user;
                     txtSenha.Text = enviroments[index].password;
                     txtDatabase.Text = enviroments[index].database;
+                    setEnabledButtons(true);
+
+                } else {
+                    setEnabledButtons(false);
                 }
             }
             catch (Exception err)
@@ -178,6 +216,24 @@ namespace sindex.forms
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
+            btnAdicionar.Enabled = !(validaNomeAmbiente(txtNome.Text));
+        }
+
+        private void txtServidor_TextChanged(object sender, EventArgs e)
+        {
+            btnTestarCon.Enabled = ValidaConexao();
+        }
+
+        public bool ValidaConexao()
+        {
+            if (!String.IsNullOrEmpty(txtDatabase.Text) && !String.IsNullOrEmpty(txtServidor.Text) && !String.IsNullOrEmpty(txtUsuario.Text) && !String.IsNullOrEmpty(txtServidor.Text))
+                return true;
+
+            return false;
         }
     }
 }

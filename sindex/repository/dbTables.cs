@@ -141,5 +141,63 @@ namespace sindex.repository
 
             return res;
         }
+        public static DataTable GetDatabases(Credentials cred, string database, string filtro)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+            param.Add("@banco", filtro, DbType.String, ParameterDirection.Input);
+
+            string errMsg = "";
+            int returnCode = 0;
+
+            DataTable res = db.executeDataTable("select * from dbo.[database] where database_name LIKE '%' + @banco + '%'", param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+        public static DataTable SetDatabaseEnabled(Credentials cred, string database, int databaseId, bool enabled)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+            param.Add("@database_uid", databaseId, DbType.Int32, ParameterDirection.Input);
+            param.Add("@ativo", enabled, DbType.Boolean, ParameterDirection.Input);
+
+            string errMsg = "";
+            int returnCode = 0;
+
+            DataTable res = db.executeDataTable("UPDATE [database] set ativo = @ativo where database_uid = @database_uid", param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+        public static DataTable SetDatabaseEnabled(Credentials cred, string database,  bool enabled)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+            param.Add("@ativo", enabled, DbType.Boolean, ParameterDirection.Input);
+
+            string errMsg = "";
+            int returnCode = 0;
+
+            DataTable res = db.executeDataTable("UPDATE [database] set ativo = @ativo", param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
     }
 }

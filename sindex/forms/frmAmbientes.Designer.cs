@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlBackground = new MetroFramework.Controls.MetroPanel();
+            this.btnSelecionarAmbiente = new MetroFramework.Controls.MetroButton();
             this.btnTestarCon = new MetroFramework.Controls.MetroButton();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.txtDatabase = new MetroFramework.Controls.MetroTextBox();
@@ -47,7 +48,6 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.cbxAmbiente = new MetroFramework.Controls.MetroComboBox();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.pnlBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +57,7 @@
             this.pnlBackground.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlBackground.Controls.Add(this.metroButton1);
+            this.pnlBackground.Controls.Add(this.btnSelecionarAmbiente);
             this.pnlBackground.Controls.Add(this.btnTestarCon);
             this.pnlBackground.Controls.Add(this.metroLabel6);
             this.pnlBackground.Controls.Add(this.txtDatabase);
@@ -84,6 +84,17 @@
             this.pnlBackground.VerticalScrollbarBarColor = true;
             this.pnlBackground.VerticalScrollbarHighlightOnWheel = false;
             this.pnlBackground.VerticalScrollbarSize = 10;
+            // 
+            // btnSelecionarAmbiente
+            // 
+            this.btnSelecionarAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelecionarAmbiente.Location = new System.Drawing.Point(655, 326);
+            this.btnSelecionarAmbiente.Name = "btnSelecionarAmbiente";
+            this.btnSelecionarAmbiente.Size = new System.Drawing.Size(120, 23);
+            this.btnSelecionarAmbiente.TabIndex = 0;
+            this.btnSelecionarAmbiente.Text = "Selecionar Ambiente";
+            this.btnSelecionarAmbiente.UseSelectable = true;
+            this.btnSelecionarAmbiente.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // btnTestarCon
             // 
@@ -138,6 +149,7 @@
             this.txtDatabase.WaterMark = "Banco de dados default";
             this.txtDatabase.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtDatabase.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtDatabase.TextChanged += new System.EventHandler(this.txtServidor_TextChanged);
             // 
             // btnExcluir
             // 
@@ -241,6 +253,7 @@
             this.txtSenha.WaterMark = "Senha";
             this.txtSenha.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSenha.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtSenha.TextChanged += new System.EventHandler(this.txtServidor_TextChanged);
             // 
             // txtUsuario
             // 
@@ -275,6 +288,7 @@
             this.txtUsuario.WaterMark = "Usuário";
             this.txtUsuario.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtUsuario.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtUsuario.TextChanged += new System.EventHandler(this.txtServidor_TextChanged);
             // 
             // txtServidor
             // 
@@ -309,6 +323,7 @@
             this.txtServidor.WaterMark = "Servidor";
             this.txtServidor.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtServidor.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtServidor.TextChanged += new System.EventHandler(this.txtServidor_TextChanged);
             // 
             // txtNome
             // 
@@ -343,6 +358,7 @@
             this.txtNome.WaterMark = "Nome do ambiente";
             this.txtNome.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtNome.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNome.TextChanged += new System.EventHandler(this.txtNome_TextChanged);
             // 
             // metroLabel1
             // 
@@ -369,17 +385,6 @@
             // metroStyleManager
             // 
             this.metroStyleManager.Owner = this;
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroButton1.Location = new System.Drawing.Point(655, 326);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(120, 23);
-            this.metroButton1.TabIndex = 0;
-            this.metroButton1.Text = "Selecionar Ambiente";
-            this.metroButton1.UseSelectable = true;
-            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // frmAmbientes
             // 
@@ -417,6 +422,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroTextBox txtDatabase;
         private MetroFramework.Controls.MetroButton btnTestarCon;
-        private MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton btnSelecionarAmbiente;
     }
 }

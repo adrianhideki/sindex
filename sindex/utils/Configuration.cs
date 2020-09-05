@@ -166,6 +166,7 @@ namespace sindex.utils
             enviroments[index].user = env.user;
             enviroments[index].password = env.password;
             enviroments[index].database = env.database;
+            enviroments[index].name = env.name;
         }
 
         public bool ValidarEmail(string email)
