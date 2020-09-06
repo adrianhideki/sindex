@@ -7,15 +7,15 @@ BEGIN
     FROM sys.sysprocesses
     GROUP BY spid
   )
-  SELECT TotalConnections      = COUNT(1)
-        ,SystemConnections     = SUM(CASE WHEN _proc.system_con    > 0 THEN 1 ELSE 0 END)
-        ,UserConnections       = SUM(CASE WHEN _proc.system_con    = 0 THEN 1 ELSE 0 END)
-        ,BlockedConnections    = SUM(CASE WHEN _proc.blocked       > 0 THEN 1 ELSE 0 END)
-        ,ParallelConnections   = SUM(CASE WHEN _proc.ecid          > 0 THEN 1 ELSE 0 END)
-        ,TranOpenConnections   = SUM(CASE WHEN _proc.tran_count    > 0 THEN 1 ELSE 0 END)
-        ,BackgroundConnections = SUM(CASE WHEN _proc.is_background > 0 THEN 1 ELSE 0 END)
-        ,SleepingConnections   = SUM(CASE WHEN _proc.is_sleeping   > 0 THEN 1 ELSE 0 END)
-        ,RunnableConnections   = SUM(CASE WHEN _proc.is_runnable   > 0 THEN 1 ELSE 0 END)
+  SELECT [Total de Conexões]        = COUNT(1)
+        ,[Conexões de Sistema]      = SUM(CASE WHEN _proc.system_con    > 0 THEN 1 ELSE 0 END)
+        ,[Conexões de Usuário]      = SUM(CASE WHEN _proc.system_con    = 0 THEN 1 ELSE 0 END)
+        ,[Conexões bloqueadas]      = SUM(CASE WHEN _proc.blocked       > 0 THEN 1 ELSE 0 END)
+        ,[Conexões com paralelismo] = SUM(CASE WHEN _proc.ecid          > 0 THEN 1 ELSE 0 END)
+        ,[Conexões com transação]   = SUM(CASE WHEN _proc.tran_count    > 0 THEN 1 ELSE 0 END)
+        ,[Conexões em background]   = SUM(CASE WHEN _proc.is_background > 0 THEN 1 ELSE 0 END)
+        ,[Conexões em sleeping]     = SUM(CASE WHEN _proc.is_sleeping   > 0 THEN 1 ELSE 0 END)
+        ,[Conexões em execução]     = SUM(CASE WHEN _proc.is_runnable   > 0 THEN 1 ELSE 0 END)
   FROM CTA
        CROSS APPLY (
          SELECT system_con    = SUM(CASE WHEN sysprocesses.spid      <= 50 THEN 1 ELSE 0 END)

@@ -11,6 +11,7 @@ namespace sindex.repository
 {
     public static class dbTables
     {
+        #region Load Data Tables
         public static void LoadServer(Credentials cred, string database)
         {
             dbConnect db = new dbConnect(cred);
@@ -137,43 +138,9 @@ namespace sindex.repository
                 throw new Exception(errMsg);
             }
         }
+        #endregion
 
-        public static DataTable GetDatabases(Credentials cred, string database)
-        {
-
-            dbConnect db = new dbConnect(cred);
-            DynamicParameters param = new Dapper.DynamicParameters();
-            string errMsg = "";
-            int returnCode = 0;
-
-            DataTable res = db.executeDataTable("select * from dbo.[database]", param, database, out errMsg, out returnCode);
-
-            if (returnCode != 0)
-            {
-                throw new Exception(errMsg);
-            }
-
-            return res;
-        }
-        public static DataTable GetDatabases(Credentials cred, string database, string filtro)
-        {
-
-            dbConnect db = new dbConnect(cred);
-            DynamicParameters param = new Dapper.DynamicParameters();
-            param.Add("@banco", filtro, DbType.String, ParameterDirection.Input);
-
-            string errMsg = "";
-            int returnCode = 0;
-
-            DataTable res = db.executeDataTable("select * from dbo.[database] where database_name LIKE '%' + @banco + '%'", param, database, out errMsg, out returnCode);
-
-            if (returnCode != 0)
-            {
-                throw new Exception(errMsg);
-            }
-
-            return res;
-        }
+        #region dashboard methods
         public static DataTable GetMemoryInfo(Credentials cred, string database)
         {
 
@@ -243,7 +210,6 @@ namespace sindex.repository
 
             return res;
         }
-
         public static DataTable GetActiveDatabases(Credentials cred, string database)
         {
 
@@ -265,7 +231,6 @@ namespace sindex.repository
 
             return res;
         }
-
         public static DataTable GetDatabasesFileInfo(Credentials cred, string database)
         {
 
@@ -287,7 +252,30 @@ namespace sindex.repository
 
             return res;
         }
+        public static DataTable GetConnectionsInfo(Credentials cred, string database)
+        {
 
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            cmd = @"EXEC dbo.st_GetConStatus";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+        #endregion
+
+        #region database methods
         public static int GetMinLastUpdate(Credentials cred, string database)
         {
 
@@ -309,7 +297,42 @@ namespace sindex.repository
 
             return res;
         }
+        public static DataTable GetDatabases(Credentials cred, string database)
+        {
 
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+            string errMsg = "";
+            int returnCode = 0;
+
+            DataTable res = db.executeDataTable("select * from dbo.[database]", param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+        public static DataTable GetDatabases(Credentials cred, string database, string filtro)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+            param.Add("@banco", filtro, DbType.String, ParameterDirection.Input);
+
+            string errMsg = "";
+            int returnCode = 0;
+
+            DataTable res = db.executeDataTable("select * from dbo.[database] where database_name LIKE '%' + @banco + '%'", param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
         public static DataTable SetDatabaseEnabled(Credentials cred, string database, int databaseId, bool enabled)
         {
 
@@ -349,5 +372,6 @@ namespace sindex.repository
 
             return res;
         }
+        #endregion
     }
 }

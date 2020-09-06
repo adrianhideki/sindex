@@ -33,10 +33,13 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
@@ -44,15 +47,17 @@
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlBackground = new MetroFramework.Controls.MetroPanel();
             this.tlpCharts = new System.Windows.Forms.TableLayoutPanel();
+            this.chtArquivos = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chtCPU = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
-            this.chtArquivos = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chtConnection = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chtMemory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBackground.SuspendLayout();
             this.tlpCharts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chtCPU)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chtArquivos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtCPU)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtConnection)).BeginInit();
             this.SuspendLayout();
             // 
             // chtMemory
@@ -98,6 +103,7 @@
             this.tlpCharts.ColumnCount = 2;
             this.tlpCharts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpCharts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCharts.Controls.Add(this.chtConnection, 0, 1);
             this.tlpCharts.Controls.Add(this.chtArquivos, 0, 1);
             this.tlpCharts.Controls.Add(this.chtCPU, 1, 0);
             this.tlpCharts.Controls.Add(this.chtMemory, 0, 0);
@@ -110,62 +116,80 @@
             this.tlpCharts.Size = new System.Drawing.Size(762, 454);
             this.tlpCharts.TabIndex = 6;
             // 
-            // chtCPU
+            // chtArquivos
             // 
             chartArea3.Name = "ChartArea1";
-            this.chtCPU.ChartAreas.Add(chartArea3);
+            this.chtArquivos.ChartAreas.Add(chartArea3);
+            this.chtArquivos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chtArquivos.Location = new System.Drawing.Point(384, 230);
+            this.chtArquivos.Name = "chtArquivos";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100;
+            series3.Name = "Series1";
+            series3.YValuesPerPoint = 2;
+            this.chtArquivos.Series.Add(series3);
+            this.chtArquivos.Size = new System.Drawing.Size(375, 221);
+            this.chtArquivos.TabIndex = 6;
+            this.chtArquivos.Text = "chart1";
+            title3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            title3.Name = "Memory";
+            title3.Text = "File Disk";
+            this.chtArquivos.Titles.Add(title3);
+            // 
+            // chtCPU
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.chtCPU.ChartAreas.Add(chartArea4);
             this.chtCPU.Dock = System.Windows.Forms.DockStyle.Fill;
             legend1.Name = "Legend1";
             this.chtCPU.Legends.Add(legend1);
             this.chtCPU.Location = new System.Drawing.Point(384, 3);
             this.chtCPU.Name = "chtCPU";
-            series3.BorderWidth = 5;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.LabelForeColor = System.Drawing.Color.DimGray;
-            series3.Legend = "Legend1";
-            series3.LegendText = "CPU Usage";
-            series3.Name = "Series1";
             series4.BorderWidth = 5;
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.LabelForeColor = System.Drawing.Color.DimGray;
             series4.Legend = "Legend1";
-            series4.LegendText = "SQL CPU Usage";
-            series4.Name = "Series2";
-            this.chtCPU.Series.Add(series3);
+            series4.LegendText = "CPU Usage";
+            series4.Name = "Series1";
+            series5.BorderWidth = 5;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.LegendText = "SQL CPU Usage";
+            series5.Name = "Series2";
             this.chtCPU.Series.Add(series4);
+            this.chtCPU.Series.Add(series5);
             this.chtCPU.Size = new System.Drawing.Size(375, 221);
             this.chtCPU.TabIndex = 5;
             this.chtCPU.Text = "chart1";
-            title3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            title3.Name = "Title1";
-            title3.Text = "CPU";
-            this.chtCPU.Titles.Add(title3);
+            title4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            title4.Name = "Title1";
+            title4.Text = "CPU";
+            this.chtCPU.Titles.Add(title4);
             // 
             // tmrUpdate
             // 
             this.tmrUpdate.Interval = 1000;
             this.tmrUpdate.Tick += new System.EventHandler(this.tmrUpdate_Tick);
             // 
-            // chtArquivos
+            // chtConnection
             // 
             chartArea2.Name = "ChartArea1";
-            this.chtArquivos.ChartAreas.Add(chartArea2);
-            this.chtArquivos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chtArquivos.Location = new System.Drawing.Point(3, 230);
-            this.chtArquivos.Name = "chtArquivos";
+            this.chtConnection.ChartAreas.Add(chartArea2);
+            this.chtConnection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chtConnection.Location = new System.Drawing.Point(3, 230);
+            this.chtConnection.Name = "chtConnection";
             series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100;
             series2.Name = "Series1";
-            series2.YValuesPerPoint = 2;
-            this.chtArquivos.Series.Add(series2);
-            this.chtArquivos.Size = new System.Drawing.Size(375, 221);
-            this.chtArquivos.TabIndex = 6;
-            this.chtArquivos.Text = "chart1";
+            this.chtConnection.Series.Add(series2);
+            this.chtConnection.Size = new System.Drawing.Size(375, 221);
+            this.chtConnection.TabIndex = 7;
+            this.chtConnection.Text = "chart1";
             title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             title2.Name = "Memory";
-            title2.Text = "File Disk";
-            this.chtArquivos.Titles.Add(title2);
+            title2.Text = "Connections";
+            this.chtConnection.Titles.Add(title2);
             // 
             // frmDashboard
             // 
@@ -180,8 +204,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.pnlBackground.ResumeLayout(false);
             this.tlpCharts.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chtCPU)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chtArquivos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtCPU)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chtConnection)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -194,5 +219,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chtCPU;
         private System.Windows.Forms.Timer tmrUpdate;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtArquivos;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chtConnection;
     }
 }

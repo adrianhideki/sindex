@@ -38,6 +38,7 @@ namespace sindex.forms
                 SetTheme(chtCPU);
                 SetTheme(chtMemory);
                 SetTheme(chtArquivos);
+                SetTheme(chtConnection);
                 SetupDiskChart();
 
                 tmrUpdate_Tick(null,null);
@@ -100,6 +101,52 @@ namespace sindex.forms
                 chart.Titles[i].BackColor = back;
                 chart.Titles[i].ForeColor = fore;
             }
+        }
+
+        private void SetConnectionChart()
+        {
+            DataTable dt = dbTables.GetConnectionsInfo(main.cred, main.databaseSindex);
+
+            DataPoint Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[0].ColumnName, dt.Rows[0][0].ToString());
+
+            chtConnection.Series[0].Points.Clear();
+            chtConnection.Series[0].Points.Add(Dp);
+
+            Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[1].ColumnName, dt.Rows[0][1].ToString());
+            chtConnection.Series[0].Points.Add(Dp);
+
+            Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[2].ColumnName, dt.Rows[0][2].ToString());
+            chtConnection.Series[0].Points.Add(Dp);
+
+            Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[3].ColumnName, dt.Rows[0][3].ToString());
+            chtConnection.Series[0].Points.Add(Dp);
+
+            Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[4].ColumnName, dt.Rows[0][4].ToString());
+            chtConnection.Series[0].Points.Add(Dp);
+
+            Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[5].ColumnName, dt.Rows[0][5].ToString());
+            chtConnection.Series[0].Points.Add(Dp);
+
+            Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[6].ColumnName, dt.Rows[0][6].ToString());
+            chtConnection.Series[0].Points.Add(Dp);
+
+            Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[7].ColumnName, dt.Rows[0][7].ToString());
+            chtConnection.Series[0].Points.Add(Dp);
+
+            Dp = new DataPoint();
+            Dp.SetValueXY(dt.Columns[8].ColumnName, dt.Rows[0][8].ToString());
+            chtConnection.Series[0].Points.Add(Dp);
+
+            SetTheme(chtConnection);
+            chtConnection.Series[0].IsValueShownAsLabel = true;
         }
 
         private void SetMemoryChart()
@@ -205,6 +252,7 @@ namespace sindex.forms
                 SetCPUChart();
                 SetMemoryChart();
                 SetDiskChart();
+                SetConnectionChart();
             }
             catch (Exception err)
             {
