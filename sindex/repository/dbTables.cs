@@ -266,6 +266,28 @@ namespace sindex.repository
             return res;
         }
 
+        public static DataTable GetDatabasesFileInfo(Credentials cred, string database)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            cmd = @"EXEC dbo.st_GetDatabaseFilesInfo";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+
         public static DataTable SetDatabaseEnabled(Credentials cred, string database, int databaseId, bool enabled)
         {
 

@@ -30,13 +30,22 @@ namespace sindex.forms
 
             this.metroStyleManager.Theme = metroStyleManager.Theme;
             this.metroStyleManager.Style = metroStyleManager.Style;
-            SetTheme(chtMemory);
 
             this.Refresh();
-            SetTheme(chtCPU);
-            SetTheme(chtMemory);
 
-            tmrUpdate.Enabled = true;
+            try
+            {
+                SetTheme(chtCPU);
+                SetTheme(chtMemory);
+                SetTheme(chtArquivos);
+                SetupDiskChart();
+
+                tmrUpdate.Enabled = true;
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SetTheme(Chart chart)
@@ -62,15 +71,15 @@ namespace sindex.forms
 
                 for (int x = 0; x < chart.ChartAreas[i].Axes.Count(); x++)
                 {
-                    chart.ChartAreas[i].Axes[x].LineColor = fore;
+                    chart.ChartAreas[i].Axes[x].LineColor = foreTwo;
                 }
 
                 chart.ChartAreas[i].AxisX.LineColor = fore;
                 chart.ChartAreas[i].AxisY.LineColor = fore;
                 chart.ChartAreas[i].AxisX2.LineColor = fore;
                 chart.ChartAreas[i].AxisY2.LineColor = fore;
-                chart.ChartAreas[i].AxisX.MinorGrid.LineColor = fore;
-                chart.ChartAreas[i].AxisY.MinorGrid.LineColor = fore;
+                chart.ChartAreas[i].AxisX.MinorGrid.LineColor = foreTwo;
+                chart.ChartAreas[i].AxisY.MinorGrid.LineColor = foreTwo;
                 chart.ChartAreas[i].AxisX.MajorGrid.LineColor = foreTwo;
                 chart.ChartAreas[i].AxisY.MajorGrid.LineColor = foreTwo;
                 chart.ChartAreas[i].AxisY.LabelStyle.ForeColor = foreTwo;
@@ -146,10 +155,60 @@ namespace sindex.forms
             chtCPU.Series[1].IsValueShownAsLabel = true;
         }
 
+        private void SetupDiskChart()
+        {
+            chtArquivos.Series.Clear();
+            chtArquivos.Series.Add(new Series() { LegendText = "Data Free Space", IsValueShownAsLabel = true, ChartType = SeriesChartType.StackedColumn100 });
+            chtArquivos.Series.Add(new Series() { LegendText = "Data Usage", IsValueShownAsLabel = true, ChartType = SeriesChartType.StackedColumn100 });
+            chtArquivos.Series.Add(new Series() { LegendText = "LOG Free Space", IsValueShownAsLabel = true, ChartType = SeriesChartType.StackedColumn100 });
+            chtArquivos.Series.Add(new Series() { LegendText = "LOG Usage", IsValueShownAsLabel = true, ChartType = SeriesChartType.StackedColumn100 });
+            chtArquivos.Legends.Add(new Legend() { BackColor = Color.FromArgb(17,17,17) });
+        }
+
+        private void SetDiskChart()
+        {
+            DataTable dt = dbTables.GetDatabasesFileInfo(main.cred, main.databaseSindex);
+
+            chtArquivos.Series[0].Points.Clear();
+            chtArquivos.Series[1].Points.Clear();
+            chtArquivos.Series[2].Points.Clear();
+            chtArquivos.Series[3].Points.Clear();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                string dbName = dt.Rows[i][0].ToString() + "\n" + dt.Rows[i][5].ToString() + " MB";
+                DataPoint Dp = new DataPoint();
+                Dp.SetValueXY(dbName, dt.Rows[i][1].ToString());
+                chtArquivos.Series[0].Points.Add(Dp);
+
+                Dp = new DataPoint();
+                Dp.SetValueXY(dbName, dt.Rows[i][2].ToString());
+                chtArquivos.Series[1].Points.Add(Dp);
+
+                Dp = new DataPoint();
+                Dp.SetValueXY(dbName, dt.Rows[i][3].ToString());
+                chtArquivos.Series[2].Points.Add(Dp);
+
+                Dp = new DataPoint();
+                Dp.SetValueXY(dbName, dt.Rows[i][4].ToString());
+                chtArquivos.Series[3].Points.Add(Dp);
+            }
+
+            SetTheme(chtArquivos);
+        }
+
         private async void tmrUpdate_Tick(object sender, EventArgs e)
         {
-            SetCPUChart();
-            SetMemoryChart();
+            try
+            {
+                SetCPUChart();
+                SetMemoryChart();
+                SetDiskChart();
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
