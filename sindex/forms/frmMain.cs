@@ -125,6 +125,10 @@ namespace sindex
         {
             LoadForm(new frmDatabases(metroStyleManager, configuration, this), pnlForm);
         }
+        public void LoadDashboard()
+        {
+            LoadForm(new frmDashboard(metroStyleManager, configuration, this), pnlForm);
+        }
         #endregion
 
         #region menuItens
@@ -192,6 +196,16 @@ namespace sindex
         private void btnBanco_Click(object sender, EventArgs e)
         {
             LoadDatabase();
+        }
+
+        private void btnConexoes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRecursos_Click(object sender, EventArgs e)
+        {
+            LoadDashboard();
         }
     }
 }

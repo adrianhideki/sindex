@@ -174,6 +174,98 @@ namespace sindex.repository
 
             return res;
         }
+        public static DataTable GetMemoryInfo(Credentials cred, string database)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            cmd = @"SELECT total_physical_memory_kb/1024 AS [Physical Memory (MB)],
+                           available_physical_memory_kb / 1024 AS[Available Memory(MB)],
+                           total_page_file_kb / 1024 / 1024 AS[Total Page File(GB)],
+                           available_page_file_kb / 1024 AS[Available Page File(MB)], 
+                           system_cache_kb / 1024 AS[System Cache(MB)],
+                           system_memory_state_desc AS[System Memory State]
+                    FROM sys.dm_os_sys_memory WITH(NOLOCK) OPTION(RECOMPILE); ";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+        public static DataTable GetCPUInfo(Credentials cred, string database)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            cmd = @"DECLARE @ts_now bigint = (SELECT cpu_ticks/(cpu_ticks/ms_ticks)FROM sys.dm_os_sys_info);
+
+                 ;WITH CTA
+                  AS (SELECT TOP(10) 
+                             [SQL Server Process CPU Utilization] = SQLProcessUtilization, 
+                             [System Idle Process]                = SystemIdle, 
+                             [Other Process CPU Utilization]      = 100 - SystemIdle - SQLProcessUtilization, 
+                             [Event Time]                         = CAST(DATEADD(ms, -1 * (@ts_now - [timestamp]), GETDATE()) AS time)
+                      FROM ( 
+                            SELECT record_id               = record.value('(./Record/@id)[1]', 'int'), 
+                                   [SystemIdle]            = record.value('(./Record/SchedulerMonitorEvent/SystemHealth/SystemIdle)[1]', 'int'), 
+                                   [SQLProcessUtilization] = record.value('(./Record/SchedulerMonitorEvent/SystemHealth/ProcessUtilization)[1]','int'),
+                                   [timestamp]
+                            FROM ( 
+                                  SELECT [timestamp], CONVERT(xml, record) AS [record] 
+                                  FROM sys.dm_os_ring_buffers 
+                                  WHERE ring_buffer_type = N'RING_BUFFER_SCHEDULER_MONITOR' 
+                                  AND record LIKE '%<SystemHealth>%') AS x 
+                       ) AS y 
+                  ORDER BY record_id DESC)
+                 SELECT * ,ROWID = ROW_NUMBER() OVER (ORDER BY [Event Time] ASC)
+                 FROM CTA;";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+
+        public static DataTable GetActiveDatabases(Credentials cred, string database)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            cmd = @"SELECT * FROM dbo.[database] WHERE ativo = 1";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+
         public static DataTable SetDatabaseEnabled(Credentials cred, string database, int databaseId, bool enabled)
         {
 
@@ -194,7 +286,7 @@ namespace sindex.repository
 
             return res;
         }
-        public static DataTable SetDatabaseEnabled(Credentials cred, string database,  bool enabled)
+        public static DataTable SetDatabaseEnabled(Credentials cred, string database, bool enabled)
         {
 
             dbConnect db = new dbConnect(cred);

@@ -35,7 +35,6 @@
             this.pnlForm = new System.Windows.Forms.Panel();
             this.pnlBgMenu = new System.Windows.Forms.Panel();
             this.pnlMenuLogo = new System.Windows.Forms.Panel();
-            this.imgLogo = new System.Windows.Forms.PictureBox();
             this.btnMenuConfiguracoes = new System.Windows.Forms.Button();
             this.pnlSubMenuConfig = new System.Windows.Forms.Panel();
             this.btnAmbientes = new System.Windows.Forms.Button();
@@ -52,13 +51,14 @@
             this.btnMenuLogout = new System.Windows.Forms.Button();
             this.btnMenuSair = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.imgLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlMenuLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).BeginInit();
             this.pnlSubMenuConfig.SuspendLayout();
             this.pnlSubMenuTuning.SuspendLayout();
             this.pnlSubMenuMonitoramento.SuspendLayout();
             this.pnlMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // metroStyleManager
@@ -103,16 +103,6 @@
             this.pnlMenuLogo.Name = "pnlMenuLogo";
             this.pnlMenuLogo.Size = new System.Drawing.Size(183, 80);
             this.pnlMenuLogo.TabIndex = 0;
-            // 
-            // imgLogo
-            // 
-            this.imgLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.imgLogo.Image = global::sindex.Properties.Resources.performance__1_;
-            this.imgLogo.Location = new System.Drawing.Point(58, 10);
-            this.imgLogo.Name = "imgLogo";
-            this.imgLogo.Size = new System.Drawing.Size(66, 55);
-            this.imgLogo.TabIndex = 1;
-            this.imgLogo.TabStop = false;
             // 
             // btnMenuConfiguracoes
             // 
@@ -315,6 +305,7 @@
             this.btnConexoes.Text = "Conexões";
             this.btnConexoes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConexoes.UseVisualStyleBackColor = true;
+            this.btnConexoes.Click += new System.EventHandler(this.btnConexoes_Click);
             // 
             // btnRecursos
             // 
@@ -333,6 +324,7 @@
             this.btnRecursos.Text = "Recursos";
             this.btnRecursos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRecursos.UseVisualStyleBackColor = true;
+            this.btnRecursos.Click += new System.EventHandler(this.btnRecursos_Click);
             // 
             // btnMenuLogout
             // 
@@ -391,6 +383,16 @@
             this.pnlMenu.Size = new System.Drawing.Size(200, 552);
             this.pnlMenu.TabIndex = 0;
             // 
+            // imgLogo
+            // 
+            this.imgLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.imgLogo.Image = global::sindex.Properties.Resources.performance__1_;
+            this.imgLogo.Location = new System.Drawing.Point(58, 10);
+            this.imgLogo.Name = "imgLogo";
+            this.imgLogo.Size = new System.Drawing.Size(66, 55);
+            this.imgLogo.TabIndex = 1;
+            this.imgLogo.TabStop = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,11 +408,11 @@
             this.Padding = new System.Windows.Forms.Padding(0, 60, 0, 18);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.pnlMenuLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).EndInit();
             this.pnlSubMenuConfig.ResumeLayout(false);
             this.pnlSubMenuTuning.ResumeLayout(false);
             this.pnlSubMenuMonitoramento.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).EndInit();
             this.ResumeLayout(false);
 
         }

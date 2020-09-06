@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Components;
+using sindex.repository;
 using sindex.utils;
 using System;
 using System.Collections.Generic;
@@ -207,7 +208,27 @@ namespace sindex.forms
                     this.conf.currentConfiguration = cbxAmbiente.SelectedIndex;
 
                     main.SetConnectionSettings();
-                    main.LoadDatabase();
+
+
+                    DataTable dt = main.GetDbConnect().executeDataTable("SELECT * FROM sys.tables WHERE name = 'index'", new Dapper.DynamicParameters(), main.GetDatabaseName(), out string errMsg, out int errCode);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        DataTable dtDatabases = dbTables.GetActiveDatabases(main.cred, main.databaseSindex);
+
+                        if (dtDatabases.Rows.Count > 0)
+                        {
+                            main.LoadTables();
+                        } else
+                        {
+                            main.LoadDatabase();
+                        }
+                    } 
+                    else
+                    {
+                        main.LoadDatabase();
+                    }
+
                     this.Close();
                 } 
                 else 
