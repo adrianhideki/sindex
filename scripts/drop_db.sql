@@ -9,6 +9,7 @@ IF OBJECT_ID('[dbo].[st_GetIndexes]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetIn
 IF OBJECT_ID('[dbo].[st_ExcludeDataFromDisableDatabase]') IS NOT NULL DROP PROCEDURE [dbo].[st_ExcludeDataFromDisableDatabase];
 IF OBJECT_ID('[dbo].[st_GetDatabaseFilesInfo]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetDatabaseFilesInfo];
 IF OBJECT_ID('[dbo].[st_GetConStatus]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetConStatus];
+IF OBJECT_ID('[dbo].[sp_WhoIsActive]') IS NOT NULL DROP PROCEDURE [dbo].[sp_WhoIsActive];
 
 IF OBJECT_ID('[dbo].[server]') IS NOT NULL DROP TABLE [dbo].[server];
 IF OBJECT_ID('[dbo].[configuration]') IS NOT NULL DROP TABLE [dbo].[configuration];

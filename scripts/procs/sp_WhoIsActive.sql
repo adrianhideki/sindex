@@ -1,30 +1,4 @@
-SET QUOTED_IDENTIFIER ON;
-SET ANSI_PADDING ON;
-SET CONCAT_NULL_YIELDS_NULL ON;
-SET ANSI_WARNINGS ON;
-SET NUMERIC_ROUNDABORT OFF;
-SET ARITHABORT ON;
-GO
-
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = 'sp_WhoIsActive')
-	EXEC ('CREATE PROC dbo.sp_WhoIsActive AS SELECT ''stub version, to be replaced''')
-GO
-
-/*********************************************************************************************
-Who Is Active? v11.32 (2018-07-03)
-(C) 2007-2018, Adam Machanic
-
-Feedback: mailto:adam@dataeducation.com
-Updates: http://whoisactive.com
-Blog: http://dataeducation.com
-
-License: 
-	Who is Active? is free to download and use for personal, educational, and internal 
-	corporate purposes, provided that this header is preserved. Redistribution or sale 
-	of Who is Active?, in whole or in part, is prohibited without the author's express 
-	written consent.
-*********************************************************************************************/
-CREATE PROC dbo.sp_WhoIsActive
+CREATE PROCEDURE dbo.sp_WhoIsActive
 (
 --~
 	--Filters--Both inclusive and exclusive
@@ -5274,4 +5248,3 @@ BEGIN;
 		N'@schema VARCHAR(MAX) OUTPUT',
 		@schema OUTPUT;
 END;
-GO
