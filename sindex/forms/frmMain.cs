@@ -184,6 +184,10 @@ namespace sindex
         {
             LoadForm(new frmDashboard(metroStyleManager, configuration, this), pnlForm);
         }
+        public void LoadHelp()
+        {
+            LoadForm(new frmAjuda(metroStyleManager, configuration, this), pnlForm);
+        }
         #endregion
 
         #region menuItens
@@ -276,6 +280,11 @@ namespace sindex
         private void btnAtualizarDados_Click(object sender, EventArgs e)
         {
             LoadTables();
+        }
+
+        private void btnAjuda_Click(object sender, EventArgs e)
+        {
+            LoadHelp();
         }
     }
 }

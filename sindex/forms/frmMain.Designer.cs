@@ -32,39 +32,40 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlButtom = new System.Windows.Forms.Panel();
+            this.lblAmbiente = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.lblUsuario = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.pnlForm = new System.Windows.Forms.Panel();
             this.pnlBgMenu = new System.Windows.Forms.Panel();
             this.pnlMenuLogo = new System.Windows.Forms.Panel();
+            this.imgLogo = new System.Windows.Forms.PictureBox();
             this.btnMenuConfiguracoes = new System.Windows.Forms.Button();
             this.pnlSubMenuConfig = new System.Windows.Forms.Panel();
-            this.btnAmbientes = new System.Windows.Forms.Button();
+            this.btnAtualizarDados = new System.Windows.Forms.Button();
             this.btnBanco = new System.Windows.Forms.Button();
+            this.btnAmbientes = new System.Windows.Forms.Button();
             this.btnMenuTuning = new System.Windows.Forms.Button();
             this.pnlSubMenuTuning = new System.Windows.Forms.Panel();
-            this.btnMissIndex = new System.Windows.Forms.Button();
-            this.btnStatisticas = new System.Windows.Forms.Button();
             this.btnDefrag = new System.Windows.Forms.Button();
+            this.btnStatisticas = new System.Windows.Forms.Button();
+            this.btnMissIndex = new System.Windows.Forms.Button();
             this.btnMenuMonitoramento = new System.Windows.Forms.Button();
             this.pnlSubMenuMonitoramento = new System.Windows.Forms.Panel();
-            this.btnConexoes = new System.Windows.Forms.Button();
             this.btnRecursos = new System.Windows.Forms.Button();
+            this.btnConexoes = new System.Windows.Forms.Button();
             this.btnMenuLogout = new System.Windows.Forms.Button();
             this.btnMenuSair = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
-            this.imgLogo = new System.Windows.Forms.PictureBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.lblUsuario = new MetroFramework.Controls.MetroLabel();
-            this.lblAmbiente = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.btnAtualizarDados = new System.Windows.Forms.Button();
+            this.btnAjuda = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlButtom.SuspendLayout();
             this.pnlMenuLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).BeginInit();
             this.pnlSubMenuConfig.SuspendLayout();
             this.pnlSubMenuTuning.SuspendLayout();
             this.pnlSubMenuMonitoramento.SuspendLayout();
             this.pnlMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // metroStyleManager
@@ -85,6 +86,42 @@
             this.pnlButtom.Name = "pnlButtom";
             this.pnlButtom.Size = new System.Drawing.Size(800, 33);
             this.pnlButtom.TabIndex = 1;
+            // 
+            // lblAmbiente
+            // 
+            this.lblAmbiente.AutoSize = true;
+            this.lblAmbiente.Location = new System.Drawing.Point(260, 8);
+            this.lblAmbiente.Name = "lblAmbiente";
+            this.lblAmbiente.Size = new System.Drawing.Size(66, 19);
+            this.lblAmbiente.TabIndex = 3;
+            this.lblAmbiente.Text = "Ambiente";
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(185, 8);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(69, 19);
+            this.metroLabel3.TabIndex = 2;
+            this.metroLabel3.Text = "Ambiente:";
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Location = new System.Drawing.Point(72, 8);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(35, 19);
+            this.lblUsuario.TabIndex = 1;
+            this.lblUsuario.Text = "User";
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(10, 8);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(56, 19);
+            this.metroLabel1.TabIndex = 0;
+            this.metroLabel1.Text = "Usuário:";
             // 
             // pnlForm
             // 
@@ -113,6 +150,16 @@
             this.pnlMenuLogo.Name = "pnlMenuLogo";
             this.pnlMenuLogo.Size = new System.Drawing.Size(183, 80);
             this.pnlMenuLogo.TabIndex = 0;
+            // 
+            // imgLogo
+            // 
+            this.imgLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.imgLogo.Image = global::sindex.Properties.Resources.performance__1_;
+            this.imgLogo.Location = new System.Drawing.Point(58, 10);
+            this.imgLogo.Name = "imgLogo";
+            this.imgLogo.Size = new System.Drawing.Size(66, 55);
+            this.imgLogo.TabIndex = 1;
+            this.imgLogo.TabStop = false;
             // 
             // btnMenuConfiguracoes
             // 
@@ -146,24 +193,24 @@
             this.pnlSubMenuConfig.Size = new System.Drawing.Size(183, 123);
             this.pnlSubMenuConfig.TabIndex = 2;
             // 
-            // btnAmbientes
+            // btnAtualizarDados
             // 
-            this.btnAmbientes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAmbientes.FlatAppearance.BorderSize = 0;
-            this.btnAmbientes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnAmbientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnAmbientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAmbientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAmbientes.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnAmbientes.Location = new System.Drawing.Point(0, 0);
-            this.btnAmbientes.Name = "btnAmbientes";
-            this.btnAmbientes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnAmbientes.Size = new System.Drawing.Size(183, 38);
-            this.btnAmbientes.TabIndex = 2;
-            this.btnAmbientes.Text = "Ambientes";
-            this.btnAmbientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAmbientes.UseVisualStyleBackColor = true;
-            this.btnAmbientes.Click += new System.EventHandler(this.btnAmbientes_Click);
+            this.btnAtualizarDados.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAtualizarDados.FlatAppearance.BorderSize = 0;
+            this.btnAtualizarDados.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnAtualizarDados.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnAtualizarDados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAtualizarDados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtualizarDados.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnAtualizarDados.Location = new System.Drawing.Point(0, 76);
+            this.btnAtualizarDados.Name = "btnAtualizarDados";
+            this.btnAtualizarDados.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnAtualizarDados.Size = new System.Drawing.Size(183, 38);
+            this.btnAtualizarDados.TabIndex = 4;
+            this.btnAtualizarDados.Text = "Atualizar Dados";
+            this.btnAtualizarDados.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAtualizarDados.UseVisualStyleBackColor = true;
+            this.btnAtualizarDados.Click += new System.EventHandler(this.btnAtualizarDados_Click);
             // 
             // btnBanco
             // 
@@ -183,6 +230,25 @@
             this.btnBanco.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBanco.UseVisualStyleBackColor = true;
             this.btnBanco.Click += new System.EventHandler(this.btnBanco_Click);
+            // 
+            // btnAmbientes
+            // 
+            this.btnAmbientes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAmbientes.FlatAppearance.BorderSize = 0;
+            this.btnAmbientes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnAmbientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnAmbientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAmbientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAmbientes.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnAmbientes.Location = new System.Drawing.Point(0, 0);
+            this.btnAmbientes.Name = "btnAmbientes";
+            this.btnAmbientes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnAmbientes.Size = new System.Drawing.Size(183, 38);
+            this.btnAmbientes.TabIndex = 2;
+            this.btnAmbientes.Text = "Ambientes";
+            this.btnAmbientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAmbientes.UseVisualStyleBackColor = true;
+            this.btnAmbientes.Click += new System.EventHandler(this.btnAmbientes_Click);
             // 
             // btnMenuTuning
             // 
@@ -215,23 +281,23 @@
             this.pnlSubMenuTuning.Size = new System.Drawing.Size(183, 133);
             this.pnlSubMenuTuning.TabIndex = 5;
             // 
-            // btnMissIndex
+            // btnDefrag
             // 
-            this.btnMissIndex.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnMissIndex.FlatAppearance.BorderSize = 0;
-            this.btnMissIndex.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnMissIndex.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnMissIndex.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMissIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMissIndex.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMissIndex.Location = new System.Drawing.Point(0, 0);
-            this.btnMissIndex.Name = "btnMissIndex";
-            this.btnMissIndex.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnMissIndex.Size = new System.Drawing.Size(183, 38);
-            this.btnMissIndex.TabIndex = 2;
-            this.btnMissIndex.Text = "Índices Faltantes";
-            this.btnMissIndex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMissIndex.UseVisualStyleBackColor = true;
+            this.btnDefrag.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDefrag.FlatAppearance.BorderSize = 0;
+            this.btnDefrag.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnDefrag.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnDefrag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDefrag.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDefrag.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnDefrag.Location = new System.Drawing.Point(0, 76);
+            this.btnDefrag.Name = "btnDefrag";
+            this.btnDefrag.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnDefrag.Size = new System.Drawing.Size(183, 38);
+            this.btnDefrag.TabIndex = 4;
+            this.btnDefrag.Text = "Desfragmentação";
+            this.btnDefrag.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDefrag.UseVisualStyleBackColor = true;
             // 
             // btnStatisticas
             // 
@@ -251,23 +317,23 @@
             this.btnStatisticas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStatisticas.UseVisualStyleBackColor = true;
             // 
-            // btnDefrag
+            // btnMissIndex
             // 
-            this.btnDefrag.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDefrag.FlatAppearance.BorderSize = 0;
-            this.btnDefrag.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnDefrag.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnDefrag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDefrag.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDefrag.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnDefrag.Location = new System.Drawing.Point(0, 76);
-            this.btnDefrag.Name = "btnDefrag";
-            this.btnDefrag.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnDefrag.Size = new System.Drawing.Size(183, 38);
-            this.btnDefrag.TabIndex = 4;
-            this.btnDefrag.Text = "Desfragmentação";
-            this.btnDefrag.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDefrag.UseVisualStyleBackColor = true;
+            this.btnMissIndex.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnMissIndex.FlatAppearance.BorderSize = 0;
+            this.btnMissIndex.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnMissIndex.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnMissIndex.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMissIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMissIndex.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnMissIndex.Location = new System.Drawing.Point(0, 0);
+            this.btnMissIndex.Name = "btnMissIndex";
+            this.btnMissIndex.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnMissIndex.Size = new System.Drawing.Size(183, 38);
+            this.btnMissIndex.TabIndex = 2;
+            this.btnMissIndex.Text = "Índices Faltantes";
+            this.btnMissIndex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMissIndex.UseVisualStyleBackColor = true;
             // 
             // btnMenuMonitoramento
             // 
@@ -299,25 +365,6 @@
             this.pnlSubMenuMonitoramento.Size = new System.Drawing.Size(183, 85);
             this.pnlSubMenuMonitoramento.TabIndex = 7;
             // 
-            // btnConexoes
-            // 
-            this.btnConexoes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnConexoes.FlatAppearance.BorderSize = 0;
-            this.btnConexoes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnConexoes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnConexoes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConexoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConexoes.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnConexoes.Location = new System.Drawing.Point(0, 0);
-            this.btnConexoes.Name = "btnConexoes";
-            this.btnConexoes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnConexoes.Size = new System.Drawing.Size(183, 38);
-            this.btnConexoes.TabIndex = 2;
-            this.btnConexoes.Text = "Conexões";
-            this.btnConexoes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConexoes.UseVisualStyleBackColor = true;
-            this.btnConexoes.Click += new System.EventHandler(this.btnConexoes_Click);
-            // 
             // btnRecursos
             // 
             this.btnRecursos.Dock = System.Windows.Forms.DockStyle.Top;
@@ -336,6 +383,25 @@
             this.btnRecursos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRecursos.UseVisualStyleBackColor = true;
             this.btnRecursos.Click += new System.EventHandler(this.btnRecursos_Click);
+            // 
+            // btnConexoes
+            // 
+            this.btnConexoes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnConexoes.FlatAppearance.BorderSize = 0;
+            this.btnConexoes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnConexoes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnConexoes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConexoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConexoes.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnConexoes.Location = new System.Drawing.Point(0, 0);
+            this.btnConexoes.Name = "btnConexoes";
+            this.btnConexoes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnConexoes.Size = new System.Drawing.Size(183, 38);
+            this.btnConexoes.TabIndex = 2;
+            this.btnConexoes.Text = "Conexões";
+            this.btnConexoes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConexoes.UseVisualStyleBackColor = true;
+            this.btnConexoes.Click += new System.EventHandler(this.btnConexoes_Click);
             // 
             // btnMenuLogout
             // 
@@ -379,6 +445,7 @@
             // 
             this.pnlMenu.AutoScroll = true;
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.pnlMenu.Controls.Add(this.btnAjuda);
             this.pnlMenu.Controls.Add(this.btnMenuSair);
             this.pnlMenu.Controls.Add(this.btnMenuLogout);
             this.pnlMenu.Controls.Add(this.pnlSubMenuMonitoramento);
@@ -394,70 +461,24 @@
             this.pnlMenu.Size = new System.Drawing.Size(200, 552);
             this.pnlMenu.TabIndex = 0;
             // 
-            // imgLogo
+            // btnAjuda
             // 
-            this.imgLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.imgLogo.Image = global::sindex.Properties.Resources.performance__1_;
-            this.imgLogo.Location = new System.Drawing.Point(58, 10);
-            this.imgLogo.Name = "imgLogo";
-            this.imgLogo.Size = new System.Drawing.Size(66, 55);
-            this.imgLogo.TabIndex = 1;
-            this.imgLogo.TabStop = false;
-            // 
-            // metroLabel1
-            // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(10, 8);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(56, 19);
-            this.metroLabel1.TabIndex = 0;
-            this.metroLabel1.Text = "Usuário:";
-            // 
-            // lblUsuario
-            // 
-            this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(72, 8);
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(35, 19);
-            this.lblUsuario.TabIndex = 1;
-            this.lblUsuario.Text = "User";
-            // 
-            // lblAmbiente
-            // 
-            this.lblAmbiente.AutoSize = true;
-            this.lblAmbiente.Location = new System.Drawing.Point(260, 8);
-            this.lblAmbiente.Name = "lblAmbiente";
-            this.lblAmbiente.Size = new System.Drawing.Size(66, 19);
-            this.lblAmbiente.TabIndex = 3;
-            this.lblAmbiente.Text = "Ambiente";
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(185, 8);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(69, 19);
-            this.metroLabel3.TabIndex = 2;
-            this.metroLabel3.Text = "Ambiente:";
-            // 
-            // btnAtualizarDados
-            // 
-            this.btnAtualizarDados.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAtualizarDados.FlatAppearance.BorderSize = 0;
-            this.btnAtualizarDados.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnAtualizarDados.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnAtualizarDados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAtualizarDados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAtualizarDados.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnAtualizarDados.Location = new System.Drawing.Point(0, 76);
-            this.btnAtualizarDados.Name = "btnAtualizarDados";
-            this.btnAtualizarDados.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnAtualizarDados.Size = new System.Drawing.Size(183, 38);
-            this.btnAtualizarDados.TabIndex = 4;
-            this.btnAtualizarDados.Text = "Atualizar Dados";
-            this.btnAtualizarDados.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAtualizarDados.UseVisualStyleBackColor = true;
-            this.btnAtualizarDados.Click += new System.EventHandler(this.btnAtualizarDados_Click);
+            this.btnAjuda.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAjuda.FlatAppearance.BorderSize = 0;
+            this.btnAjuda.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnAjuda.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnAjuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAjuda.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAjuda.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnAjuda.Location = new System.Drawing.Point(0, 611);
+            this.btnAjuda.Name = "btnAjuda";
+            this.btnAjuda.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnAjuda.Size = new System.Drawing.Size(183, 38);
+            this.btnAjuda.TabIndex = 10;
+            this.btnAjuda.Text = "Ajuda";
+            this.btnAjuda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAjuda.UseVisualStyleBackColor = true;
+            this.btnAjuda.Click += new System.EventHandler(this.btnAjuda_Click);
             // 
             // frmMain
             // 
@@ -476,11 +497,11 @@
             this.pnlButtom.ResumeLayout(false);
             this.pnlButtom.PerformLayout();
             this.pnlMenuLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).EndInit();
             this.pnlSubMenuConfig.ResumeLayout(false);
             this.pnlSubMenuTuning.ResumeLayout(false);
             this.pnlSubMenuMonitoramento.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -513,6 +534,7 @@
         private MetroFramework.Controls.MetroLabel lblAmbiente;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private System.Windows.Forms.Button btnAtualizarDados;
+        private System.Windows.Forms.Button btnAjuda;
     }
 }
 
