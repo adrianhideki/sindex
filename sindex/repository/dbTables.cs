@@ -130,7 +130,7 @@ namespace sindex.repository
             string errMsg = "";
             int returnCode = 0;
 
-            db.executeQuery("EXEC dbo.st_GetIndexes", param, database, out errMsg, out returnCode);
+            db.executeQuery("EXEC dbo.st_ExcludeDataFromDisableDatabase", param, database, out errMsg, out returnCode);
 
             if (returnCode != 0)
             {
@@ -279,6 +279,28 @@ namespace sindex.repository
             cmd = @"EXEC dbo.st_GetDatabaseFilesInfo";
 
             DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+
+        public static int GetMinLastUpdate(Credentials cred, string database)
+        {
+
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            cmd = @"SELECT * FROM dbo.fn_GetLastUpdate()";
+
+            int res = db.executeScalar<int>(cmd, param, database, out errMsg, out returnCode);
 
             if (returnCode != 0)
             {

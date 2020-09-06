@@ -40,6 +40,7 @@ namespace sindex.forms
                 SetTheme(chtArquivos);
                 SetupDiskChart();
 
+                tmrUpdate_Tick(null,null);
                 tmrUpdate.Enabled = true;
             }
             catch (Exception err)

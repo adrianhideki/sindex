@@ -22,3 +22,4 @@ IF OBJECT_ID('[dbo].[constraint]') IS NOT NULL DROP TABLE [dbo].[constraint];
 IF OBJECT_ID('[dbo].[index]') IS NOT NULL DROP TABLE [dbo].[index];
 
 IF OBJECT_ID('[dbo].[fn_GetServerId]') IS NOT NULL DROP FUNCTION [dbo].[fn_GetServerId];
+IF OBJECT_ID('[dbo].[fn_GetLastUpdate]') IS NOT NULL DROP FUNCTION [dbo].[fn_GetLastUpdate];

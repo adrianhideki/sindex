@@ -93,12 +93,22 @@ namespace sindex.forms
                 {
                     int index = cbxAmbiente.SelectedIndex;
 
-                    txtNome.Text = enviroments[index].name;
-                    txtServidor.Text = enviroments[index].server;
-                    txtUsuario.Text = enviroments[index].user;
-                    txtSenha.Text = enviroments[index].password;
-                    txtDatabase.Text = enviroments[index].database;
-                    setEnabledButtons(true);
+                    if (index >= 0)
+                    {
+                        txtNome.Text = enviroments[index].name;
+                        txtServidor.Text = enviroments[index].server;
+                        txtUsuario.Text = enviroments[index].user;
+                        txtSenha.Text = enviroments[index].password;
+                        txtDatabase.Text = enviroments[index].database;
+                        setEnabledButtons(true);
+                    } else
+                    { 
+                        txtNome.Text = "";
+                        txtServidor.Text = "";
+                        txtUsuario.Text = "";
+                        txtSenha.Text = "";
+                        txtDatabase.Text = "";
+                    }
 
                 } else {
                     setEnabledButtons(false);
@@ -124,6 +134,11 @@ namespace sindex.forms
                 conf.users[conf.currentUser].AddEnviroment(env);
                 cbxAmbiente.Items.Add(env.name);
                 main.SaveConfig();
+
+                int index = cbxAmbiente.Items.Count - 1;
+                cbxAmbiente.SelectedIndex = index;
+                txtNome_TextChanged(null, null);
+                cbxAmbiente_SelectedIndexChanged(null, null);
             } catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -170,6 +185,8 @@ namespace sindex.forms
                     main.SaveConfig();
 
                     cbxAmbiente.Items.RemoveAt(index);
+                    txtNome_TextChanged(null,null);
+                    cbxAmbiente_SelectedIndexChanged(null, null);
                 }
             }
             catch (Exception err)
@@ -183,19 +200,23 @@ namespace sindex.forms
         {
             try
             {
-                dbConnect dbConnect = new dbConnect(new Credentials(txtUsuario.Text, txtSenha.Text, txtServidor.Text));
-                dbConnect.executeQuery("SELECT 1", new Dapper.DynamicParameters(), txtDatabase.Text, out string errMsg, out int errCode);
-
-                if (errCode != 0)
-                {
-                    throw new Exception(errMsg);
-                }
-
+                TestarCon();
                 main.ShowMessage("Conexão válida!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void TestarCon()
+        {
+            dbConnect dbConnect = new dbConnect(new Credentials(txtUsuario.Text, txtSenha.Text, txtServidor.Text));
+            dbConnect.executeQuery("SELECT 1", new Dapper.DynamicParameters(), txtDatabase.Text, out string errMsg, out int errCode);
+
+            if (errCode != 0)
+            {
+                throw new Exception(errMsg);
             }
         }
 
@@ -206,6 +227,7 @@ namespace sindex.forms
                 if (enviroments.Count > 0 && cbxAmbiente.SelectedIndex >= 0)
                 {
                     this.conf.currentConfiguration = cbxAmbiente.SelectedIndex;
+                    TestarCon();
 
                     main.SetConnectionSettings();
                     main.SetAmbienteText(cbxAmbiente.Text);
@@ -215,10 +237,11 @@ namespace sindex.forms
                     if (dt.Rows.Count > 0)
                     {
                         DataTable dtDatabases = dbTables.GetActiveDatabases(main.cred, main.databaseSindex);
+                        int min = dbTables.GetMinLastUpdate(main.cred, main.databaseSindex);
 
                         if (dtDatabases.Rows.Count > 0)
                         {
-                            main.LoadTables();
+                            if (min > 5) main.LoadTables();
                         } else
                         {
                             main.LoadDatabase();

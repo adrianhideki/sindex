@@ -110,6 +110,9 @@ namespace sindex
             this.configuration.currentUser = -1;
             this.configuration.currentConfiguration = -1;
 
+            if (CurrentForm != null)
+                CurrentForm.Close();
+
             HideMenu(false);
             LoadForm(new frmLogin(this.metroStyleManager, configuration, this), pnlForm, DockStyle.Left);
         }

@@ -98,5 +98,29 @@ namespace sindex.utils
                 return null;
             }
         }
+
+        public T executeScalar<T>(string query, DynamicParameters parameters, string dbName, out string errMsg, out int errCode)
+        {
+            errMsg = "";
+            errCode = 0;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
+                {
+
+                    var result = connection.ExecuteScalar<T>(query, parameters);
+                    return result;
+                }
+            }
+            catch (Exception err)
+            {
+                errCode = 1;
+                errMsg = err.Message;
+
+                return default(T);
+            }
+        }
+
     }
 }

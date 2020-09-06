@@ -1,0 +1,5 @@
+CREATE FUNCTION dbo.fn_GetLastUpdate()
+RETURNS TABLE
+AS RETURN(
+SELECT DATEDIFF(MINUTE,ISNULL(MAX(update_date),'1900-01-01'), GETDATE()) AS MinuteDif
+FROM dbo.[database])
