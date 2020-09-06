@@ -52,7 +52,13 @@
             this.btnMenuSair = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.imgLogo = new System.Windows.Forms.PictureBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.lblUsuario = new MetroFramework.Controls.MetroLabel();
+            this.lblAmbiente = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.btnAtualizarDados = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
+            this.pnlButtom.SuspendLayout();
             this.pnlMenuLogo.SuspendLayout();
             this.pnlSubMenuConfig.SuspendLayout();
             this.pnlSubMenuTuning.SuspendLayout();
@@ -70,10 +76,14 @@
             // pnlButtom
             // 
             this.pnlButtom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.pnlButtom.Controls.Add(this.lblAmbiente);
+            this.pnlButtom.Controls.Add(this.metroLabel3);
+            this.pnlButtom.Controls.Add(this.lblUsuario);
+            this.pnlButtom.Controls.Add(this.metroLabel1);
             this.pnlButtom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtom.Location = new System.Drawing.Point(200, 552);
+            this.pnlButtom.Location = new System.Drawing.Point(200, 579);
             this.pnlButtom.Name = "pnlButtom";
-            this.pnlButtom.Size = new System.Drawing.Size(800, 60);
+            this.pnlButtom.Size = new System.Drawing.Size(800, 33);
             this.pnlButtom.TabIndex = 1;
             // 
             // pnlForm
@@ -82,7 +92,7 @@
             this.pnlForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlForm.Location = new System.Drawing.Point(200, 60);
             this.pnlForm.Name = "pnlForm";
-            this.pnlForm.Size = new System.Drawing.Size(800, 492);
+            this.pnlForm.Size = new System.Drawing.Size(800, 519);
             this.pnlForm.TabIndex = 2;
             // 
             // pnlBgMenu
@@ -127,12 +137,13 @@
             // pnlSubMenuConfig
             // 
             this.pnlSubMenuConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.pnlSubMenuConfig.Controls.Add(this.btnAtualizarDados);
             this.pnlSubMenuConfig.Controls.Add(this.btnBanco);
             this.pnlSubMenuConfig.Controls.Add(this.btnAmbientes);
             this.pnlSubMenuConfig.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSubMenuConfig.Location = new System.Drawing.Point(0, 118);
             this.pnlSubMenuConfig.Name = "pnlSubMenuConfig";
-            this.pnlSubMenuConfig.Size = new System.Drawing.Size(183, 91);
+            this.pnlSubMenuConfig.Size = new System.Drawing.Size(183, 123);
             this.pnlSubMenuConfig.TabIndex = 2;
             // 
             // btnAmbientes
@@ -182,7 +193,7 @@
             this.btnMenuTuning.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMenuTuning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenuTuning.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMenuTuning.Location = new System.Drawing.Point(0, 209);
+            this.btnMenuTuning.Location = new System.Drawing.Point(0, 241);
             this.btnMenuTuning.Name = "btnMenuTuning";
             this.btnMenuTuning.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMenuTuning.Size = new System.Drawing.Size(183, 38);
@@ -199,7 +210,7 @@
             this.pnlSubMenuTuning.Controls.Add(this.btnStatisticas);
             this.pnlSubMenuTuning.Controls.Add(this.btnMissIndex);
             this.pnlSubMenuTuning.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSubMenuTuning.Location = new System.Drawing.Point(0, 247);
+            this.pnlSubMenuTuning.Location = new System.Drawing.Point(0, 279);
             this.pnlSubMenuTuning.Name = "pnlSubMenuTuning";
             this.pnlSubMenuTuning.Size = new System.Drawing.Size(183, 133);
             this.pnlSubMenuTuning.TabIndex = 5;
@@ -267,7 +278,7 @@
             this.btnMenuMonitoramento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMenuMonitoramento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenuMonitoramento.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMenuMonitoramento.Location = new System.Drawing.Point(0, 380);
+            this.btnMenuMonitoramento.Location = new System.Drawing.Point(0, 412);
             this.btnMenuMonitoramento.Name = "btnMenuMonitoramento";
             this.btnMenuMonitoramento.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMenuMonitoramento.Size = new System.Drawing.Size(183, 38);
@@ -283,7 +294,7 @@
             this.pnlSubMenuMonitoramento.Controls.Add(this.btnRecursos);
             this.pnlSubMenuMonitoramento.Controls.Add(this.btnConexoes);
             this.pnlSubMenuMonitoramento.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSubMenuMonitoramento.Location = new System.Drawing.Point(0, 418);
+            this.pnlSubMenuMonitoramento.Location = new System.Drawing.Point(0, 450);
             this.pnlSubMenuMonitoramento.Name = "pnlSubMenuMonitoramento";
             this.pnlSubMenuMonitoramento.Size = new System.Drawing.Size(183, 85);
             this.pnlSubMenuMonitoramento.TabIndex = 7;
@@ -321,7 +332,7 @@
             this.btnRecursos.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btnRecursos.Size = new System.Drawing.Size(183, 38);
             this.btnRecursos.TabIndex = 3;
-            this.btnRecursos.Text = "Recursos";
+            this.btnRecursos.Text = "DashBoard";
             this.btnRecursos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRecursos.UseVisualStyleBackColor = true;
             this.btnRecursos.Click += new System.EventHandler(this.btnRecursos_Click);
@@ -335,7 +346,7 @@
             this.btnMenuLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMenuLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenuLogout.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMenuLogout.Location = new System.Drawing.Point(0, 503);
+            this.btnMenuLogout.Location = new System.Drawing.Point(0, 535);
             this.btnMenuLogout.Name = "btnMenuLogout";
             this.btnMenuLogout.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMenuLogout.Size = new System.Drawing.Size(183, 38);
@@ -354,7 +365,7 @@
             this.btnMenuSair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMenuSair.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenuSair.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMenuSair.Location = new System.Drawing.Point(0, 541);
+            this.btnMenuSair.Location = new System.Drawing.Point(0, 573);
             this.btnMenuSair.Name = "btnMenuSair";
             this.btnMenuSair.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMenuSair.Size = new System.Drawing.Size(183, 38);
@@ -393,6 +404,61 @@
             this.imgLogo.TabIndex = 1;
             this.imgLogo.TabStop = false;
             // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(10, 8);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(56, 19);
+            this.metroLabel1.TabIndex = 0;
+            this.metroLabel1.Text = "Usuário:";
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Location = new System.Drawing.Point(72, 8);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(35, 19);
+            this.lblUsuario.TabIndex = 1;
+            this.lblUsuario.Text = "User";
+            // 
+            // lblAmbiente
+            // 
+            this.lblAmbiente.AutoSize = true;
+            this.lblAmbiente.Location = new System.Drawing.Point(260, 8);
+            this.lblAmbiente.Name = "lblAmbiente";
+            this.lblAmbiente.Size = new System.Drawing.Size(66, 19);
+            this.lblAmbiente.TabIndex = 3;
+            this.lblAmbiente.Text = "Ambiente";
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(185, 8);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(69, 19);
+            this.metroLabel3.TabIndex = 2;
+            this.metroLabel3.Text = "Ambiente:";
+            // 
+            // btnAtualizarDados
+            // 
+            this.btnAtualizarDados.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnAtualizarDados.FlatAppearance.BorderSize = 0;
+            this.btnAtualizarDados.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnAtualizarDados.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnAtualizarDados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAtualizarDados.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtualizarDados.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnAtualizarDados.Location = new System.Drawing.Point(0, 76);
+            this.btnAtualizarDados.Name = "btnAtualizarDados";
+            this.btnAtualizarDados.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnAtualizarDados.Size = new System.Drawing.Size(183, 38);
+            this.btnAtualizarDados.TabIndex = 4;
+            this.btnAtualizarDados.Text = "Atualizar Dados";
+            this.btnAtualizarDados.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAtualizarDados.UseVisualStyleBackColor = true;
+            this.btnAtualizarDados.Click += new System.EventHandler(this.btnAtualizarDados_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,6 +473,8 @@
             this.Name = "frmMain";
             this.Padding = new System.Windows.Forms.Padding(0, 60, 0, 18);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
+            this.pnlButtom.ResumeLayout(false);
+            this.pnlButtom.PerformLayout();
             this.pnlMenuLogo.ResumeLayout(false);
             this.pnlSubMenuConfig.ResumeLayout(false);
             this.pnlSubMenuTuning.ResumeLayout(false);
@@ -440,6 +508,11 @@
         private System.Windows.Forms.Button btnMenuConfiguracoes;
         private System.Windows.Forms.Panel pnlMenuLogo;
         private System.Windows.Forms.PictureBox imgLogo;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroLabel lblUsuario;
+        private MetroFramework.Controls.MetroLabel lblAmbiente;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private System.Windows.Forms.Button btnAtualizarDados;
     }
 }
 

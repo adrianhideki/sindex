@@ -139,10 +139,22 @@ namespace sindex
             if (pnlSubMenuMonitoramento.Visible) pnlSubMenuMonitoramento.Visible = false;
         }
 
+        public void SetAmbienteText(string text)
+        {
+            lblAmbiente.Text = text;
+        }
+        public void SetUsuarioText(string text)
+        {
+            lblUsuario.Text = text;
+        }
+
         public void HideMenu(bool val)
         {
             pnlMenu.Visible = val;
             pnlBgMenu.Visible = val;
+            pnlButtom.Visible = val;
+            lblAmbiente.Text = "";
+            lblUsuario.Text = "";
             this.Refresh();
         }
 
@@ -206,6 +218,11 @@ namespace sindex
         private void btnRecursos_Click(object sender, EventArgs e)
         {
             LoadDashboard();
+        }
+
+        private void btnAtualizarDados_Click(object sender, EventArgs e)
+        {
+            LoadTables();
         }
     }
 }

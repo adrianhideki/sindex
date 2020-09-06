@@ -208,7 +208,7 @@ namespace sindex.forms
                     this.conf.currentConfiguration = cbxAmbiente.SelectedIndex;
 
                     main.SetConnectionSettings();
-
+                    main.SetAmbienteText(cbxAmbiente.Text);
 
                     DataTable dt = main.GetDbConnect().executeDataTable("SELECT * FROM sys.tables WHERE name = 'index'", new Dapper.DynamicParameters(), main.GetDatabaseName(), out string errMsg, out int errCode);
 
