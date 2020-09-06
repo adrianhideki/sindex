@@ -30,22 +30,24 @@ namespace sindex.forms
 
             this.metroStyleManager.Theme = metroStyleManager.Theme;
             this.metroStyleManager.Style = metroStyleManager.Style;
+            this.tmrUpdate.Interval = main.secondsToUpdateChart * 1000;
 
             this.Refresh();
 
             try
             {
+                SetupDiskChart();
                 SetTheme(chtCPU);
                 SetTheme(chtMemory);
                 SetTheme(chtArquivos);
                 SetTheme(chtConnection);
-                SetupDiskChart();
 
-                tmrUpdate_Tick(null,null);
                 tmrUpdate.Enabled = true;
+                tmrUpdate_Tick(null,null);
             }
             catch (Exception err)
             {
+                tmrUpdate.Enabled = false;
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -84,9 +86,9 @@ namespace sindex.forms
                 chart.ChartAreas[i].AxisY.MinorGrid.LineColor = foreTwo;
                 chart.ChartAreas[i].AxisX.MajorGrid.LineColor = foreTwo;
                 chart.ChartAreas[i].AxisY.MajorGrid.LineColor = foreTwo;
-                chart.ChartAreas[i].AxisY.LabelStyle.ForeColor = foreTwo;
-                chart.ChartAreas[i].AxisX.LabelStyle.ForeColor = foreTwo;
-                chart.ChartAreas[i].AxisX.TitleForeColor = foreTwo;
+                chart.ChartAreas[i].AxisY.LabelStyle.ForeColor = fore;
+                chart.ChartAreas[i].AxisX.LabelStyle.ForeColor = fore;
+                chart.ChartAreas[i].AxisX.TitleForeColor = fore;
             }
 
             for (int i = 0; i < chart.Legends.Count; i++)
@@ -206,6 +208,8 @@ namespace sindex.forms
         private void SetupDiskChart()
         {
             chtArquivos.Series.Clear();
+            chtArquivos.Legends.Clear();
+
             chtArquivos.Series.Add(new Series() { LegendText = "Data Free Space", IsValueShownAsLabel = true, ChartType = SeriesChartType.StackedColumn100 });
             chtArquivos.Series.Add(new Series() { LegendText = "Data Usage", IsValueShownAsLabel = true, ChartType = SeriesChartType.StackedColumn100 });
             chtArquivos.Series.Add(new Series() { LegendText = "LOG Free Space", IsValueShownAsLabel = true, ChartType = SeriesChartType.StackedColumn100 });
@@ -256,6 +260,7 @@ namespace sindex.forms
             }
             catch (Exception err)
             {
+                tmrUpdate.Enabled = false;
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

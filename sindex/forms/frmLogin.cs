@@ -65,7 +65,7 @@ namespace sindex.forms
                 conf.Login(txtUser.Text, txtPassword.Text);
                 main.HideMenu(true);
                 main.SetUsuarioText(txtUser.Text);
-                main.LoadEnviroment();
+                main.LoadEnviroment(true);
                 this.Close();
             }
             catch (Exception err)

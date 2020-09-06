@@ -21,17 +21,18 @@ namespace sindex.forms
         Configuration conf;
         frmMain main;
         string databaseName;
+        bool login;
 
-        public frmLoadTables(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
+        public frmLoadTables(MetroStyleManager metroStyleManager, Configuration conf, frmMain main, bool login)
         {
             InitializeComponent();
             this.metroStyleManager.Theme = metroStyleManager.Theme;
             this.metroStyleManager.Style = metroStyleManager.Style;
+            this.login = login;
 
 
             this.main = main;
             this.cred = main.cred;
-            this.databaseName = main.GetDatabaseName();
 
             this.Refresh();
             LoadProcs();
@@ -40,29 +41,38 @@ namespace sindex.forms
         private async void LoadProcs()
         {
             string status = "Carregando informações";
+            string erro = "";
 
             Task t = Task.Run(() => {
-                status = "Apagando dados...";
-                dbTables.DeleteDataFromDisabledDatabases(cred, databaseName);
+                try
+                {
+                    this.databaseName = main.GetDatabaseName();
 
-                status = "Carregando filegroups...";
-                dbTables.LoadFilegroups(cred, databaseName);
+                    status = "Apagando dados...";
+                    dbTables.DeleteDataFromDisabledDatabases(cred, databaseName);
 
-                status = "Carregando files...";
-                dbTables.LoadFiles(cred, databaseName);
+                    status = "Carregando filegroups...";
+                    dbTables.LoadFilegroups(cred, databaseName);
 
-                status = "Carregando tabelas...";
-                dbTables.LoadTables(cred, databaseName);
+                    status = "Carregando files...";
+                    dbTables.LoadFiles(cred, databaseName);
 
-                status = "Carregando restrições...";
-                dbTables.LoadConstraints(cred, databaseName);
+                    status = "Carregando tabelas...";
+                    dbTables.LoadTables(cred, databaseName);
 
-                status = "Carregando estatísticas...";
-                dbTables.LoadStats(cred, databaseName);
+                    status = "Carregando restrições...";
+                    dbTables.LoadConstraints(cred, databaseName);
 
-                status = "Carregando índices...";
-                dbTables.LoadIndexes(cred, databaseName);
-                Task.Delay(500);
+                    status = "Carregando estatísticas...";
+                    dbTables.LoadStats(cred, databaseName);
+
+                    status = "Carregando índices...";
+                    dbTables.LoadIndexes(cred, databaseName);
+                    Task.Delay(500);
+                } catch (Exception err)
+                {
+                    erro = err.Message;
+                }
             });
 
             while (!t.IsCompleted)
@@ -71,7 +81,28 @@ namespace sindex.forms
                 lblTitulo.Text = status;
             }
 
-            this.Close();
+            if (login)
+            {
+                if (!String.IsNullOrEmpty(erro))
+                {
+                    main.ShowMessage(erro, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
+                else
+                {
+                    main.LoadDashboard();
+                    this.Close();
+                }
+            } 
+            else 
+            {
+
+                if (String.IsNullOrEmpty(erro))
+                  lblTitulo.Text = "Tabelas atualizadas com sucesso!";
+                else
+                    lblTitulo.Text = "Erro ao atualizar tabelas: " + erro;
+
+                spnLoading.Visible = false;
+            }
         }
     }
 }

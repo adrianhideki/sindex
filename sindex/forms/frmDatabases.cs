@@ -21,8 +21,9 @@ namespace sindex.forms
         private object dbConnect;
         Configuration conf;
         frmMain main;
+        bool login;
 
-        public frmDatabases(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
+        public frmDatabases(MetroStyleManager metroStyleManager, Configuration conf, frmMain main, bool login)
         {
             InitializeComponent();
             this.metroStyleManager.Theme = metroStyleManager.Theme;
@@ -32,6 +33,7 @@ namespace sindex.forms
 
             this.conf = conf;
             this.main = main;
+            this.login = login;
 
             try
             {
@@ -262,7 +264,7 @@ namespace sindex.forms
         private void lnkSalvarFechar_Click(object sender, EventArgs e)
         {
             this.Close();
-            main.LoadTables();
+            main.LoadTables(login);
         }
 
         private void frmDatabases_Resize(object sender, EventArgs e)

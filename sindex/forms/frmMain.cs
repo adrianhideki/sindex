@@ -19,14 +19,19 @@ namespace sindex
 {
     public partial class frmMain : MetroForm
     {
-        Credentials credentials;
         public string jsonPath = "";
         private static string passPharse = "s1nd3x@hideki";
         public Configuration configuration = null;
+
+        #region variáveis de status
         public string databaseSindex = "";
         public dbConnect dbCon;
         public Credentials cred;
+        public int minutesToUpdateTable = 5;
+        public int secondsToUpdateChart = 5;
+
         private Form CurrentForm;
+        #endregion
 
         public frmMain()
         {
@@ -73,42 +78,89 @@ namespace sindex
             databaseSindex = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].GetDatabase();
             cred = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].GetCredentials();
             dbCon = new dbConnect(cred);
+            minutesToUpdateTable = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].minutesToRefreshTables;
+            secondsToUpdateChart = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].secondsToRefreshCharts;
         }
 
         public Credentials GetCredentials()
         {
-            return this.cred;
+            if (ValidaAmbienteConfigurado())
+                return this.cred;
+            else
+            {
+                throw new Exception("Ambiente não selecionado/configurado!");
+            }
         }
 
         public dbConnect GetDbConnect()
         {
-            return this.dbCon;
+            if (ValidaAmbienteConfigurado())
+                return this.dbCon;
+            else
+            {
+                throw new Exception("Ambiente não selecionado/configurado!");
+            }
         }
 
         public string GetDatabaseName()
         {
-            return this.databaseSindex;
+            if (ValidaAmbienteConfigurado())
+              return this.databaseSindex;
+            else
+            {
+                throw new Exception("Ambiente não selecionado/configurado!");
+            }
+        }
+
+        public bool ValidaAmbienteConfigurado()
+        {
+            return (configuration.currentConfiguration >= 0);
         }
         #endregion
 
         #region LoadForms
-        private void LoadForm(Form frm, Control parent, DockStyle dockStyle = DockStyle.Fill)
+        private void LoadForm(Form frm, Control parent, DockStyle dockStyle = DockStyle.Fill, bool validaAmbiente = false)
         {
-            if (CurrentForm != null)
-                CurrentForm.Close();
+            try
+            {
+                if (CurrentForm != null)
+                    CurrentForm.Close();
 
-            CurrentForm = frm;
-            CurrentForm.TopLevel = false;
-            CurrentForm.TopMost = true;
-            parent.Controls.Add(CurrentForm);
-            CurrentForm.Dock = dockStyle;
-            CurrentForm.StartPosition = FormStartPosition.CenterParent;
-            CurrentForm.Show();
+                if (validaAmbiente)
+                {
+                    if (configuration.currentConfiguration < 0 || configuration.currentUser < 0)
+                    {
+                        frm.Close();
+                        throw new Exception("Ambiente não foi selecionãdo, não sendo possível conectar-se ao banco de dados!");
+                    }
+                }
+
+                CurrentForm = frm;
+                CurrentForm.TopLevel = false;
+                CurrentForm.TopMost = true;
+                parent.Controls.Add(CurrentForm);
+                CurrentForm.Dock = dockStyle;
+                CurrentForm.StartPosition = FormStartPosition.CenterParent;
+                CurrentForm.Show();
+
+            }
+            catch (Exception err)
+            {
+                this.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
         public void LoadLogin()
         {
             this.configuration.currentUser = -1;
             this.configuration.currentConfiguration = -1;
+            this.dbCon = null;
+            this.cred = null;
+            this.databaseSindex = null;
+            lblAmbiente.Text = "";
+            lblUsuario.Text = "";
+            minutesToUpdateTable = 5;
+            secondsToUpdateChart = 5;
 
             if (CurrentForm != null)
                 CurrentForm.Close();
@@ -116,17 +168,17 @@ namespace sindex
             HideMenu(false);
             LoadForm(new frmLogin(this.metroStyleManager, configuration, this), pnlForm, DockStyle.Left);
         }
-        public void LoadEnviroment()
+        public void LoadEnviroment(bool login = false)
         {
-            LoadForm(new frmAmbientes(this.metroStyleManager, configuration, this), pnlForm);
+            LoadForm(new frmAmbientes(this.metroStyleManager, configuration, this, login), pnlForm);
         }
-        public void LoadTables()
+        public void LoadTables(bool login = false)
         {
-            LoadForm(new frmLoadTables(metroStyleManager, configuration, this), pnlForm);
+            LoadForm(new frmLoadTables(metroStyleManager, configuration, this, login), pnlForm);
         }
-        public void LoadDatabase()
+        public void LoadDatabase(bool login = false)
         {
-            LoadForm(new frmDatabases(metroStyleManager, configuration, this), pnlForm);
+            LoadForm(new frmDatabases(metroStyleManager, configuration, this, login), pnlForm);
         }
         public void LoadDashboard()
         {
@@ -156,8 +208,6 @@ namespace sindex
             pnlMenu.Visible = val;
             pnlBgMenu.Visible = val;
             pnlButtom.Visible = val;
-            lblAmbiente.Text = "";
-            lblUsuario.Text = "";
             this.Refresh();
         }
 

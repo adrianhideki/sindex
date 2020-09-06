@@ -17,9 +17,10 @@ namespace sindex.forms
     {
         private Configuration conf;
         private frmMain main;
+        private bool login;
         List<Enviroment> enviroments = null;
 
-        public frmAmbientes(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
+        public frmAmbientes(MetroStyleManager metroStyleManager, Configuration conf, frmMain main, bool login = false)
         {
             try
             {
@@ -27,6 +28,7 @@ namespace sindex.forms
 
                 this.metroStyleManager.Theme = metroStyleManager.Theme;
                 this.metroStyleManager.Style = metroStyleManager.Style;
+                this.login = login;
 
                 this.Refresh();
 
@@ -100,6 +102,9 @@ namespace sindex.forms
                         txtUsuario.Text = enviroments[index].user;
                         txtSenha.Text = enviroments[index].password;
                         txtDatabase.Text = enviroments[index].database;
+                        txtUpdateChart.Text = enviroments[index].secondsToRefreshCharts.ToString();
+                        txtUpdateTables.Text = enviroments[index].minutesToRefreshTables.ToString();
+
                         setEnabledButtons(true);
                     } else
                     { 
@@ -108,6 +113,8 @@ namespace sindex.forms
                         txtUsuario.Text = "";
                         txtSenha.Text = "";
                         txtDatabase.Text = "";
+                        txtUpdateChart.Text = "";
+                        txtUpdateTables.Text = "";
                     }
 
                 } else {
@@ -120,16 +127,41 @@ namespace sindex.forms
             }
         }
 
+        private void validarConfiguracoes()
+        {
+            string _out = "";
+            int _num = 0;
+
+            if (String.IsNullOrEmpty(txtNome.Text)) _out += "\nNome do ambiente inválido.";
+            if (String.IsNullOrEmpty(txtServidor.Text)) _out += "\nNome do servidor inválido.";
+            if (String.IsNullOrEmpty(txtUsuario.Text)) _out += "\nUsuário inválido.";
+            if (String.IsNullOrEmpty(txtSenha.Text)) _out += "\nSenha inválida.";
+            if (String.IsNullOrEmpty(txtDatabase.Text)) _out += "\nBanco de dados inválido.";
+
+            Int32.TryParse(txtUpdateChart.Text, out _num);
+            if (String.IsNullOrEmpty(txtUpdateChart.Text) || _num <= 0) _out += "\nSegundos para atualizar gráficos configurado incorretamente.";
+
+            Int32.TryParse(txtUpdateTables.Text, out _num);
+            if (String.IsNullOrEmpty(txtUpdateTables.Text) || _num <= 0) _out += "\nMinutos para atualizar tabelas configurado incorretamente.";
+
+            if (_out != "")
+                throw new Exception(_out);
+        }
+
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
             try
             {
+                validarConfiguracoes();
+
                 Enviroment env = new Enviroment();
                 env.name = txtNome.Text;
                 env.server = txtServidor.Text;
                 env.user = txtUsuario.Text;
                 env.password = txtSenha.Text;
                 env.database = txtDatabase.Text;
+                env.secondsToRefreshCharts = Int32.Parse(txtUpdateChart.Text);
+                env.minutesToRefreshTables = Int32.Parse(txtUpdateTables.Text);
 
                 conf.users[conf.currentUser].AddEnviroment(env);
                 cbxAmbiente.Items.Add(env.name);
@@ -151,6 +183,8 @@ namespace sindex.forms
             {
                 if (enviroments.Count > 0 && cbxAmbiente.SelectedIndex >= 0)
                 {
+                    validarConfiguracoes();
+
                     int index = cbxAmbiente.SelectedIndex;
 
                     Enviroment env = new Enviroment();
@@ -159,6 +193,8 @@ namespace sindex.forms
                     env.user = txtUsuario.Text;
                     env.password = txtSenha.Text;
                     env.database = txtDatabase.Text;
+                    env.secondsToRefreshCharts = Int32.Parse(txtUpdateChart.Text);
+                    env.minutesToRefreshTables = Int32.Parse(txtUpdateTables.Text);
 
                     conf.users[conf.currentUser].UpdateEnviroment(index, env);
                     cbxAmbiente.Items[index] = env.name;
@@ -241,18 +277,25 @@ namespace sindex.forms
 
                         if (dtDatabases.Rows.Count > 0)
                         {
-                            if (min > 5) main.LoadTables();
+                            if (min > main.minutesToUpdateTable)
+                            {
+                                main.LoadTables(login);
+                            } else if (login)
+                            {
+                                main.LoadDashboard();
+                            }
                         } else
                         {
-                            main.LoadDatabase();
+                            main.LoadDatabase(login);
                         }
                     } 
                     else
                     {
-                        main.LoadDatabase();
+                        main.LoadDatabase(login);
                     }
 
-                    this.Close();
+                    if (login)
+                      this.Close();
                 } 
                 else 
                 {
@@ -281,6 +324,20 @@ namespace sindex.forms
                 return true;
 
             return false;
+        }
+
+        private void txtUpdateTables_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

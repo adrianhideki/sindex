@@ -32,32 +32,33 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.chtMemory = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlBackground = new MetroFramework.Controls.MetroPanel();
             this.tlpCharts = new System.Windows.Forms.TableLayoutPanel();
+            this.chtConnection = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chtArquivos = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chtCPU = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
-            this.chtConnection = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chtMemory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBackground.SuspendLayout();
             this.tlpCharts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chtConnection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chtArquivos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chtCPU)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chtConnection)).BeginInit();
             this.SuspendLayout();
             // 
             // chtMemory
@@ -116,15 +117,37 @@
             this.tlpCharts.Size = new System.Drawing.Size(762, 454);
             this.tlpCharts.TabIndex = 6;
             // 
+            // chtConnection
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chtConnection.ChartAreas.Add(chartArea2);
+            this.chtConnection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chtConnection.Location = new System.Drawing.Point(3, 230);
+            this.chtConnection.Name = "chtConnection";
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series1";
+            this.chtConnection.Series.Add(series2);
+            this.chtConnection.Size = new System.Drawing.Size(375, 221);
+            this.chtConnection.TabIndex = 7;
+            this.chtConnection.Text = "chart1";
+            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            title2.Name = "Memory";
+            title2.Text = "Connections";
+            this.chtConnection.Titles.Add(title2);
+            // 
             // chtArquivos
             // 
             chartArea3.Name = "ChartArea1";
             this.chtArquivos.ChartAreas.Add(chartArea3);
             this.chtArquivos.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.ForeColor = System.Drawing.Color.Silver;
+            legend1.Name = "Legend1";
+            this.chtArquivos.Legends.Add(legend1);
             this.chtArquivos.Location = new System.Drawing.Point(384, 230);
             this.chtArquivos.Name = "chtArquivos";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100;
+            series3.Legend = "Legend1";
             series3.Name = "Series1";
             series3.YValuesPerPoint = 2;
             this.chtArquivos.Series.Add(series3);
@@ -141,8 +164,8 @@
             chartArea4.Name = "ChartArea1";
             this.chtCPU.ChartAreas.Add(chartArea4);
             this.chtCPU.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chtCPU.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.chtCPU.Legends.Add(legend2);
             this.chtCPU.Location = new System.Drawing.Point(384, 3);
             this.chtCPU.Name = "chtCPU";
             series4.BorderWidth = 5;
@@ -173,24 +196,6 @@
             this.tmrUpdate.Interval = 1000;
             this.tmrUpdate.Tick += new System.EventHandler(this.tmrUpdate_Tick);
             // 
-            // chtConnection
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chtConnection.ChartAreas.Add(chartArea2);
-            this.chtConnection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chtConnection.Location = new System.Drawing.Point(3, 230);
-            this.chtConnection.Name = "chtConnection";
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.chtConnection.Series.Add(series2);
-            this.chtConnection.Size = new System.Drawing.Size(375, 221);
-            this.chtConnection.TabIndex = 7;
-            this.chtConnection.Text = "chart1";
-            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            title2.Name = "Memory";
-            title2.Text = "Connections";
-            this.chtConnection.Titles.Add(title2);
-            // 
             // frmDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,9 +209,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.pnlBackground.ResumeLayout(false);
             this.tlpCharts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chtConnection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chtArquivos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chtCPU)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chtConnection)).EndInit();
             this.ResumeLayout(false);
 
         }

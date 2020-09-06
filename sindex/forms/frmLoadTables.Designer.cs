@@ -51,12 +51,13 @@
             // 
             this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblTitulo.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.lblTitulo.Location = new System.Drawing.Point(193, 116);
+            this.lblTitulo.Location = new System.Drawing.Point(116, 81);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(212, 25);
+            this.lblTitulo.Size = new System.Drawing.Size(366, 58);
             this.lblTitulo.TabIndex = 2;
             this.lblTitulo.Text = "Carregando informações...";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTitulo.WrapToLine = true;
             // 
             // metroStyleManager
             // 

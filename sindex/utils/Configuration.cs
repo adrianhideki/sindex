@@ -14,7 +14,6 @@ namespace sindex.utils
         public List<User> users;
         public int currentUser { get; set; }
         public int currentConfiguration { get; set; }
-
         public Configuration()
         {
             if (users == null)
@@ -167,6 +166,8 @@ namespace sindex.utils
             enviroments[index].password = env.password;
             enviroments[index].database = env.database;
             enviroments[index].name = env.name;
+            enviroments[index].minutesToRefreshTables = env.minutesToRefreshTables;
+            enviroments[index].secondsToRefreshCharts = env.secondsToRefreshCharts;
         }
 
         public bool ValidarEmail(string email)
@@ -204,6 +205,8 @@ namespace sindex.utils
         public string user { get; set; }
         public string password { get; set; }
         public string database { get; set; }
+        public int minutesToRefreshTables { get; set; }
+        public int secondsToRefreshCharts { get; set; }
 
         public string GetConnectionString(string database)
         {

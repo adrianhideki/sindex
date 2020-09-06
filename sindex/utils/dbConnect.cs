@@ -25,6 +25,11 @@ namespace sindex.utils
         }
         public dbConnect(Credentials cred)
         {
+            if (cred == null)
+            {
+                throw new Exception("Erro ao carregar as credenciais do banco de dados, revise as configurações do ambiente.");
+            }
+
             this.user = cred.user;
             this.pass = cred.password;
             this.server = cred.server;
