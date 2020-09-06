@@ -35,4 +35,7 @@ BEGIN
   WHERE EXISTS(SELECT 1 
                FROM dbo.[database] 
                WHERE [database].database_uid = [index].database_uid AND [database].ativo = 0);
+
+  UPDATE [database]
+     SET update_date = GETDATE();
 END
