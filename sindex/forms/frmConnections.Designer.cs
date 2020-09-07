@@ -51,9 +51,10 @@
             this.matarSessãoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.habilitarDesabilitarAutoRefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tmrSession = new System.Windows.Forms.Timer(this.components);
             this.padrãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmrSession = new System.Windows.Forms.Timer(this.components);
+            this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdSessios)).BeginInit();
@@ -318,14 +319,11 @@
             // 
             this.imprimirToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.padrãoToolStripMenuItem,
-            this.gridToolStripMenuItem});
+            this.gridToolStripMenuItem,
+            this.excelToolStripMenuItem});
             this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
             this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.imprimirToolStripMenuItem.Text = "Imprimir";
-            // 
-            // tmrSession
-            // 
-            this.tmrSession.Tick += new System.EventHandler(this.tmrSession_Tick);
+            this.imprimirToolStripMenuItem.Text = "Imprimir Relatório";
             // 
             // padrãoToolStripMenuItem
             // 
@@ -340,6 +338,17 @@
             this.gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
+            // 
+            // tmrSession
+            // 
+            this.tmrSession.Tick += new System.EventHandler(this.tmrSession_Tick);
+            // 
+            // excelToolStripMenuItem
+            // 
+            this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.excelToolStripMenuItem.Text = "Excel";
+            this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
             // 
             // frmConnections
             // 
@@ -383,5 +392,6 @@
         private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem padrãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
     }
 }

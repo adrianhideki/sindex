@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using ClosedXML.Excel;
+using Dapper;
 using MetroFramework.Components;
 using Microsoft.Reporting.WinForms;
 using sindex.model;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -170,41 +172,48 @@ namespace sindex.forms
 
         private void verDetalhesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (grdSessios.SelectedRows.Count > 0)
+            try
             {
-                for(int i = 0; i < grdSessios.SelectedRows.Count; i++)
+                if (grdSessios.SelectedRows.Count > 0)
                 {
-                    int spid = Int32.Parse(grdSessios.SelectedRows[i].Cells[0].Value.ToString());
+                    for (int i = 0; i < grdSessios.SelectedRows.Count; i++)
+                    {
+                        int spid = Int32.Parse(grdSessios.SelectedRows[i].Cells[0].Value.ToString());
 
-                    DataTable dt = dbTables.GetSpidInfo(main.cred, main.databaseSindex, spid);
+                        DataTable dt = dbTables.GetSpidInfo(main.cred, main.databaseSindex, spid);
 
-                    SessionModel session = new SessionModel();
-                    session.sessionId = Int32.Parse(dt.Rows[0][0].ToString());
-                    session.databaseName = dt.Rows[0][1].ToString();
-                    session.hostName = dt.Rows[0][2].ToString();
-                    session.programName = dt.Rows[0][3].ToString();
-                    session.clientInterfaceName = dt.Rows[0][4].ToString();
-                    session.blockingSessionId = Int32.Parse(dt.Rows[0][5].ToString());
-                    session.openTransacionCount = Int32.Parse(dt.Rows[0][6].ToString());
-                    session.percentComplete = Double.Parse(dt.Rows[0][7].ToString());
-                    session.cpuTime = Int32.Parse(dt.Rows[0][8].ToString());
-                    session.totalElapsedTime = Int32.Parse(dt.Rows[0][9].ToString());
-                    session.reads = Int32.Parse(dt.Rows[0][10].ToString());
-                    session.writes = Int32.Parse(dt.Rows[0][11].ToString());
-                    session.logicalReads = Int32.Parse(dt.Rows[0][12].ToString());
-                    session.startTime = DateTime.Parse(dt.Rows[0][13].ToString());
-                    session.status = dt.Rows[0][14].ToString();
-                    session.waitType = dt.Rows[0][15].ToString();
-                    session.waitTime = Int32.Parse(dt.Rows[0][16].ToString());
-                    session.waitResource = dt.Rows[0][17].ToString();
-                    session.command = dt.Rows[0][18].ToString();
-                    session.currentStatement = dt.Rows[0][19].ToString();
-                    session.cmdSql = dt.Rows[0][20].ToString();
-                    session.qryPlan = dt.Rows[0][21].ToString();
+                        SessionModel session = new SessionModel();
+                        session.sessionId = Int32.Parse(dt.Rows[0][0].ToString());
+                        session.databaseName = dt.Rows[0][1].ToString();
+                        session.hostName = dt.Rows[0][2].ToString();
+                        session.programName = dt.Rows[0][3].ToString();
+                        session.clientInterfaceName = dt.Rows[0][4].ToString();
+                        session.blockingSessionId = Int32.Parse(dt.Rows[0][5].ToString());
+                        session.openTransacionCount = Int32.Parse(dt.Rows[0][6].ToString());
+                        session.percentComplete = Double.Parse(dt.Rows[0][7].ToString());
+                        session.cpuTime = Int32.Parse(dt.Rows[0][8].ToString());
+                        session.totalElapsedTime = Int32.Parse(dt.Rows[0][9].ToString());
+                        session.reads = Int32.Parse(dt.Rows[0][10].ToString());
+                        session.writes = Int32.Parse(dt.Rows[0][11].ToString());
+                        session.logicalReads = Int32.Parse(dt.Rows[0][12].ToString());
+                        session.startTime = DateTime.Parse(dt.Rows[0][13].ToString());
+                        session.status = dt.Rows[0][14].ToString();
+                        session.waitType = dt.Rows[0][15].ToString();
+                        session.waitTime = Int32.Parse(dt.Rows[0][16].ToString());
+                        session.waitResource = dt.Rows[0][17].ToString();
+                        session.command = dt.Rows[0][18].ToString();
+                        session.currentStatement = dt.Rows[0][19].ToString();
+                        session.cmdSql = dt.Rows[0][20].ToString();
+                        session.qryPlan = dt.Rows[0][21].ToString();
 
-                    Form frm = new frmDetailSession(this.metroStyleManager, session);
-                    frm.Show();
+                        Form frm = new frmDetailSession(this.metroStyleManager, session);
+                        frm.Show();
+                    }
                 }
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -277,18 +286,56 @@ namespace sindex.forms
 
         private void padrãoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrintSindex.PrintReportViewer(GetSessionList(), "DataSet1", "sindex.reports.Sessions.rdlc", true, DeviceInfoSindex.landscape);
+            try
+            {
+                PrintSindex.PrintReportViewer(GetSessionList(), "DataSet1", "sindex.reports.Sessions.rdlc", true, DeviceInfoSindex.landscape);
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void gridToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            grdSessios.Theme = MetroFramework.MetroThemeStyle.Light;
-            grdSessios.Style = MetroFramework.MetroColorStyle.Silver;
+            try
+            {
+                grdSessios.Theme = MetroFramework.MetroThemeStyle.Light;
+                grdSessios.Style = MetroFramework.MetroColorStyle.Silver;
 
-            PrintSindex.PrintGrid("Sessions", "", "", grdSessios);
+                PrintSindex.PrintGrid("Sessions", "", "", grdSessios);
 
-            grdSessios.Theme = MetroFramework.MetroThemeStyle.Default;
-            grdSessios.Style = MetroFramework.MetroColorStyle.Default;
+                grdSessios.Theme = MetroFramework.MetroThemeStyle.Default;
+                grdSessios.Style = MetroFramework.MetroColorStyle.Default;
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void excelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try 
+            {
+                XLWorkbook wb = new XLWorkbook();
+                wb.Worksheets.Add(dtSession, "Sessions");
+
+                SaveFileDialog fileDialog = new SaveFileDialog();
+
+                fileDialog.DefaultExt = "xlsx";
+                fileDialog.Filter = "Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    wb.SaveAs(fileDialog.FileName);
+                }
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
