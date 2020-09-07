@@ -156,7 +156,31 @@ namespace sindex.repository
                            ,@only_blocked = @ponly_blocked
                            ,@reads = @preads
                            ,@writes = @pwrites
-                           ,@cpu = @pcpu";
+                           ,@cpu = @pcpu
+                           ,@spid = @pspid";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+
+        public static DataTable GetSpidInfo(Credentials cred, string database, int spid)
+        {
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new DynamicParameters();
+
+            param.Add("@pspid", spid, DbType.Int32, ParameterDirection.Input);
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            cmd = @"EXEC dbo.st_GetSessionsInfo @spid = @pspid";
 
             DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
 

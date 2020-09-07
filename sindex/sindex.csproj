@@ -122,6 +122,12 @@
     <Compile Include="forms\frmDatabases.Designer.cs">
       <DependentUpon>frmDatabases.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmDetailSession.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmDetailSession.Designer.cs">
+      <DependentUpon>frmDetailSession.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\frmLoadTables.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,7 @@
     </Compile>
     <Compile Include="model\ConfigurationModel.cs" />
     <Compile Include="model\ServerModel.cs" />
+    <Compile Include="model\SessionModel.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="utils\Configuration.cs" />
     <Compile Include="utils\Credentials.cs" />
@@ -166,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmDatabases.resx">
       <DependentUpon>frmDatabases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmDetailSession.resx">
+      <DependentUpon>frmDetailSession.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmLoadTables.resx">
       <DependentUpon>frmLoadTables.cs</DependentUpon>

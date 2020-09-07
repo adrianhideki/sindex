@@ -44,9 +44,13 @@
             this.chkMarcarTodos = new MetroFramework.Controls.MetroCheckBox();
             this.chkIgnorarSQLConections = new MetroFramework.Controls.MetroCheckBox();
             this.chkConexoesBloqueadas = new MetroFramework.Controls.MetroCheckBox();
+            this.mnuGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.verDetalhesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matarSessãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdSessios)).BeginInit();
+            this.mnuGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroStyleManager
@@ -97,6 +101,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.grdSessios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.grdSessios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdSessios.ContextMenuStrip = this.mnuGrid;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -234,6 +239,27 @@
             this.chkConexoesBloqueadas.Text = "Listar Somente Conexões Bloqueadas";
             this.chkConexoesBloqueadas.UseSelectable = true;
             // 
+            // mnuGrid
+            // 
+            this.mnuGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verDetalhesToolStripMenuItem,
+            this.matarSessãoToolStripMenuItem});
+            this.mnuGrid.Name = "mnuGrid";
+            this.mnuGrid.Size = new System.Drawing.Size(143, 48);
+            // 
+            // verDetalhesToolStripMenuItem
+            // 
+            this.verDetalhesToolStripMenuItem.Name = "verDetalhesToolStripMenuItem";
+            this.verDetalhesToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.verDetalhesToolStripMenuItem.Text = "Ver Detalhes";
+            this.verDetalhesToolStripMenuItem.Click += new System.EventHandler(this.verDetalhesToolStripMenuItem_Click);
+            // 
+            // matarSessãoToolStripMenuItem
+            // 
+            this.matarSessãoToolStripMenuItem.Name = "matarSessãoToolStripMenuItem";
+            this.matarSessãoToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.matarSessãoToolStripMenuItem.Text = "Matar sessão";
+            // 
             // frmConnections
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,6 +273,7 @@
             this.pnlBG.ResumeLayout(false);
             this.pnlBG.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdSessios)).EndInit();
+            this.mnuGrid.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -265,5 +292,8 @@
         private MetroFramework.Controls.MetroCheckBox chkMarcarTodos;
         private MetroFramework.Controls.MetroCheckBox chkIgnorarSQLConections;
         private MetroFramework.Controls.MetroCheckBox chkConexoesBloqueadas;
+        private System.Windows.Forms.ContextMenuStrip mnuGrid;
+        private System.Windows.Forms.ToolStripMenuItem verDetalhesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem matarSessãoToolStripMenuItem;
     }
 }
