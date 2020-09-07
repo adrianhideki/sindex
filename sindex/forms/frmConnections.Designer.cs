@@ -34,6 +34,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlBG = new MetroFramework.Controls.MetroPanel();
+            this.lblSegundos = new MetroFramework.Controls.MetroLabel();
+            this.tkbSegundos = new MetroFramework.Controls.MetroTrackBar();
+            this.chkRefresh = new MetroFramework.Controls.MetroCheckBox();
             this.chkConexoesBloqueadas = new MetroFramework.Controls.MetroCheckBox();
             this.chkIgnorarSQLConections = new MetroFramework.Controls.MetroCheckBox();
             this.chkMarcarTodos = new MetroFramework.Controls.MetroCheckBox();
@@ -43,14 +46,14 @@
             this.txtFiltro = new MetroFramework.Controls.MetroTextBox();
             this.cbxFiltro = new MetroFramework.Controls.MetroComboBox();
             this.grdSessios = new MetroFramework.Controls.MetroGrid();
-            this.tmrSession = new System.Windows.Forms.Timer(this.components);
-            this.chkRefresh = new MetroFramework.Controls.MetroCheckBox();
             this.mnuGridView = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.verDetalhesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.matarSessãoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tkbSegundos = new MetroFramework.Controls.MetroTrackBar();
-            this.lblSegundos = new MetroFramework.Controls.MetroLabel();
             this.habilitarDesabilitarAutoRefreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmrSession = new System.Windows.Forms.Timer(this.components);
+            this.padrãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdSessios)).BeginInit();
@@ -86,6 +89,39 @@
             this.pnlBG.VerticalScrollbarBarColor = true;
             this.pnlBG.VerticalScrollbarHighlightOnWheel = false;
             this.pnlBG.VerticalScrollbarSize = 10;
+            // 
+            // lblSegundos
+            // 
+            this.lblSegundos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSegundos.AutoSize = true;
+            this.lblSegundos.Location = new System.Drawing.Point(227, 508);
+            this.lblSegundos.Name = "lblSegundos";
+            this.lblSegundos.Size = new System.Drawing.Size(21, 19);
+            this.lblSegundos.TabIndex = 14;
+            this.lblSegundos.Text = "10";
+            // 
+            // tkbSegundos
+            // 
+            this.tkbSegundos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tkbSegundos.BackColor = System.Drawing.Color.Transparent;
+            this.tkbSegundos.Location = new System.Drawing.Point(122, 507);
+            this.tkbSegundos.Name = "tkbSegundos";
+            this.tkbSegundos.Size = new System.Drawing.Size(75, 23);
+            this.tkbSegundos.TabIndex = 13;
+            this.tkbSegundos.Value = 0;
+            this.tkbSegundos.ValueChanged += new System.EventHandler(this.tkbSegundos_ValueChanged);
+            // 
+            // chkRefresh
+            // 
+            this.chkRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkRefresh.AutoSize = true;
+            this.chkRefresh.Location = new System.Drawing.Point(12, 512);
+            this.chkRefresh.Name = "chkRefresh";
+            this.chkRefresh.Size = new System.Drawing.Size(91, 15);
+            this.chkRefresh.TabIndex = 12;
+            this.chkRefresh.Text = "Auto Refresh";
+            this.chkRefresh.UseSelectable = true;
+            this.chkRefresh.CheckedChanged += new System.EventHandler(this.chkRefresh_CheckedChanged);
             // 
             // chkConexoesBloqueadas
             // 
@@ -246,30 +282,17 @@
             this.grdSessios.Size = new System.Drawing.Size(705, 293);
             this.grdSessios.TabIndex = 2;
             // 
-            // tmrSession
-            // 
-            this.tmrSession.Tick += new System.EventHandler(this.tmrSession_Tick);
-            // 
-            // chkRefresh
-            // 
-            this.chkRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkRefresh.AutoSize = true;
-            this.chkRefresh.Location = new System.Drawing.Point(12, 512);
-            this.chkRefresh.Name = "chkRefresh";
-            this.chkRefresh.Size = new System.Drawing.Size(91, 15);
-            this.chkRefresh.TabIndex = 12;
-            this.chkRefresh.Text = "Auto Refresh";
-            this.chkRefresh.UseSelectable = true;
-            this.chkRefresh.CheckedChanged += new System.EventHandler(this.chkRefresh_CheckedChanged);
-            // 
             // mnuGridView
             // 
+            this.mnuGridView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mnuGridView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.mnuGridView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verDetalhesToolStripMenuItem1,
             this.matarSessãoToolStripMenuItem1,
-            this.habilitarDesabilitarAutoRefreshToolStripMenuItem});
+            this.habilitarDesabilitarAutoRefreshToolStripMenuItem,
+            this.imprimirToolStripMenuItem});
             this.mnuGridView.Name = "metroContextMenu1";
-            this.mnuGridView.Size = new System.Drawing.Size(257, 92);
+            this.mnuGridView.Size = new System.Drawing.Size(257, 114);
             // 
             // verDetalhesToolStripMenuItem1
             // 
@@ -284,33 +307,39 @@
             this.matarSessãoToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.matarSessãoToolStripMenuItem1.Text = "Matar Sessão";
             // 
-            // tkbSegundos
-            // 
-            this.tkbSegundos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tkbSegundos.BackColor = System.Drawing.Color.Transparent;
-            this.tkbSegundos.Location = new System.Drawing.Point(122, 507);
-            this.tkbSegundos.Name = "tkbSegundos";
-            this.tkbSegundos.Size = new System.Drawing.Size(75, 23);
-            this.tkbSegundos.TabIndex = 13;
-            this.tkbSegundos.Value = 0;
-            this.tkbSegundos.ValueChanged += new System.EventHandler(this.tkbSegundos_ValueChanged);
-            // 
-            // lblSegundos
-            // 
-            this.lblSegundos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblSegundos.AutoSize = true;
-            this.lblSegundos.Location = new System.Drawing.Point(227, 508);
-            this.lblSegundos.Name = "lblSegundos";
-            this.lblSegundos.Size = new System.Drawing.Size(21, 19);
-            this.lblSegundos.TabIndex = 14;
-            this.lblSegundos.Text = "10";
-            // 
             // habilitarDesabilitarAutoRefreshToolStripMenuItem
             // 
             this.habilitarDesabilitarAutoRefreshToolStripMenuItem.Name = "habilitarDesabilitarAutoRefreshToolStripMenuItem";
             this.habilitarDesabilitarAutoRefreshToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.habilitarDesabilitarAutoRefreshToolStripMenuItem.Text = "Habilitar / Desabilitar Auto Refresh";
             this.habilitarDesabilitarAutoRefreshToolStripMenuItem.Click += new System.EventHandler(this.habilitarDesabilitarAutoRefreshToolStripMenuItem_Click);
+            // 
+            // imprimirToolStripMenuItem
+            // 
+            this.imprimirToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.padrãoToolStripMenuItem,
+            this.gridToolStripMenuItem});
+            this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
+            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.imprimirToolStripMenuItem.Text = "Imprimir";
+            // 
+            // tmrSession
+            // 
+            this.tmrSession.Tick += new System.EventHandler(this.tmrSession_Tick);
+            // 
+            // padrãoToolStripMenuItem
+            // 
+            this.padrãoToolStripMenuItem.Name = "padrãoToolStripMenuItem";
+            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.padrãoToolStripMenuItem.Text = "Padrão";
+            this.padrãoToolStripMenuItem.Click += new System.EventHandler(this.padrãoToolStripMenuItem_Click);
+            // 
+            // gridToolStripMenuItem
+            // 
+            this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gridToolStripMenuItem.Text = "Grid";
+            this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
             // frmConnections
             // 
@@ -351,5 +380,8 @@
         private MetroFramework.Controls.MetroTrackBar tkbSegundos;
         private MetroFramework.Controls.MetroLabel lblSegundos;
         private System.Windows.Forms.ToolStripMenuItem habilitarDesabilitarAutoRefreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem padrãoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
     }
 }

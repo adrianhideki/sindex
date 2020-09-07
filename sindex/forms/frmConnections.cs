@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MetroFramework.Components;
+using Microsoft.Reporting.WinForms;
 using sindex.model;
 using sindex.repository;
 using sindex.utils;
@@ -233,6 +234,61 @@ namespace sindex.forms
         private void habilitarDesabilitarAutoRefreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             chkRefresh.Checked = !chkRefresh.Checked;
+        }
+
+        private List<SessionModel> GetSessionList()
+        {
+            List<SessionModel> list = new List<SessionModel>();
+
+            if (dtSession.Rows.Count > 0)
+            {
+                for (int i = 0; i < dtSession.Rows.Count; i++)
+                {
+                    SessionModel session = new SessionModel();
+                    session.sessionId = Int32.Parse(dtSession.Rows[0][0].ToString());
+                    session.databaseName = dtSession.Rows[0][1].ToString();
+                    session.hostName = dtSession.Rows[0][2].ToString();
+                    session.programName = dtSession.Rows[0][3].ToString();
+                    session.clientInterfaceName = dtSession.Rows[0][4].ToString();
+                    session.blockingSessionId = Int32.Parse(dtSession.Rows[0][5].ToString());
+                    session.openTransacionCount = Int32.Parse(dtSession.Rows[0][6].ToString());
+                    session.percentComplete = Double.Parse(dtSession.Rows[0][7].ToString());
+                    session.cpuTime = Int32.Parse(dtSession.Rows[0][8].ToString());
+                    session.totalElapsedTime = Int32.Parse(dtSession.Rows[0][9].ToString());
+                    session.reads = Int32.Parse(dtSession.Rows[0][10].ToString());
+                    session.writes = Int32.Parse(dtSession.Rows[0][11].ToString());
+                    session.logicalReads = Int32.Parse(dtSession.Rows[0][12].ToString());
+                    session.startTime = DateTime.Parse(dtSession.Rows[0][13].ToString());
+                    session.status = dtSession.Rows[0][14].ToString();
+                    session.waitType = dtSession.Rows[0][15].ToString();
+                    session.waitTime = Int32.Parse(dtSession.Rows[0][16].ToString());
+                    session.waitResource = dtSession.Rows[0][17].ToString();
+                    session.command = dtSession.Rows[0][18].ToString();
+                    session.currentStatement = dtSession.Rows[0][19].ToString();
+                    session.cmdSql = dtSession.Rows[0][20].ToString();
+                    session.qryPlan = dtSession.Rows[0][21].ToString();
+
+                    list.Add(session);
+                }
+            }
+
+            return list;
+        }
+
+        private void padrãoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintSindex.PrintReportViewer(GetSessionList(), "DataSet1", "sindex.reports.Sessions.rdlc", true, DeviceInfoSindex.landscape);
+        }
+
+        private void gridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grdSessios.Theme = MetroFramework.MetroThemeStyle.Light;
+            grdSessios.Style = MetroFramework.MetroColorStyle.Silver;
+
+            PrintSindex.PrintGrid("Sessions", "", "", grdSessios);
+
+            grdSessios.Theme = MetroFramework.MetroThemeStyle.Default;
+            grdSessios.Style = MetroFramework.MetroColorStyle.Default;
         }
     }
 }
