@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlBackground = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+            this.txtUpdateChart = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.txtUpdateTables = new MetroFramework.Controls.MetroTextBox();
             this.btnSelecionarAmbiente = new MetroFramework.Controls.MetroButton();
             this.btnTestarCon = new MetroFramework.Controls.MetroButton();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
@@ -48,10 +52,6 @@
             this.txtNome = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.cbxAmbiente = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
-            this.txtUpdateTables = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.txtUpdateChart = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBackground.SuspendLayout();
             this.SuspendLayout();
@@ -91,16 +91,106 @@
             this.pnlBackground.HorizontalScrollbarSize = 10;
             this.pnlBackground.Location = new System.Drawing.Point(-1, -1);
             this.pnlBackground.Name = "pnlBackground";
-            this.pnlBackground.Size = new System.Drawing.Size(806, 456);
+            this.pnlBackground.Size = new System.Drawing.Size(806, 506);
             this.pnlBackground.TabIndex = 0;
             this.pnlBackground.VerticalScrollbarBarColor = true;
             this.pnlBackground.VerticalScrollbarHighlightOnWheel = false;
             this.pnlBackground.VerticalScrollbarSize = 10;
             // 
+            // metroLabel8
+            // 
+            this.metroLabel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroLabel8.AutoSize = true;
+            this.metroLabel8.Location = new System.Drawing.Point(19, 359);
+            this.metroLabel8.Name = "metroLabel8";
+            this.metroLabel8.Size = new System.Drawing.Size(203, 19);
+            this.metroLabel8.TabIndex = 19;
+            this.metroLabel8.Text = "Segundos para atualizar gráficos:";
+            // 
+            // txtUpdateChart
+            // 
+            this.txtUpdateChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtUpdateChart.CustomButton.Image = null;
+            this.txtUpdateChart.CustomButton.Location = new System.Drawing.Point(730, 1);
+            this.txtUpdateChart.CustomButton.Name = "";
+            this.txtUpdateChart.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtUpdateChart.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtUpdateChart.CustomButton.TabIndex = 1;
+            this.txtUpdateChart.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtUpdateChart.CustomButton.UseSelectable = true;
+            this.txtUpdateChart.CustomButton.Visible = false;
+            this.txtUpdateChart.Lines = new string[0];
+            this.txtUpdateChart.Location = new System.Drawing.Point(23, 381);
+            this.txtUpdateChart.MaxLength = 32767;
+            this.txtUpdateChart.Name = "txtUpdateChart";
+            this.txtUpdateChart.PasswordChar = '\0';
+            this.txtUpdateChart.PromptText = "Segundos para atualizar gráficos";
+            this.txtUpdateChart.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtUpdateChart.SelectedText = "";
+            this.txtUpdateChart.SelectionLength = 0;
+            this.txtUpdateChart.SelectionStart = 0;
+            this.txtUpdateChart.ShortcutsEnabled = true;
+            this.txtUpdateChart.Size = new System.Drawing.Size(752, 23);
+            this.txtUpdateChart.TabIndex = 20;
+            this.txtUpdateChart.UseSelectable = true;
+            this.txtUpdateChart.WaterMark = "Segundos para atualizar gráficos";
+            this.txtUpdateChart.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtUpdateChart.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtUpdateChart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUpdateTables_KeyPress);
+            // 
+            // metroLabel7
+            // 
+            this.metroLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.Location = new System.Drawing.Point(19, 309);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(187, 19);
+            this.metroLabel7.TabIndex = 17;
+            this.metroLabel7.Text = "Minutos para atualizar tabelas:";
+            // 
+            // txtUpdateTables
+            // 
+            this.txtUpdateTables.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtUpdateTables.CustomButton.Image = null;
+            this.txtUpdateTables.CustomButton.Location = new System.Drawing.Point(730, 1);
+            this.txtUpdateTables.CustomButton.Name = "";
+            this.txtUpdateTables.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtUpdateTables.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtUpdateTables.CustomButton.TabIndex = 1;
+            this.txtUpdateTables.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtUpdateTables.CustomButton.UseSelectable = true;
+            this.txtUpdateTables.CustomButton.Visible = false;
+            this.txtUpdateTables.Lines = new string[0];
+            this.txtUpdateTables.Location = new System.Drawing.Point(23, 331);
+            this.txtUpdateTables.MaxLength = 32767;
+            this.txtUpdateTables.Name = "txtUpdateTables";
+            this.txtUpdateTables.PasswordChar = '\0';
+            this.txtUpdateTables.PromptText = "Minutos para atualizar as tabelas";
+            this.txtUpdateTables.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtUpdateTables.SelectedText = "";
+            this.txtUpdateTables.SelectionLength = 0;
+            this.txtUpdateTables.SelectionStart = 0;
+            this.txtUpdateTables.ShortcutsEnabled = true;
+            this.txtUpdateTables.Size = new System.Drawing.Size(752, 23);
+            this.txtUpdateTables.TabIndex = 18;
+            this.txtUpdateTables.UseSelectable = true;
+            this.txtUpdateTables.WaterMark = "Minutos para atualizar as tabelas";
+            this.txtUpdateTables.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtUpdateTables.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtUpdateTables.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUpdateTables_KeyPress);
+            // 
             // btnSelecionarAmbiente
             // 
             this.btnSelecionarAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelecionarAmbiente.Location = new System.Drawing.Point(655, 416);
+            this.btnSelecionarAmbiente.Location = new System.Drawing.Point(655, 420);
             this.btnSelecionarAmbiente.Name = "btnSelecionarAmbiente";
             this.btnSelecionarAmbiente.Size = new System.Drawing.Size(120, 23);
             this.btnSelecionarAmbiente.TabIndex = 0;
@@ -111,7 +201,7 @@
             // btnTestarCon
             // 
             this.btnTestarCon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTestarCon.Location = new System.Drawing.Point(151, 416);
+            this.btnTestarCon.Location = new System.Drawing.Point(151, 420);
             this.btnTestarCon.Name = "btnTestarCon";
             this.btnTestarCon.Size = new System.Drawing.Size(120, 23);
             this.btnTestarCon.TabIndex = 4;
@@ -123,7 +213,7 @@
             // 
             this.metroLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(23, 250);
+            this.metroLabel6.Location = new System.Drawing.Point(19, 260);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(39, 19);
             this.metroLabel6.TabIndex = 10;
@@ -146,7 +236,7 @@
             this.txtDatabase.CustomButton.UseSelectable = true;
             this.txtDatabase.CustomButton.Visible = false;
             this.txtDatabase.Lines = new string[0];
-            this.txtDatabase.Location = new System.Drawing.Point(23, 272);
+            this.txtDatabase.Location = new System.Drawing.Point(23, 282);
             this.txtDatabase.MaxLength = 32767;
             this.txtDatabase.Name = "txtDatabase";
             this.txtDatabase.PasswordChar = '\0';
@@ -167,7 +257,7 @@
             // btnExcluir
             // 
             this.btnExcluir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExcluir.Location = new System.Drawing.Point(277, 416);
+            this.btnExcluir.Location = new System.Drawing.Point(277, 420);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(120, 23);
             this.btnExcluir.TabIndex = 3;
@@ -178,7 +268,7 @@
             // btnAtualizar
             // 
             this.btnAtualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAtualizar.Location = new System.Drawing.Point(403, 416);
+            this.btnAtualizar.Location = new System.Drawing.Point(403, 420);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(120, 23);
             this.btnAtualizar.TabIndex = 2;
@@ -189,7 +279,7 @@
             // btnAdicionar
             // 
             this.btnAdicionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdicionar.Location = new System.Drawing.Point(529, 416);
+            this.btnAdicionar.Location = new System.Drawing.Point(529, 420);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(120, 23);
             this.btnAdicionar.TabIndex = 1;
@@ -201,7 +291,7 @@
             // 
             this.metroLabel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(23, 201);
+            this.metroLabel5.Location = new System.Drawing.Point(19, 211);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(47, 19);
             this.metroLabel5.TabIndex = 8;
@@ -211,7 +301,7 @@
             // 
             this.metroLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(23, 152);
+            this.metroLabel4.Location = new System.Drawing.Point(19, 162);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(56, 19);
             this.metroLabel4.TabIndex = 6;
@@ -221,7 +311,7 @@
             // 
             this.metroLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(23, 103);
+            this.metroLabel3.Location = new System.Drawing.Point(19, 113);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(63, 19);
             this.metroLabel3.TabIndex = 4;
@@ -231,7 +321,7 @@
             // 
             this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(23, 55);
+            this.metroLabel2.Location = new System.Drawing.Point(19, 65);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(130, 19);
             this.metroLabel2.TabIndex = 2;
@@ -254,7 +344,7 @@
             this.txtSenha.CustomButton.UseSelectable = true;
             this.txtSenha.CustomButton.Visible = false;
             this.txtSenha.Lines = new string[0];
-            this.txtSenha.Location = new System.Drawing.Point(23, 223);
+            this.txtSenha.Location = new System.Drawing.Point(23, 233);
             this.txtSenha.MaxLength = 32767;
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
@@ -289,7 +379,7 @@
             this.txtUsuario.CustomButton.UseSelectable = true;
             this.txtUsuario.CustomButton.Visible = false;
             this.txtUsuario.Lines = new string[0];
-            this.txtUsuario.Location = new System.Drawing.Point(23, 174);
+            this.txtUsuario.Location = new System.Drawing.Point(23, 184);
             this.txtUsuario.MaxLength = 32767;
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.PasswordChar = '\0';
@@ -324,7 +414,7 @@
             this.txtServidor.CustomButton.UseSelectable = true;
             this.txtServidor.CustomButton.Visible = false;
             this.txtServidor.Lines = new string[0];
-            this.txtServidor.Location = new System.Drawing.Point(23, 125);
+            this.txtServidor.Location = new System.Drawing.Point(23, 135);
             this.txtServidor.MaxLength = 32767;
             this.txtServidor.Name = "txtServidor";
             this.txtServidor.PasswordChar = '\0';
@@ -359,7 +449,7 @@
             this.txtNome.CustomButton.UseSelectable = true;
             this.txtNome.CustomButton.Visible = false;
             this.txtNome.Lines = new string[0];
-            this.txtNome.Location = new System.Drawing.Point(23, 77);
+            this.txtNome.Location = new System.Drawing.Point(23, 87);
             this.txtNome.MaxLength = 32767;
             this.txtNome.Name = "txtNome";
             this.txtNome.PasswordChar = '\0';
@@ -380,7 +470,7 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(23, 23);
+            this.metroLabel1.Location = new System.Drawing.Point(19, 25);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(69, 19);
             this.metroLabel1.TabIndex = 0;
@@ -399,101 +489,11 @@
             this.cbxAmbiente.UseSelectable = true;
             this.cbxAmbiente.SelectedIndexChanged += new System.EventHandler(this.cbxAmbiente_SelectedIndexChanged);
             // 
-            // metroLabel7
-            // 
-            this.metroLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.metroLabel7.AutoSize = true;
-            this.metroLabel7.Location = new System.Drawing.Point(23, 299);
-            this.metroLabel7.Name = "metroLabel7";
-            this.metroLabel7.Size = new System.Drawing.Size(187, 19);
-            this.metroLabel7.TabIndex = 17;
-            this.metroLabel7.Text = "Minutos para atualizar tabelas:";
-            // 
-            // txtUpdateTables
-            // 
-            this.txtUpdateTables.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
-            this.txtUpdateTables.CustomButton.Image = null;
-            this.txtUpdateTables.CustomButton.Location = new System.Drawing.Point(730, 1);
-            this.txtUpdateTables.CustomButton.Name = "";
-            this.txtUpdateTables.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtUpdateTables.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtUpdateTables.CustomButton.TabIndex = 1;
-            this.txtUpdateTables.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtUpdateTables.CustomButton.UseSelectable = true;
-            this.txtUpdateTables.CustomButton.Visible = false;
-            this.txtUpdateTables.Lines = new string[0];
-            this.txtUpdateTables.Location = new System.Drawing.Point(23, 321);
-            this.txtUpdateTables.MaxLength = 32767;
-            this.txtUpdateTables.Name = "txtUpdateTables";
-            this.txtUpdateTables.PasswordChar = '\0';
-            this.txtUpdateTables.PromptText = "Minutos para atualizar as tabelas";
-            this.txtUpdateTables.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtUpdateTables.SelectedText = "";
-            this.txtUpdateTables.SelectionLength = 0;
-            this.txtUpdateTables.SelectionStart = 0;
-            this.txtUpdateTables.ShortcutsEnabled = true;
-            this.txtUpdateTables.Size = new System.Drawing.Size(752, 23);
-            this.txtUpdateTables.TabIndex = 18;
-            this.txtUpdateTables.UseSelectable = true;
-            this.txtUpdateTables.WaterMark = "Minutos para atualizar as tabelas";
-            this.txtUpdateTables.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtUpdateTables.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtUpdateTables.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUpdateTables_KeyPress);
-            // 
-            // metroLabel8
-            // 
-            this.metroLabel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.metroLabel8.AutoSize = true;
-            this.metroLabel8.Location = new System.Drawing.Point(23, 349);
-            this.metroLabel8.Name = "metroLabel8";
-            this.metroLabel8.Size = new System.Drawing.Size(203, 19);
-            this.metroLabel8.TabIndex = 19;
-            this.metroLabel8.Text = "Segundos para atualizar gráficos:";
-            // 
-            // txtUpdateChart
-            // 
-            this.txtUpdateChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
-            this.txtUpdateChart.CustomButton.Image = null;
-            this.txtUpdateChart.CustomButton.Location = new System.Drawing.Point(730, 1);
-            this.txtUpdateChart.CustomButton.Name = "";
-            this.txtUpdateChart.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtUpdateChart.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtUpdateChart.CustomButton.TabIndex = 1;
-            this.txtUpdateChart.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtUpdateChart.CustomButton.UseSelectable = true;
-            this.txtUpdateChart.CustomButton.Visible = false;
-            this.txtUpdateChart.Lines = new string[0];
-            this.txtUpdateChart.Location = new System.Drawing.Point(23, 371);
-            this.txtUpdateChart.MaxLength = 32767;
-            this.txtUpdateChart.Name = "txtUpdateChart";
-            this.txtUpdateChart.PasswordChar = '\0';
-            this.txtUpdateChart.PromptText = "Segundos para atualizar gráficos";
-            this.txtUpdateChart.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtUpdateChart.SelectedText = "";
-            this.txtUpdateChart.SelectionLength = 0;
-            this.txtUpdateChart.SelectionStart = 0;
-            this.txtUpdateChart.ShortcutsEnabled = true;
-            this.txtUpdateChart.Size = new System.Drawing.Size(752, 23);
-            this.txtUpdateChart.TabIndex = 20;
-            this.txtUpdateChart.UseSelectable = true;
-            this.txtUpdateChart.WaterMark = "Segundos para atualizar gráficos";
-            this.txtUpdateChart.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtUpdateChart.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtUpdateChart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUpdateTables_KeyPress);
-            // 
             // frmAmbientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 500);
             this.Controls.Add(this.pnlBackground);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAmbientes";

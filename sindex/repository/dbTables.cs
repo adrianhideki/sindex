@@ -140,6 +140,35 @@ namespace sindex.repository
         }
         #endregion
 
+        #region Connections
+        public static DataTable GetSessionInfo(Credentials cred, string database, DynamicParameters param)
+        {
+            dbConnect db = new dbConnect(cred);
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            cmd = @"EXEC dbo.st_GetSessionsInfo @userConnections = @puserConnections
+                           ,@db_name = @pdb_name
+                           ,@host_name = @phost_name
+                           ,@status = @pstatus
+                           ,@only_blocked = @ponly_blocked
+                           ,@reads = @preads
+                           ,@writes = @pwrites
+                           ,@cpu = @pcpu";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+        #endregion
+
         #region dashboard methods
         public static DataTable GetMemoryInfo(Credentials cred, string database)
         {

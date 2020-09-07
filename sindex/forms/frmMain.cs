@@ -149,7 +149,10 @@ namespace sindex
                 this.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        private void LoadSessions()
+        {
+            LoadForm(new frmConnections(this.metroStyleManager, configuration, this), pnlForm);
+        }
         public void LoadLogin()
         {
             this.configuration.currentUser = -1;
@@ -269,7 +272,7 @@ namespace sindex
 
         private void btnConexoes_Click(object sender, EventArgs e)
         {
-
+            LoadSessions();
         }
 
         private void btnRecursos_Click(object sender, EventArgs e)

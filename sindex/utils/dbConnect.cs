@@ -37,7 +37,7 @@ namespace sindex.utils
 
         public string getConnectionString(string dbName)
         {
-            return String.Format("Data Source = {0}; Initial Catalog = {1}; User ID = {2}; Password = {3};", this.server, dbName, this.user, this.pass);
+            return String.Format("Data Source = {0}; Initial Catalog = {1}; User ID = {2}; Password = {3}; Application Name = sindex", this.server, dbName, this.user, this.pass);
         }
 
         public dynamic executeQuery(string query, DynamicParameters parameters, string dbName, out string errMsg, out int errCode)
@@ -50,6 +50,8 @@ namespace sindex.utils
                 using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
                 {
                     var result = connection.Query(query, parameters);
+                    connection.Close();
+
                     return result;
                 }
             } catch (Exception err)
@@ -69,6 +71,8 @@ namespace sindex.utils
                 using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
                 {
                     var result = connection.Execute(query, parameters);
+                    connection.Close();
+
                     return result;
                 }
             } catch (Exception err)
@@ -78,6 +82,7 @@ namespace sindex.utils
                 return 0;
             }
         }
+
         public DataTable executeDataTable(string query, DynamicParameters parameters, string dbName, out string errMsg, out int errCode)
         {
             errMsg = "";
@@ -89,6 +94,7 @@ namespace sindex.utils
                 {
 
                     var result = connection.Query(query, parameters);
+                    connection.Close();
 
                     var json = JsonConvert.SerializeObject(result);
                     DataTable dataTable = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
@@ -115,6 +121,8 @@ namespace sindex.utils
                 {
 
                     var result = connection.ExecuteScalar<T>(query, parameters);
+                    connection.Close();
+
                     return result;
                 }
             }

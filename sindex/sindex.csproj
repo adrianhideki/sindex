@@ -104,6 +104,12 @@
     <Compile Include="forms\frmAmbientes.Designer.cs">
       <DependentUpon>frmAmbientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmConnections.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmConnections.Designer.cs">
+      <DependentUpon>frmConnections.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\frmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmAmbientes.resx">
       <DependentUpon>frmAmbientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmConnections.resx">
+      <DependentUpon>frmConnections.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmDashboard.resx">
       <DependentUpon>frmDashboard.cs</DependentUpon>
