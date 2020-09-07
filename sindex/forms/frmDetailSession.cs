@@ -28,13 +28,12 @@ namespace sindex.forms
             InitializeComponent();
 
             this.metroStyleManager.Theme = metroStyleManager.Theme;
-            this.metroStyleManager.Style = metroStyleManager.Style;
+            //this.metroStyleManager.Style = metroStyleManager.Style;
 
             lblSpid.Text = session.sessionId.ToString();
             lblDatabase.Text = session.databaseName;
             lblHost.Text = session.hostName;
             lblProgramName.Text = session.programName;
-            lblClientInterface.Text =  session.clientInterfaceName;
             lblBlockingSession.Text = session.blockingSessionId.ToString();
             lblOpenTrancount.Text = session.openTransacionCount.ToString();
             lblPercentCompleted.Text = session.percentComplete.ToString();

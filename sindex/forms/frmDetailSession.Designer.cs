@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetailSession));
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlTop = new System.Windows.Forms.Panel();
             this.pnlBG = new MetroFramework.Controls.MetroPanel();
@@ -71,23 +72,26 @@
             this.lblOpenTrancount = new MetroFramework.Controls.MetroLabel();
             this.metroLabel20 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.lblClientInterface = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
             this.lblProgramName = new MetroFramework.Controls.MetroLabel();
             this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
             this.lblSpid = new MetroFramework.Controls.MetroLabel();
             this.metroLabel18 = new MetroFramework.Controls.MetroLabel();
             this.InfoTile = new MetroFramework.Controls.MetroTile();
+            this.tileStatus = new MetroFramework.Controls.MetroTile();
+            this.tileResource = new MetroFramework.Controls.MetroTile();
+            this.tileWait = new MetroFramework.Controls.MetroTile();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             this.InfoTile.SuspendLayout();
+            this.tileStatus.SuspendLayout();
+            this.tileResource.SuspendLayout();
+            this.tileWait.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroStyleManager
             // 
             this.metroStyleManager.Owner = this;
+            this.metroStyleManager.Style = MetroFramework.MetroColorStyle.Silver;
             // 
             // pnlTop
             // 
@@ -101,6 +105,9 @@
             // 
             // pnlBG
             // 
+            this.pnlBG.Controls.Add(this.tileWait);
+            this.pnlBG.Controls.Add(this.tileResource);
+            this.pnlBG.Controls.Add(this.tileStatus);
             this.pnlBG.Controls.Add(this.InfoTile);
             this.pnlBG.Controls.Add(this.lblQryPlan);
             this.pnlBG.Controls.Add(this.metroLabel36);
@@ -108,26 +115,6 @@
             this.pnlBG.Controls.Add(this.metroLabel34);
             this.pnlBG.Controls.Add(this.txtCurrentStatement);
             this.pnlBG.Controls.Add(this.metroLabel30);
-            this.pnlBG.Controls.Add(this.lblCommand);
-            this.pnlBG.Controls.Add(this.metroLabel35);
-            this.pnlBG.Controls.Add(this.lblWaitResource);
-            this.pnlBG.Controls.Add(this.metroLabel33);
-            this.pnlBG.Controls.Add(this.lblWaitTime);
-            this.pnlBG.Controls.Add(this.metroLabel32);
-            this.pnlBG.Controls.Add(this.lblWaitType);
-            this.pnlBG.Controls.Add(this.metroLabel31);
-            this.pnlBG.Controls.Add(this.lblStatus);
-            this.pnlBG.Controls.Add(this.metroLabel29);
-            this.pnlBG.Controls.Add(this.lblLogicalReads);
-            this.pnlBG.Controls.Add(this.metroLabel26);
-            this.pnlBG.Controls.Add(this.lblWrites);
-            this.pnlBG.Controls.Add(this.metroLabel25);
-            this.pnlBG.Controls.Add(this.lblReads);
-            this.pnlBG.Controls.Add(this.metroLabel24);
-            this.pnlBG.Controls.Add(this.lblTotalElapsedTime);
-            this.pnlBG.Controls.Add(this.metroLabel23);
-            this.pnlBG.Controls.Add(this.lblCpuTime);
-            this.pnlBG.Controls.Add(this.metroLabel22);
             this.pnlBG.Controls.Add(this.btnClose);
             this.pnlBG.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBG.HorizontalScrollbarBarColor = true;
@@ -160,7 +147,7 @@
             // 
             this.lblBlockingSession.AutoSize = true;
             this.lblBlockingSession.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblBlockingSession.Location = new System.Drawing.Point(301, 36);
+            this.lblBlockingSession.Location = new System.Drawing.Point(124, 50);
             this.lblBlockingSession.Name = "lblBlockingSession";
             this.lblBlockingSession.Size = new System.Drawing.Size(17, 19);
             this.lblBlockingSession.TabIndex = 68;
@@ -169,7 +156,7 @@
             // lblQryPlan
             // 
             this.lblQryPlan.AutoSize = true;
-            this.lblQryPlan.Location = new System.Drawing.Point(100, 512);
+            this.lblQryPlan.Location = new System.Drawing.Point(91, 516);
             this.lblQryPlan.Name = "lblQryPlan";
             this.lblQryPlan.Size = new System.Drawing.Size(85, 19);
             this.lblQryPlan.TabIndex = 100;
@@ -179,7 +166,7 @@
             // 
             this.lblHost.AutoSize = true;
             this.lblHost.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblHost.Location = new System.Drawing.Point(196, 7);
+            this.lblHost.Location = new System.Drawing.Point(124, 71);
             this.lblHost.Name = "lblHost";
             this.lblHost.Size = new System.Drawing.Size(36, 19);
             this.lblHost.TabIndex = 55;
@@ -189,7 +176,7 @@
             // 
             this.metroLabel4.AutoSize = true;
             this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel4.Location = new System.Drawing.Point(115, 7);
+            this.metroLabel4.Location = new System.Drawing.Point(9, 71);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(75, 19);
             this.metroLabel4.TabIndex = 54;
@@ -198,7 +185,7 @@
             // metroLabel36
             // 
             this.metroLabel36.AutoSize = true;
-            this.metroLabel36.Location = new System.Drawing.Point(13, 512);
+            this.metroLabel36.Location = new System.Drawing.Point(7, 516);
             this.metroLabel36.Name = "metroLabel36";
             this.metroLabel36.Size = new System.Drawing.Size(78, 19);
             this.metroLabel36.TabIndex = 99;
@@ -208,7 +195,7 @@
             // 
             this.lblDatabase.AutoSize = true;
             this.lblDatabase.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblDatabase.Location = new System.Drawing.Point(393, 36);
+            this.lblDatabase.Location = new System.Drawing.Point(124, 91);
             this.lblDatabase.Name = "lblDatabase";
             this.lblDatabase.Size = new System.Drawing.Size(51, 19);
             this.lblDatabase.TabIndex = 51;
@@ -218,7 +205,7 @@
             // 
             this.metroLabel3.AutoSize = true;
             this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel3.Location = new System.Drawing.Point(324, 36);
+            this.metroLabel3.Location = new System.Drawing.Point(9, 91);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(69, 19);
             this.metroLabel3.TabIndex = 49;
@@ -229,17 +216,17 @@
             this.txtCmdSql.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.txtCmdSql.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCmdSql.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.txtCmdSql.Location = new System.Drawing.Point(13, 408);
+            this.txtCmdSql.Location = new System.Drawing.Point(7, 375);
             this.txtCmdSql.Name = "txtCmdSql";
             this.txtCmdSql.ReadOnly = true;
-            this.txtCmdSql.Size = new System.Drawing.Size(595, 96);
+            this.txtCmdSql.Size = new System.Drawing.Size(608, 134);
             this.txtCmdSql.TabIndex = 98;
             this.txtCmdSql.Text = "";
             // 
             // metroLabel34
             // 
             this.metroLabel34.AutoSize = true;
-            this.metroLabel34.Location = new System.Drawing.Point(13, 386);
+            this.metroLabel34.Location = new System.Drawing.Point(7, 353);
             this.metroLabel34.Name = "metroLabel34";
             this.metroLabel34.Size = new System.Drawing.Size(99, 19);
             this.metroLabel34.TabIndex = 97;
@@ -250,17 +237,17 @@
             this.txtCurrentStatement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.txtCurrentStatement.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCurrentStatement.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.txtCurrentStatement.Location = new System.Drawing.Point(13, 280);
+            this.txtCurrentStatement.Location = new System.Drawing.Point(7, 254);
             this.txtCurrentStatement.Name = "txtCurrentStatement";
             this.txtCurrentStatement.ReadOnly = true;
-            this.txtCurrentStatement.Size = new System.Drawing.Size(595, 96);
+            this.txtCurrentStatement.Size = new System.Drawing.Size(608, 96);
             this.txtCurrentStatement.TabIndex = 96;
             this.txtCurrentStatement.Text = "";
             // 
             // metroLabel30
             // 
             this.metroLabel30.AutoSize = true;
-            this.metroLabel30.Location = new System.Drawing.Point(13, 258);
+            this.metroLabel30.Location = new System.Drawing.Point(7, 232);
             this.metroLabel30.Name = "metroLabel30";
             this.metroLabel30.Size = new System.Drawing.Size(119, 19);
             this.metroLabel30.TabIndex = 95;
@@ -269,90 +256,100 @@
             // lblCommand
             // 
             this.lblCommand.AutoSize = true;
-            this.lblCommand.Location = new System.Drawing.Point(209, 172);
+            this.lblCommand.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblCommand.Location = new System.Drawing.Point(124, 137);
             this.lblCommand.Name = "lblCommand";
-            this.lblCommand.Size = new System.Drawing.Size(59, 19);
+            this.lblCommand.Size = new System.Drawing.Size(61, 19);
             this.lblCommand.TabIndex = 94;
             this.lblCommand.Text = "BACKUP";
             // 
             // metroLabel35
             // 
             this.metroLabel35.AutoSize = true;
-            this.metroLabel35.Location = new System.Drawing.Point(128, 172);
+            this.metroLabel35.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel35.Location = new System.Drawing.Point(9, 137);
             this.metroLabel35.Name = "metroLabel35";
-            this.metroLabel35.Size = new System.Drawing.Size(75, 19);
+            this.metroLabel35.Size = new System.Drawing.Size(76, 19);
             this.metroLabel35.TabIndex = 93;
             this.metroLabel35.Text = "Command:";
             // 
             // lblWaitResource
             // 
             this.lblWaitResource.AutoSize = true;
-            this.lblWaitResource.Location = new System.Drawing.Point(114, 203);
+            this.lblWaitResource.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblWaitResource.Location = new System.Drawing.Point(337, 5);
             this.lblWaitResource.Name = "lblWaitResource";
-            this.lblWaitResource.Size = new System.Drawing.Size(77, 19);
+            this.lblWaitResource.Size = new System.Drawing.Size(84, 19);
             this.lblWaitResource.TabIndex = 92;
             this.lblWaitResource.Text = "0:000XX000";
             // 
             // metroLabel33
             // 
             this.metroLabel33.AutoSize = true;
-            this.metroLabel33.Location = new System.Drawing.Point(13, 203);
+            this.metroLabel33.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel33.Location = new System.Drawing.Point(229, 5);
             this.metroLabel33.Name = "metroLabel33";
-            this.metroLabel33.Size = new System.Drawing.Size(95, 19);
+            this.metroLabel33.Size = new System.Drawing.Size(98, 19);
             this.metroLabel33.TabIndex = 91;
             this.metroLabel33.Text = "Wait Resource:";
             // 
             // lblWaitTime
             // 
             this.lblWaitTime.AutoSize = true;
-            this.lblWaitTime.Location = new System.Drawing.Point(537, 172);
+            this.lblWaitTime.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblWaitTime.Location = new System.Drawing.Point(532, 5);
             this.lblWaitTime.Name = "lblWaitTime";
-            this.lblWaitTime.Size = new System.Drawing.Size(16, 19);
+            this.lblWaitTime.Size = new System.Drawing.Size(17, 19);
             this.lblWaitTime.TabIndex = 90;
             this.lblWaitTime.Text = "0";
             // 
             // metroLabel32
             // 
             this.metroLabel32.AutoSize = true;
-            this.metroLabel32.Location = new System.Drawing.Point(459, 172);
+            this.metroLabel32.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel32.Location = new System.Drawing.Point(454, 5);
             this.metroLabel32.Name = "metroLabel32";
-            this.metroLabel32.Size = new System.Drawing.Size(71, 19);
+            this.metroLabel32.Size = new System.Drawing.Size(72, 19);
             this.metroLabel32.TabIndex = 89;
             this.metroLabel32.Text = "Wait Time:";
             // 
             // lblWaitType
             // 
             this.lblWaitType.AutoSize = true;
-            this.lblWaitType.Location = new System.Drawing.Point(349, 172);
+            this.lblWaitType.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblWaitType.Location = new System.Drawing.Point(80, 5);
             this.lblWaitType.Name = "lblWaitType";
-            this.lblWaitType.Size = new System.Drawing.Size(104, 19);
+            this.lblWaitType.Size = new System.Drawing.Size(106, 19);
             this.lblWaitType.TabIndex = 88;
             this.lblWaitType.Text = "Some Wait Type";
             // 
             // metroLabel31
             // 
             this.metroLabel31.AutoSize = true;
-            this.metroLabel31.Location = new System.Drawing.Point(274, 172);
+            this.metroLabel31.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel31.Location = new System.Drawing.Point(9, 5);
             this.metroLabel31.Name = "metroLabel31";
-            this.metroLabel31.Size = new System.Drawing.Size(69, 19);
+            this.metroLabel31.Size = new System.Drawing.Size(71, 19);
             this.metroLabel31.TabIndex = 87;
             this.metroLabel31.Text = "Wait Type:";
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(60, 172);
+            this.lblStatus.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblStatus.Location = new System.Drawing.Point(124, 113);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(57, 19);
+            this.lblStatus.Size = new System.Drawing.Size(59, 19);
             this.lblStatus.TabIndex = 86;
             this.lblStatus.Text = "sleeping";
             // 
             // metroLabel29
             // 
             this.metroLabel29.AutoSize = true;
-            this.metroLabel29.Location = new System.Drawing.Point(13, 172);
+            this.metroLabel29.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel29.Location = new System.Drawing.Point(9, 113);
             this.metroLabel29.Name = "metroLabel29";
-            this.metroLabel29.Size = new System.Drawing.Size(46, 19);
+            this.metroLabel29.Size = new System.Drawing.Size(50, 19);
             this.metroLabel29.TabIndex = 85;
             this.metroLabel29.Text = "Status:";
             // 
@@ -360,7 +357,7 @@
             // 
             this.lblStartTime.AutoSize = true;
             this.lblStartTime.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblStartTime.Location = new System.Drawing.Point(243, 63);
+            this.lblStartTime.Location = new System.Drawing.Point(137, 7);
             this.lblStartTime.Name = "lblStartTime";
             this.lblStartTime.Size = new System.Drawing.Size(170, 19);
             this.lblStartTime.TabIndex = 84;
@@ -370,7 +367,7 @@
             // 
             this.metroLabel27.AutoSize = true;
             this.metroLabel27.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel27.Location = new System.Drawing.Point(163, 63);
+            this.metroLabel27.Location = new System.Drawing.Point(3, 7);
             this.metroLabel27.Name = "metroLabel27";
             this.metroLabel27.Size = new System.Drawing.Size(74, 19);
             this.metroLabel27.TabIndex = 83;
@@ -379,90 +376,100 @@
             // lblLogicalReads
             // 
             this.lblLogicalReads.AutoSize = true;
-            this.lblLogicalReads.Location = new System.Drawing.Point(537, 140);
+            this.lblLogicalReads.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblLogicalReads.Location = new System.Drawing.Point(288, 4);
             this.lblLogicalReads.Name = "lblLogicalReads";
-            this.lblLogicalReads.Size = new System.Drawing.Size(16, 19);
+            this.lblLogicalReads.Size = new System.Drawing.Size(17, 19);
             this.lblLogicalReads.TabIndex = 82;
             this.lblLogicalReads.Text = "0";
             // 
             // metroLabel26
             // 
             this.metroLabel26.AutoSize = true;
-            this.metroLabel26.Location = new System.Drawing.Point(439, 140);
+            this.metroLabel26.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel26.Location = new System.Drawing.Point(188, 4);
             this.metroLabel26.Name = "metroLabel26";
-            this.metroLabel26.Size = new System.Drawing.Size(92, 19);
+            this.metroLabel26.Size = new System.Drawing.Size(94, 19);
             this.metroLabel26.TabIndex = 81;
             this.metroLabel26.Text = "Logical Reads:";
             // 
             // lblWrites
             // 
             this.lblWrites.AutoSize = true;
-            this.lblWrites.Location = new System.Drawing.Point(410, 140);
+            this.lblWrites.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblWrites.Location = new System.Drawing.Point(105, 26);
             this.lblWrites.Name = "lblWrites";
-            this.lblWrites.Size = new System.Drawing.Size(16, 19);
+            this.lblWrites.Size = new System.Drawing.Size(17, 19);
             this.lblWrites.TabIndex = 80;
             this.lblWrites.Text = "0";
             // 
             // metroLabel25
             // 
             this.metroLabel25.AutoSize = true;
-            this.metroLabel25.Location = new System.Drawing.Point(357, 140);
+            this.metroLabel25.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel25.Location = new System.Drawing.Point(6, 26);
             this.metroLabel25.Name = "metroLabel25";
-            this.metroLabel25.Size = new System.Drawing.Size(49, 19);
+            this.metroLabel25.Size = new System.Drawing.Size(51, 19);
             this.metroLabel25.TabIndex = 79;
             this.metroLabel25.Text = "Writes:";
             // 
             // lblReads
             // 
             this.lblReads.AutoSize = true;
-            this.lblReads.Location = new System.Drawing.Point(316, 140);
+            this.lblReads.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblReads.Location = new System.Drawing.Point(288, 30);
             this.lblReads.Name = "lblReads";
-            this.lblReads.Size = new System.Drawing.Size(16, 19);
+            this.lblReads.Size = new System.Drawing.Size(17, 19);
             this.lblReads.TabIndex = 78;
             this.lblReads.Text = "0";
             // 
             // metroLabel24
             // 
             this.metroLabel24.AutoSize = true;
-            this.metroLabel24.Location = new System.Drawing.Point(261, 140);
+            this.metroLabel24.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel24.Location = new System.Drawing.Point(188, 30);
             this.metroLabel24.Name = "metroLabel24";
-            this.metroLabel24.Size = new System.Drawing.Size(47, 19);
+            this.metroLabel24.Size = new System.Drawing.Size(48, 19);
             this.metroLabel24.TabIndex = 77;
             this.metroLabel24.Text = "Reads:";
             // 
             // lblTotalElapsedTime
             // 
             this.lblTotalElapsedTime.AutoSize = true;
-            this.lblTotalElapsedTime.Location = new System.Drawing.Point(224, 140);
+            this.lblTotalElapsedTime.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblTotalElapsedTime.Location = new System.Drawing.Point(137, 74);
             this.lblTotalElapsedTime.Name = "lblTotalElapsedTime";
-            this.lblTotalElapsedTime.Size = new System.Drawing.Size(16, 19);
+            this.lblTotalElapsedTime.Size = new System.Drawing.Size(17, 19);
             this.lblTotalElapsedTime.TabIndex = 76;
             this.lblTotalElapsedTime.Text = "0";
             // 
             // metroLabel23
             // 
             this.metroLabel23.AutoSize = true;
-            this.metroLabel23.Location = new System.Drawing.Point(128, 140);
+            this.metroLabel23.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel23.Location = new System.Drawing.Point(4, 74);
             this.metroLabel23.Name = "metroLabel23";
-            this.metroLabel23.Size = new System.Drawing.Size(90, 19);
+            this.metroLabel23.Size = new System.Drawing.Size(91, 19);
             this.metroLabel23.TabIndex = 75;
             this.metroLabel23.Text = "Elapsed Time:";
             // 
             // lblCpuTime
             // 
             this.lblCpuTime.AutoSize = true;
-            this.lblCpuTime.Location = new System.Drawing.Point(88, 140);
+            this.lblCpuTime.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblCpuTime.Location = new System.Drawing.Point(105, 4);
             this.lblCpuTime.Name = "lblCpuTime";
-            this.lblCpuTime.Size = new System.Drawing.Size(16, 19);
+            this.lblCpuTime.Size = new System.Drawing.Size(17, 19);
             this.lblCpuTime.TabIndex = 74;
             this.lblCpuTime.Text = "0";
             // 
             // metroLabel22
             // 
             this.metroLabel22.AutoSize = true;
-            this.metroLabel22.Location = new System.Drawing.Point(13, 140);
+            this.metroLabel22.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel22.Location = new System.Drawing.Point(6, 4);
             this.metroLabel22.Name = "metroLabel22";
-            this.metroLabel22.Size = new System.Drawing.Size(71, 19);
+            this.metroLabel22.Size = new System.Drawing.Size(72, 19);
             this.metroLabel22.TabIndex = 73;
             this.metroLabel22.Text = "CPU Time:";
             // 
@@ -470,7 +477,7 @@
             // 
             this.lblPercentCompleted.AutoSize = true;
             this.lblPercentCompleted.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblPercentCompleted.Location = new System.Drawing.Point(140, 63);
+            this.lblPercentCompleted.Location = new System.Drawing.Point(137, 29);
             this.lblPercentCompleted.Name = "lblPercentCompleted";
             this.lblPercentCompleted.Size = new System.Drawing.Size(17, 19);
             this.lblPercentCompleted.TabIndex = 72;
@@ -480,7 +487,7 @@
             // 
             this.metroLabel21.AutoSize = true;
             this.metroLabel21.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel21.Location = new System.Drawing.Point(6, 63);
+            this.metroLabel21.Location = new System.Drawing.Point(3, 29);
             this.metroLabel21.Name = "metroLabel21";
             this.metroLabel21.Size = new System.Drawing.Size(128, 19);
             this.metroLabel21.TabIndex = 71;
@@ -490,7 +497,7 @@
             // 
             this.lblOpenTrancount.AutoSize = true;
             this.lblOpenTrancount.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblOpenTrancount.Location = new System.Drawing.Point(567, 36);
+            this.lblOpenTrancount.Location = new System.Drawing.Point(137, 53);
             this.lblOpenTrancount.Name = "lblOpenTrancount";
             this.lblOpenTrancount.Size = new System.Drawing.Size(17, 19);
             this.lblOpenTrancount.TabIndex = 70;
@@ -500,7 +507,7 @@
             // 
             this.metroLabel20.AutoSize = true;
             this.metroLabel20.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel20.Location = new System.Drawing.Point(450, 36);
+            this.metroLabel20.Location = new System.Drawing.Point(3, 53);
             this.metroLabel20.Name = "metroLabel20";
             this.metroLabel20.Size = new System.Drawing.Size(111, 19);
             this.metroLabel20.TabIndex = 69;
@@ -510,37 +517,17 @@
             // 
             this.metroLabel8.AutoSize = true;
             this.metroLabel8.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel8.Location = new System.Drawing.Point(183, 36);
+            this.metroLabel8.Location = new System.Drawing.Point(6, 50);
             this.metroLabel8.Name = "metroLabel8";
             this.metroLabel8.Size = new System.Drawing.Size(112, 19);
             this.metroLabel8.TabIndex = 66;
             this.metroLabel8.Text = "Blocking Session:";
             // 
-            // lblClientInterface
-            // 
-            this.lblClientInterface.AutoSize = true;
-            this.lblClientInterface.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblClientInterface.Location = new System.Drawing.Point(115, 36);
-            this.lblClientInterface.Name = "lblClientInterface";
-            this.lblClientInterface.Size = new System.Drawing.Size(62, 19);
-            this.lblClientInterface.TabIndex = 64;
-            this.lblClientInterface.Text = "Interface";
-            // 
-            // metroLabel10
-            // 
-            this.metroLabel10.AutoSize = true;
-            this.metroLabel10.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel10.Location = new System.Drawing.Point(6, 36);
-            this.metroLabel10.Name = "metroLabel10";
-            this.metroLabel10.Size = new System.Drawing.Size(104, 19);
-            this.metroLabel10.TabIndex = 62;
-            this.metroLabel10.Text = "Client Interface:";
-            // 
             // lblProgramName
             // 
             this.lblProgramName.AutoSize = true;
             this.lblProgramName.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblProgramName.Location = new System.Drawing.Point(388, 7);
+            this.lblProgramName.Location = new System.Drawing.Point(124, 27);
             this.lblProgramName.Name = "lblProgramName";
             this.lblProgramName.Size = new System.Drawing.Size(62, 19);
             this.lblProgramName.TabIndex = 59;
@@ -550,37 +537,17 @@
             // 
             this.metroLabel12.AutoSize = true;
             this.metroLabel12.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel12.Location = new System.Drawing.Point(279, 7);
+            this.metroLabel12.Location = new System.Drawing.Point(6, 27);
             this.metroLabel12.Name = "metroLabel12";
             this.metroLabel12.Size = new System.Drawing.Size(103, 19);
             this.metroLabel12.TabIndex = 58;
             this.metroLabel12.Text = "Program name:";
             // 
-            // metroLabel15
-            // 
-            this.metroLabel15.AutoSize = true;
-            this.metroLabel15.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel15.Location = new System.Drawing.Point(540, 7);
-            this.metroLabel15.Name = "metroLabel15";
-            this.metroLabel15.Size = new System.Drawing.Size(51, 19);
-            this.metroLabel15.TabIndex = 52;
-            this.metroLabel15.Text = "master";
-            // 
-            // metroLabel16
-            // 
-            this.metroLabel16.AutoSize = true;
-            this.metroLabel16.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel16.Location = new System.Drawing.Point(465, 7);
-            this.metroLabel16.Name = "metroLabel16";
-            this.metroLabel16.Size = new System.Drawing.Size(69, 19);
-            this.metroLabel16.TabIndex = 50;
-            this.metroLabel16.Text = "Database:";
-            // 
             // lblSpid
             // 
             this.lblSpid.AutoSize = true;
             this.lblSpid.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblSpid.Location = new System.Drawing.Point(87, 7);
+            this.lblSpid.Location = new System.Drawing.Point(124, 7);
             this.lblSpid.Name = "lblSpid";
             this.lblSpid.Size = new System.Drawing.Size(17, 19);
             this.lblSpid.TabIndex = 48;
@@ -602,28 +569,71 @@
             this.InfoTile.Controls.Add(this.metroLabel18);
             this.InfoTile.Controls.Add(this.lblBlockingSession);
             this.InfoTile.Controls.Add(this.lblSpid);
-            this.InfoTile.Controls.Add(this.metroLabel16);
-            this.InfoTile.Controls.Add(this.metroLabel15);
             this.InfoTile.Controls.Add(this.metroLabel12);
             this.InfoTile.Controls.Add(this.lblHost);
             this.InfoTile.Controls.Add(this.lblProgramName);
-            this.InfoTile.Controls.Add(this.metroLabel10);
             this.InfoTile.Controls.Add(this.metroLabel4);
             this.InfoTile.Controls.Add(this.lblDatabase);
-            this.InfoTile.Controls.Add(this.lblClientInterface);
             this.InfoTile.Controls.Add(this.metroLabel8);
             this.InfoTile.Controls.Add(this.metroLabel3);
-            this.InfoTile.Controls.Add(this.metroLabel20);
-            this.InfoTile.Controls.Add(this.lblOpenTrancount);
-            this.InfoTile.Controls.Add(this.metroLabel21);
-            this.InfoTile.Controls.Add(this.lblStartTime);
-            this.InfoTile.Controls.Add(this.lblPercentCompleted);
-            this.InfoTile.Controls.Add(this.metroLabel27);
-            this.InfoTile.Location = new System.Drawing.Point(13, 27);
+            this.InfoTile.Controls.Add(this.lblCommand);
+            this.InfoTile.Controls.Add(this.metroLabel29);
+            this.InfoTile.Controls.Add(this.metroLabel35);
+            this.InfoTile.Controls.Add(this.lblStatus);
+            this.InfoTile.Location = new System.Drawing.Point(7, 27);
             this.InfoTile.Name = "InfoTile";
-            this.InfoTile.Size = new System.Drawing.Size(595, 101);
+            this.InfoTile.Size = new System.Drawing.Size(249, 165);
             this.InfoTile.TabIndex = 101;
             this.InfoTile.UseSelectable = true;
+            // 
+            // tileStatus
+            // 
+            this.tileStatus.ActiveControl = null;
+            this.tileStatus.Controls.Add(this.metroLabel27);
+            this.tileStatus.Controls.Add(this.lblStartTime);
+            this.tileStatus.Controls.Add(this.metroLabel21);
+            this.tileStatus.Controls.Add(this.lblPercentCompleted);
+            this.tileStatus.Controls.Add(this.metroLabel20);
+            this.tileStatus.Controls.Add(this.lblOpenTrancount);
+            this.tileStatus.Controls.Add(this.metroLabel23);
+            this.tileStatus.Controls.Add(this.lblTotalElapsedTime);
+            this.tileStatus.Location = new System.Drawing.Point(262, 27);
+            this.tileStatus.Name = "tileStatus";
+            this.tileStatus.Size = new System.Drawing.Size(353, 101);
+            this.tileStatus.TabIndex = 102;
+            this.tileStatus.UseSelectable = true;
+            // 
+            // tileResource
+            // 
+            this.tileResource.ActiveControl = null;
+            this.tileResource.Controls.Add(this.metroLabel22);
+            this.tileResource.Controls.Add(this.lblCpuTime);
+            this.tileResource.Controls.Add(this.metroLabel24);
+            this.tileResource.Controls.Add(this.lblReads);
+            this.tileResource.Controls.Add(this.metroLabel25);
+            this.tileResource.Controls.Add(this.lblWrites);
+            this.tileResource.Controls.Add(this.metroLabel26);
+            this.tileResource.Controls.Add(this.lblLogicalReads);
+            this.tileResource.Location = new System.Drawing.Point(262, 134);
+            this.tileResource.Name = "tileResource";
+            this.tileResource.Size = new System.Drawing.Size(353, 58);
+            this.tileResource.TabIndex = 103;
+            this.tileResource.UseSelectable = true;
+            // 
+            // tileWait
+            // 
+            this.tileWait.ActiveControl = null;
+            this.tileWait.Controls.Add(this.metroLabel31);
+            this.tileWait.Controls.Add(this.lblWaitType);
+            this.tileWait.Controls.Add(this.metroLabel33);
+            this.tileWait.Controls.Add(this.lblWaitResource);
+            this.tileWait.Controls.Add(this.metroLabel32);
+            this.tileWait.Controls.Add(this.lblWaitTime);
+            this.tileWait.Location = new System.Drawing.Point(7, 198);
+            this.tileWait.Name = "tileWait";
+            this.tileWait.Size = new System.Drawing.Size(608, 31);
+            this.tileWait.TabIndex = 104;
+            this.tileWait.UseSelectable = true;
             // 
             // frmDetailSession
             // 
@@ -633,6 +643,7 @@
             this.Controls.Add(this.pnlBG);
             this.Controls.Add(this.pnlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmDetailSession";
             this.Text = "frmDetailSession";
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
@@ -640,6 +651,12 @@
             this.pnlBG.PerformLayout();
             this.InfoTile.ResumeLayout(false);
             this.InfoTile.PerformLayout();
+            this.tileStatus.ResumeLayout(false);
+            this.tileStatus.PerformLayout();
+            this.tileResource.ResumeLayout(false);
+            this.tileResource.PerformLayout();
+            this.tileWait.ResumeLayout(false);
+            this.tileWait.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -688,14 +705,13 @@
         private MetroFramework.Controls.MetroLabel lblOpenTrancount;
         private MetroFramework.Controls.MetroLabel metroLabel20;
         private MetroFramework.Controls.MetroLabel metroLabel8;
-        private MetroFramework.Controls.MetroLabel lblClientInterface;
-        private MetroFramework.Controls.MetroLabel metroLabel10;
         private MetroFramework.Controls.MetroLabel lblProgramName;
         private MetroFramework.Controls.MetroLabel metroLabel12;
-        private MetroFramework.Controls.MetroLabel metroLabel15;
-        private MetroFramework.Controls.MetroLabel metroLabel16;
         private MetroFramework.Controls.MetroLabel lblSpid;
         private MetroFramework.Controls.MetroLabel metroLabel18;
         private MetroFramework.Controls.MetroTile InfoTile;
+        private MetroFramework.Controls.MetroTile tileStatus;
+        private MetroFramework.Controls.MetroTile tileResource;
+        private MetroFramework.Controls.MetroTile tileWait;
     }
 }
