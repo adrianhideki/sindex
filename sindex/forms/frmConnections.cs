@@ -39,6 +39,7 @@ namespace sindex.forms
                 this.main = main;
 
                 cbxFiltro.Items.Clear();
+                tkbSegundos.Value = 10;
 
                 foreach (string s in paramAlias)
                 {
@@ -204,6 +205,34 @@ namespace sindex.forms
                     frm.Show();
                 }
             }
+        }
+
+        private void tkbSegundos_ValueChanged(object sender, EventArgs e)
+        {
+            if (tkbSegundos.Value == 0)
+                tkbSegundos.Value = 1;
+
+            lblSegundos.Text = tkbSegundos.Value.ToString();
+        }
+
+        private void chkRefresh_CheckedChanged(object sender, EventArgs e)
+        {
+            if (tkbSegundos.Value == 0)
+                tkbSegundos.Value = 1;
+
+            tmrSession.Interval = tkbSegundos.Value * 1000;
+
+            tmrSession.Enabled = chkRefresh.Checked;
+        }
+
+        private void tmrSession_Tick(object sender, EventArgs e)
+        {
+            LoadGrid();
+        }
+
+        private void habilitarDesabilitarAutoRefreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chkRefresh.Checked = !chkRefresh.Checked;
         }
     }
 }
