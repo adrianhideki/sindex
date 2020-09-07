@@ -53,8 +53,8 @@
             this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.padrãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tmrSession = new System.Windows.Forms.Timer(this.components);
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tmrSession = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdSessios)).BeginInit();
@@ -307,6 +307,7 @@
             this.matarSessãoToolStripMenuItem1.Name = "matarSessãoToolStripMenuItem1";
             this.matarSessãoToolStripMenuItem1.Size = new System.Drawing.Size(256, 22);
             this.matarSessãoToolStripMenuItem1.Text = "Matar Sessão";
+            this.matarSessãoToolStripMenuItem1.Click += new System.EventHandler(this.matarSessãoToolStripMenuItem1_Click);
             // 
             // habilitarDesabilitarAutoRefreshToolStripMenuItem
             // 
@@ -328,27 +329,27 @@
             // padrãoToolStripMenuItem
             // 
             this.padrãoToolStripMenuItem.Name = "padrãoToolStripMenuItem";
-            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.padrãoToolStripMenuItem.Text = "Padrão";
             this.padrãoToolStripMenuItem.Click += new System.EventHandler(this.padrãoToolStripMenuItem_Click);
             // 
             // gridToolStripMenuItem
             // 
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
-            // 
-            // tmrSession
-            // 
-            this.tmrSession.Tick += new System.EventHandler(this.tmrSession_Tick);
             // 
             // excelToolStripMenuItem
             // 
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.excelToolStripMenuItem.Text = "Excel";
             this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
+            // 
+            // tmrSession
+            // 
+            this.tmrSession.Tick += new System.EventHandler(this.tmrSession_Tick);
             // 
             // frmConnections
             // 

@@ -69,9 +69,9 @@ namespace sindex
                 sr.Dispose();
             }
         }
-        public void ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+        public DialogResult ShowMessage(string message, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
         {
-            metroFunctions.ShowMessage(this, message, title, buttons, icon);
+            return metroFunctions.ShowMessage(this, message, title, buttons, icon);
         }
         public void SetConnectionSettings()
         {

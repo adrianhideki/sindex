@@ -141,6 +141,23 @@ namespace sindex.repository
         #endregion
 
         #region Connections
+        public static void KillSession(Credentials cred, string database, int spid)
+        {
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+
+            string errMsg = "";
+            int returnCode = 0;
+
+            string cmd = String.Format("KILL {0};", spid);
+            db.executeQuery(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+        }
+
         public static DataTable GetSessionInfo(Credentials cred, string database, DynamicParameters param)
         {
             dbConnect db = new dbConnect(cred);

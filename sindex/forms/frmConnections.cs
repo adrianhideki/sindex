@@ -337,5 +337,36 @@ namespace sindex.forms
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void matarSessãoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (grdSessios.SelectedRows.Count > 0)
+            {
+                string erros = "";
+
+                DialogResult dialogResult = main.ShowMessage("Deseja realmente matar as conexões?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.No) return;
+
+                for (int i = 0; i < grdSessios.SelectedRows.Count; i++)
+                {
+                    int spid = 0;
+
+                    try
+                    {
+                        spid = Int32.Parse(grdSessios.SelectedRows[i].Cells[0].Value.ToString());
+                        dbTables.KillSession(main.cred, main.databaseSindex, spid);
+                    } catch (Exception err)
+                    {
+                        erros += "\nSPID: " + spid.ToString() + ". Erro: " + err.Message;
+                    }
+                }
+
+                if (!String.IsNullOrEmpty(erros))
+                {
+                    main.ShowMessage(erros, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }
