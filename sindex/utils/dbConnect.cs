@@ -49,7 +49,7 @@ namespace sindex.utils
             {
                 using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
                 {
-                    var result = connection.Query(query, parameters);
+                    var result = connection.Query(sql: query, param: parameters, commandTimeout: 0);
                     connection.Close();
 
                     return result;
@@ -70,7 +70,7 @@ namespace sindex.utils
             {
                 using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
                 {
-                    var result = connection.Execute(query, parameters);
+                    var result = connection.Execute(sql: query, param: parameters, commandTimeout: 0);
                     connection.Close();
 
                     return result;
@@ -93,7 +93,7 @@ namespace sindex.utils
                 using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
                 {
 
-                    var result = connection.Query(query, parameters);
+                    var result = connection.Query(sql: query, param: parameters, commandTimeout: 0);
                     connection.Close();
 
                     var json = JsonConvert.SerializeObject(result);
@@ -120,7 +120,7 @@ namespace sindex.utils
                 using (SqlConnection connection = new SqlConnection(this.getConnectionString(dbName)))
                 {
 
-                    var result = connection.ExecuteScalar<T>(query, parameters);
+                    var result = connection.ExecuteScalar<T>(sql: query, param: parameters, commandTimeout: 0);
                     connection.Close();
 
                     return result;
