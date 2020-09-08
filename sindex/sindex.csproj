@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="utils\DGVPrinter.cs" />
     <Compile Include="utils\Encrypt.cs" />
+    <Compile Include="utils\ListToDataTable.cs" />
     <Compile Include="utils\metroFunctions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
