@@ -34,17 +34,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlBG = new MetroFramework.Controls.MetroPanel();
-            this.txtFiltro = new MetroFramework.Controls.MetroTextBox();
-            this.cbxFiltro = new MetroFramework.Controls.MetroComboBox();
-            this.btnFiltrar = new MetroFramework.Controls.MetroButton();
-            this.grdIndexes = new MetroFramework.Controls.MetroGrid();
             this.lblLinhas = new MetroFramework.Controls.MetroLabel();
+            this.grdIndexes = new MetroFramework.Controls.MetroGrid();
             this.mnuIndexes = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.criarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.padrãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnFiltrar = new MetroFramework.Controls.MetroButton();
+            this.txtFiltro = new MetroFramework.Controls.MetroTextBox();
+            this.cbxFiltro = new MetroFramework.Controls.MetroComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdIndexes)).BeginInit();
@@ -74,57 +74,15 @@
             this.pnlBG.VerticalScrollbarHighlightOnWheel = false;
             this.pnlBG.VerticalScrollbarSize = 10;
             // 
-            // txtFiltro
+            // lblLinhas
             // 
-            this.txtFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
-            this.txtFiltro.CustomButton.Image = null;
-            this.txtFiltro.CustomButton.Location = new System.Drawing.Point(400, 1);
-            this.txtFiltro.CustomButton.Name = "";
-            this.txtFiltro.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtFiltro.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtFiltro.CustomButton.TabIndex = 1;
-            this.txtFiltro.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtFiltro.CustomButton.UseSelectable = true;
-            this.txtFiltro.CustomButton.Visible = false;
-            this.txtFiltro.Lines = new string[0];
-            this.txtFiltro.Location = new System.Drawing.Point(177, 15);
-            this.txtFiltro.MaxLength = 32767;
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.PasswordChar = '\0';
-            this.txtFiltro.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtFiltro.SelectedText = "";
-            this.txtFiltro.SelectionLength = 0;
-            this.txtFiltro.SelectionStart = 0;
-            this.txtFiltro.ShortcutsEnabled = true;
-            this.txtFiltro.Size = new System.Drawing.Size(422, 23);
-            this.txtFiltro.TabIndex = 6;
-            this.txtFiltro.UseSelectable = true;
-            this.txtFiltro.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtFiltro.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // cbxFiltro
-            // 
-            this.cbxFiltro.FormattingEnabled = true;
-            this.cbxFiltro.ItemHeight = 23;
-            this.cbxFiltro.Location = new System.Drawing.Point(12, 12);
-            this.cbxFiltro.Name = "cbxFiltro";
-            this.cbxFiltro.Size = new System.Drawing.Size(157, 29);
-            this.cbxFiltro.TabIndex = 5;
-            this.cbxFiltro.UseSelectable = true;
-            // 
-            // btnFiltrar
-            // 
-            this.btnFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFiltrar.Location = new System.Drawing.Point(605, 15);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(114, 23);
-            this.btnFiltrar.TabIndex = 7;
-            this.btnFiltrar.Text = "Filtrar";
-            this.btnFiltrar.UseSelectable = true;
+            this.lblLinhas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLinhas.Location = new System.Drawing.Point(582, 408);
+            this.lblLinhas.Name = "lblLinhas";
+            this.lblLinhas.Size = new System.Drawing.Size(135, 23);
+            this.lblLinhas.TabIndex = 9;
+            this.lblLinhas.Text = "0 linha(s)";
+            this.lblLinhas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // grdIndexes
             // 
@@ -176,19 +134,12 @@
             this.grdIndexes.ShowEditingIcon = false;
             this.grdIndexes.Size = new System.Drawing.Size(705, 353);
             this.grdIndexes.TabIndex = 8;
-            // 
-            // lblLinhas
-            // 
-            this.lblLinhas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLinhas.Location = new System.Drawing.Point(582, 408);
-            this.lblLinhas.Name = "lblLinhas";
-            this.lblLinhas.Size = new System.Drawing.Size(135, 23);
-            this.lblLinhas.TabIndex = 9;
-            this.lblLinhas.Text = "0 linha(s)";
-            this.lblLinhas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.grdIndexes.Resize += new System.EventHandler(this.grdIndexes_Resize);
             // 
             // mnuIndexes
             // 
+            this.mnuIndexes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mnuIndexes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.mnuIndexes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.criarToolStripMenuItem,
             this.relatóriosToolStripMenuItem});
@@ -214,20 +165,76 @@
             // gridToolStripMenuItem
             // 
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             // 
             // padrãoToolStripMenuItem
             // 
             this.padrãoToolStripMenuItem.Name = "padrãoToolStripMenuItem";
-            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.padrãoToolStripMenuItem.Text = "Padrão";
             // 
             // excelToolStripMenuItem
             // 
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.excelToolStripMenuItem.Text = "Excel";
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFiltrar.Location = new System.Drawing.Point(605, 15);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(114, 23);
+            this.btnFiltrar.TabIndex = 7;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseSelectable = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtFiltro.CustomButton.Image = null;
+            this.txtFiltro.CustomButton.Location = new System.Drawing.Point(400, 1);
+            this.txtFiltro.CustomButton.Name = "";
+            this.txtFiltro.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtFiltro.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtFiltro.CustomButton.TabIndex = 1;
+            this.txtFiltro.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtFiltro.CustomButton.UseSelectable = true;
+            this.txtFiltro.CustomButton.Visible = false;
+            this.txtFiltro.Lines = new string[0];
+            this.txtFiltro.Location = new System.Drawing.Point(177, 15);
+            this.txtFiltro.MaxLength = 32767;
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.PasswordChar = '\0';
+            this.txtFiltro.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtFiltro.SelectedText = "";
+            this.txtFiltro.SelectionLength = 0;
+            this.txtFiltro.SelectionStart = 0;
+            this.txtFiltro.ShortcutsEnabled = true;
+            this.txtFiltro.Size = new System.Drawing.Size(422, 23);
+            this.txtFiltro.TabIndex = 6;
+            this.txtFiltro.UseSelectable = true;
+            this.txtFiltro.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtFiltro.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // cbxFiltro
+            // 
+            this.cbxFiltro.FormattingEnabled = true;
+            this.cbxFiltro.ItemHeight = 23;
+            this.cbxFiltro.Items.AddRange(new object[] {
+            "Database",
+            "Table"});
+            this.cbxFiltro.Location = new System.Drawing.Point(12, 12);
+            this.cbxFiltro.Name = "cbxFiltro";
+            this.cbxFiltro.Size = new System.Drawing.Size(157, 29);
+            this.cbxFiltro.TabIndex = 5;
+            this.cbxFiltro.UseSelectable = true;
             // 
             // frmMissingIndexes
             // 

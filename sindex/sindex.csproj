@@ -166,6 +166,7 @@
     <Compile Include="model\ConfigurationModel.cs" />
     <Compile Include="model\ServerModel.cs" />
     <Compile Include="model\SessionModel.cs" />
+    <Compile Include="repository\dbIndexes.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="utils\Configuration.cs" />
     <Compile Include="utils\Credentials.cs" />
