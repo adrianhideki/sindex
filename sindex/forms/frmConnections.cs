@@ -112,7 +112,7 @@ namespace sindex.forms
                     param.Add(paramName[i], paramValue[i], paramType[i]);
                 }
 
-                dtSession = dbTables.GetSessionInfo(main.cred, main.databaseSindex, param);
+                dtSession = dbServer.GetSessionInfo(main.cred, main.databaseSindex, param);
 
                 if (lbxCampos.Items.Count == 0)
                 {
@@ -180,7 +180,7 @@ namespace sindex.forms
                     {
                         int spid = Int32.Parse(grdSessios.SelectedRows[i].Cells[0].Value.ToString());
 
-                        DataTable dt = dbTables.GetSpidInfo(main.cred, main.databaseSindex, spid);
+                        DataTable dt = dbServer.GetSpidInfo(main.cred, main.databaseSindex, spid);
 
                         SessionModel session = new SessionModel();
                         session.sessionId = Int32.Parse(dt.Rows[0][0].ToString());
@@ -355,7 +355,7 @@ namespace sindex.forms
                     try
                     {
                         spid = Int32.Parse(grdSessios.SelectedRows[i].Cells[0].Value.ToString());
-                        dbTables.KillSession(main.cred, main.databaseSindex, spid);
+                        dbServer.KillSession(main.cred, main.databaseSindex, spid);
                     } catch (Exception err)
                     {
                         erros += "\nSPID: " + spid.ToString() + ". Erro: " + err.Message;

@@ -175,6 +175,10 @@ namespace sindex
         {
             LoadForm(new frmAmbientes(this.metroStyleManager, configuration, this, login), pnlForm);
         }
+        public void LoadMissingIndexes(bool login = false)
+        {
+            LoadForm(new frmMissingIndexes(this.metroStyleManager, configuration, this), pnlForm);
+        }
         public void LoadTables(bool login = false)
         {
             LoadForm(new frmLoadTables(metroStyleManager, configuration, this, login), pnlForm);
@@ -288,6 +292,11 @@ namespace sindex
         private void btnAjuda_Click(object sender, EventArgs e)
         {
             LoadHelp();
+        }
+
+        private void btnMissIndex_Click(object sender, EventArgs e)
+        {
+            LoadMissingIndexes();
         }
     }
 }

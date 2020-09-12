@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sindex.repository
 {
-    public static class dbTables
+    public static class dbServer
     {
         #region Load Data Tables
         public static void LoadServer(Credentials cred, string database)

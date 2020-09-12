@@ -272,8 +272,8 @@ namespace sindex.forms
 
                     if (dt.Rows.Count > 0)
                     {
-                        DataTable dtDatabases = dbTables.GetActiveDatabases(main.cred, main.databaseSindex);
-                        int min = dbTables.GetMinLastUpdate(main.cred, main.databaseSindex);
+                        DataTable dtDatabases = dbServer.GetActiveDatabases(main.cred, main.databaseSindex);
+                        int min = dbServer.GetMinLastUpdate(main.cred, main.databaseSindex);
 
                         if (dtDatabases.Rows.Count > 0)
                         {

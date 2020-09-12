@@ -107,7 +107,7 @@ namespace sindex.forms
 
         private void SetConnectionChart()
         {
-            DataTable dt = dbTables.GetConnectionsInfo(main.cred, main.databaseSindex);
+            DataTable dt = dbServer.GetConnectionsInfo(main.cred, main.databaseSindex);
 
             DataPoint Dp = new DataPoint();
             Dp.SetValueXY(dt.Columns[0].ColumnName, dt.Rows[0][0].ToString());
@@ -153,7 +153,7 @@ namespace sindex.forms
 
         private void SetMemoryChart()
         {
-            DataTable dt = dbTables.GetMemoryInfo(main.cred, main.databaseSindex);
+            DataTable dt = dbServer.GetMemoryInfo(main.cred, main.databaseSindex);
 
             DataPoint Dp = new DataPoint();
             Dp.SetValueXY(dt.Columns[0].ColumnName, dt.Rows[0][0].ToString());
@@ -183,7 +183,7 @@ namespace sindex.forms
 
         private void SetCPUChart()
         {
-            DataTable dt = dbTables.GetCPUInfo(main.cred, main.databaseSindex);
+            DataTable dt = dbServer.GetCPUInfo(main.cred, main.databaseSindex);
 
             chtCPU.Series[0].Points.Clear();
             chtCPU.Series[1].Points.Clear();
@@ -219,7 +219,7 @@ namespace sindex.forms
 
         private void SetDiskChart()
         {
-            DataTable dt = dbTables.GetDatabasesFileInfo(main.cred, main.databaseSindex);
+            DataTable dt = dbServer.GetDatabasesFileInfo(main.cred, main.databaseSindex);
 
             chtArquivos.Series[0].Points.Clear();
             chtArquivos.Series[1].Points.Clear();

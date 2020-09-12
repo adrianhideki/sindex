@@ -99,7 +99,6 @@
             // 
             // metroLabel8
             // 
-            this.metroLabel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel8.AutoSize = true;
             this.metroLabel8.Location = new System.Drawing.Point(19, 359);
             this.metroLabel8.Name = "metroLabel8";
@@ -109,7 +108,7 @@
             // 
             // txtUpdateChart
             // 
-            this.txtUpdateChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtUpdateChart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -144,7 +143,6 @@
             // 
             // metroLabel7
             // 
-            this.metroLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel7.AutoSize = true;
             this.metroLabel7.Location = new System.Drawing.Point(19, 309);
             this.metroLabel7.Name = "metroLabel7";
@@ -154,7 +152,7 @@
             // 
             // txtUpdateTables
             // 
-            this.txtUpdateTables.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtUpdateTables.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -189,7 +187,7 @@
             // 
             // btnSelecionarAmbiente
             // 
-            this.btnSelecionarAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelecionarAmbiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelecionarAmbiente.Location = new System.Drawing.Point(655, 420);
             this.btnSelecionarAmbiente.Name = "btnSelecionarAmbiente";
             this.btnSelecionarAmbiente.Size = new System.Drawing.Size(120, 23);
@@ -200,7 +198,7 @@
             // 
             // btnTestarCon
             // 
-            this.btnTestarCon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTestarCon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTestarCon.Location = new System.Drawing.Point(151, 420);
             this.btnTestarCon.Name = "btnTestarCon";
             this.btnTestarCon.Size = new System.Drawing.Size(120, 23);
@@ -211,7 +209,6 @@
             // 
             // metroLabel6
             // 
-            this.metroLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel6.AutoSize = true;
             this.metroLabel6.Location = new System.Drawing.Point(19, 260);
             this.metroLabel6.Name = "metroLabel6";
@@ -221,7 +218,7 @@
             // 
             // txtDatabase
             // 
-            this.txtDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -256,7 +253,7 @@
             // 
             // btnExcluir
             // 
-            this.btnExcluir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExcluir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExcluir.Location = new System.Drawing.Point(277, 420);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(120, 23);
@@ -267,7 +264,7 @@
             // 
             // btnAtualizar
             // 
-            this.btnAtualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAtualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAtualizar.Location = new System.Drawing.Point(403, 420);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(120, 23);
@@ -278,7 +275,7 @@
             // 
             // btnAdicionar
             // 
-            this.btnAdicionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdicionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdicionar.Location = new System.Drawing.Point(529, 420);
             this.btnAdicionar.Name = "btnAdicionar";
             this.btnAdicionar.Size = new System.Drawing.Size(120, 23);
@@ -289,7 +286,6 @@
             // 
             // metroLabel5
             // 
-            this.metroLabel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel5.AutoSize = true;
             this.metroLabel5.Location = new System.Drawing.Point(19, 211);
             this.metroLabel5.Name = "metroLabel5";
@@ -299,7 +295,6 @@
             // 
             // metroLabel4
             // 
-            this.metroLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel4.AutoSize = true;
             this.metroLabel4.Location = new System.Drawing.Point(19, 162);
             this.metroLabel4.Name = "metroLabel4";
@@ -309,7 +304,6 @@
             // 
             // metroLabel3
             // 
-            this.metroLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel3.AutoSize = true;
             this.metroLabel3.Location = new System.Drawing.Point(19, 113);
             this.metroLabel3.Name = "metroLabel3";
@@ -319,7 +313,6 @@
             // 
             // metroLabel2
             // 
-            this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(19, 65);
             this.metroLabel2.Name = "metroLabel2";
@@ -329,7 +322,7 @@
             // 
             // txtSenha
             // 
-            this.txtSenha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtSenha.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -364,7 +357,7 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -399,7 +392,7 @@
             // 
             // txtServidor
             // 
-            this.txtServidor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtServidor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
@@ -434,7 +427,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtNome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 

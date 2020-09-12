@@ -63,8 +63,8 @@ namespace sindex.forms
 
         public void LoadDatabases()
         {
-            dbTables.LoadServer(main.GetCredentials(), main.GetDatabaseName());
-            dbTables.LoadDatabases(main.GetCredentials(), main.GetDatabaseName());
+            dbServer.LoadServer(main.GetCredentials(), main.GetDatabaseName());
+            dbServer.LoadDatabases(main.GetCredentials(), main.GetDatabaseName());
         }
 
         public void CreateObjects()
@@ -138,10 +138,10 @@ namespace sindex.forms
             {
                 if (txtFiltrar.Text != "")
                 {
-                    grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex, txtFiltrar.Text);
+                    grdDatabases.DataSource = dbServer.GetDatabases(main.cred, main.databaseSindex, txtFiltrar.Text);
                 } else
                 {
-                    grdDatabases.DataSource = dbTables.GetDatabases(main.cred, main.databaseSindex);
+                    grdDatabases.DataSource = dbServer.GetDatabases(main.cred, main.databaseSindex);
                 }
 
                 ResizeGrid();
@@ -193,7 +193,7 @@ namespace sindex.forms
 
             foreach (DataGridViewRow r in grdDatabases.SelectedRows)
             {
-                dbTables.SetDatabaseEnabled(main.cred, main.databaseSindex, Int32.Parse(r.Cells[0].Value.ToString()), value);
+                dbServer.SetDatabaseEnabled(main.cred, main.databaseSindex, Int32.Parse(r.Cells[0].Value.ToString()), value);
                 rows[x] = r.Index;
                 x++;
 
@@ -223,7 +223,7 @@ namespace sindex.forms
 
             foreach (DataGridViewRow r in grdDatabases.SelectedRows)
             {
-                dbTables.SetDatabaseEnabled(main.cred, main.databaseSindex, Int32.Parse(r.Cells[0].Value.ToString()), !Boolean.Parse(r.Cells[4].Value.ToString()));
+                dbServer.SetDatabaseEnabled(main.cred, main.databaseSindex, Int32.Parse(r.Cells[0].Value.ToString()), !Boolean.Parse(r.Cells[4].Value.ToString()));
                 rows[x] = r.Index;
                 x++;
 
