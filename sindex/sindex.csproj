@@ -164,6 +164,7 @@
       <DependentUpon>frmMissingIndexes.cs</DependentUpon>
     </Compile>
     <Compile Include="model\ConfigurationModel.cs" />
+    <Compile Include="model\MissingIndexModel.cs" />
     <Compile Include="model\ServerModel.cs" />
     <Compile Include="model\SessionModel.cs" />
     <Compile Include="repository\dbIndexes.cs" />
@@ -226,8 +227,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="reports\MissingIndexes.rdlc" />
     <EmbeddedResource Include="reports\Sessions.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\sindex.model.ConfigurationModel.datasource" />
+    <None Include="Properties\DataSources\sindex.model.DatabaseModel.datasource" />
+    <None Include="Properties\DataSources\sindex.model.MissingIndexModel.datasource" />
+    <None Include="Properties\DataSources\sindex.model.ServerModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.SessionModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

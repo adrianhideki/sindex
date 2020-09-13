@@ -1,9 +1,11 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using ClosedXML.Excel;
+using Microsoft.Reporting.WinForms;
 using Microsoft.ReportingServices.Diagnostics.Internal;
 using sindx.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
@@ -65,6 +67,9 @@ namespace sindex.utils
         public static void PrintGrid(string title, string subtitle, string footer, DataGridView dgv)
         {
             DGVPrinter printer = new DGVPrinter();
+
+            if (dgv.Rows.Count <= 0) throw new Exception("Não há linhas para geração do arquivo.");
+
             printer.Title = title;
             printer.SubTitle = subtitle;
             printer.SubTitleFormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoClip;
@@ -76,7 +81,25 @@ namespace sindex.utils
             printer.FooterSpacing = 15;
             printer.PrintDataGridView(dgv);
         }
-}
+
+        public static void PrintExcel(DataTable  dt, string title)
+        {
+            XLWorkbook wb = new XLWorkbook();
+            wb.Worksheets.Add(dt, title);
+
+            if (dt.Rows.Count <= 0) throw new Exception("Não há linhas para geração do arquivo.");
+
+            SaveFileDialog fileDialog = new SaveFileDialog();
+
+            fileDialog.DefaultExt = "xlsx";
+            fileDialog.Filter = "Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                wb.SaveAs(fileDialog.FileName);
+            }
+        }
+    }
 
     public static class PrintReport
     {

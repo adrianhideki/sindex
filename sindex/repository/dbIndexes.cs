@@ -34,5 +34,17 @@ namespace sindex.repository
             return res;
         }
 
+        public static void CreateIndex(Credentials cred, string database, string cmd)
+        {
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new DynamicParameters();
+
+            string errMsg = "";
+            int returnCode = 0;
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0) throw new Exception(errMsg);
+        }
     }
 }

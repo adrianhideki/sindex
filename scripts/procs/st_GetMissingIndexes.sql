@@ -22,6 +22,7 @@ BEGIN
                                + ISNULL (dm_mid.inequality_columns, '')
                                + ')'
                                + ISNULL (' INCLUDE (' + dm_mid.included_columns + ')', '')
+        ,Selecionado          = CAST(0 AS bit)
   INTO #tb_indexes
   FROM sys.dm_db_missing_index_groups dm_mig
        INNER JOIN sys.dm_db_missing_index_group_stats dm_migs

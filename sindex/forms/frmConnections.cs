@@ -1,5 +1,4 @@
-﻿using ClosedXML.Excel;
-using Dapper;
+﻿using Dapper;
 using MetroFramework.Components;
 using Microsoft.Reporting.WinForms;
 using sindex.model;
@@ -83,6 +82,8 @@ namespace sindex.forms
             {
                 dtCopySession.Columns.Remove(columns[i]);
             }
+
+            mnuGridView.Enabled = !(dtCopySession.Rows.Count <= 0);
 
             return dtCopySession;
         }
@@ -254,28 +255,28 @@ namespace sindex.forms
                 for (int i = 0; i < dtSession.Rows.Count; i++)
                 {
                     SessionModel session = new SessionModel();
-                    session.sessionId = Int32.Parse(dtSession.Rows[0][0].ToString());
-                    session.databaseName = dtSession.Rows[0][1].ToString();
-                    session.hostName = dtSession.Rows[0][2].ToString();
-                    session.programName = dtSession.Rows[0][3].ToString();
-                    session.clientInterfaceName = dtSession.Rows[0][4].ToString();
-                    session.blockingSessionId = Int32.Parse(dtSession.Rows[0][5].ToString());
-                    session.openTransacionCount = Int32.Parse(dtSession.Rows[0][6].ToString());
-                    session.percentComplete = Double.Parse(dtSession.Rows[0][7].ToString());
-                    session.cpuTime = Int32.Parse(dtSession.Rows[0][8].ToString());
-                    session.totalElapsedTime = Int32.Parse(dtSession.Rows[0][9].ToString());
-                    session.reads = Int32.Parse(dtSession.Rows[0][10].ToString());
-                    session.writes = Int32.Parse(dtSession.Rows[0][11].ToString());
-                    session.logicalReads = Int32.Parse(dtSession.Rows[0][12].ToString());
-                    session.startTime = DateTime.Parse(dtSession.Rows[0][13].ToString());
-                    session.status = dtSession.Rows[0][14].ToString();
-                    session.waitType = dtSession.Rows[0][15].ToString();
-                    session.waitTime = Int32.Parse(dtSession.Rows[0][16].ToString());
-                    session.waitResource = dtSession.Rows[0][17].ToString();
-                    session.command = dtSession.Rows[0][18].ToString();
-                    session.currentStatement = dtSession.Rows[0][19].ToString();
-                    session.cmdSql = dtSession.Rows[0][20].ToString();
-                    session.qryPlan = dtSession.Rows[0][21].ToString();
+                    session.sessionId = Int32.Parse(dtSession.Rows[i][0].ToString());
+                    session.databaseName = dtSession.Rows[i][1].ToString();
+                    session.hostName = dtSession.Rows[i][2].ToString();
+                    session.programName = dtSession.Rows[i][3].ToString();
+                    session.clientInterfaceName = dtSession.Rows[i][4].ToString();
+                    session.blockingSessionId = Int32.Parse(dtSession.Rows[i][5].ToString());
+                    session.openTransacionCount = Int32.Parse(dtSession.Rows[i][6].ToString());
+                    session.percentComplete = Double.Parse(dtSession.Rows[i][7].ToString());
+                    session.cpuTime = Int32.Parse(dtSession.Rows[i][8].ToString());
+                    session.totalElapsedTime = Int32.Parse(dtSession.Rows[i][9].ToString());
+                    session.reads = Int32.Parse(dtSession.Rows[i][10].ToString());
+                    session.writes = Int32.Parse(dtSession.Rows[i][11].ToString());
+                    session.logicalReads = Int32.Parse(dtSession.Rows[i][12].ToString());
+                    session.startTime = DateTime.Parse(dtSession.Rows[i][13].ToString());
+                    session.status = dtSession.Rows[i][14].ToString();
+                    session.waitType = dtSession.Rows[i][15].ToString();
+                    session.waitTime = Int32.Parse(dtSession.Rows[i][16].ToString());
+                    session.waitResource = dtSession.Rows[i][17].ToString();
+                    session.command = dtSession.Rows[i][18].ToString();
+                    session.currentStatement = dtSession.Rows[i][19].ToString();
+                    session.cmdSql = dtSession.Rows[i][20].ToString();
+                    session.qryPlan = dtSession.Rows[i][21].ToString();
 
                     list.Add(session);
                 }
@@ -319,18 +320,7 @@ namespace sindex.forms
         {
             try 
             {
-                XLWorkbook wb = new XLWorkbook();
-                wb.Worksheets.Add(dtSession, "Sessions");
-
-                SaveFileDialog fileDialog = new SaveFileDialog();
-
-                fileDialog.DefaultExt = "xlsx";
-                fileDialog.Filter = "Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-
-                if (fileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    wb.SaveAs(fileDialog.FileName);
-                }
+                PrintSindex.PrintExcel(dtSession, "Sessions");
             }
             catch (Exception err)
             {
