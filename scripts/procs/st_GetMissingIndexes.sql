@@ -29,6 +29,7 @@ BEGIN
        ON dm_migs.group_handle = dm_mig.index_group_handle
        INNER JOIN sys.dm_db_missing_index_details dm_mid
        ON dm_mig.index_handle = dm_mid.index_handle
+  WHERE dm_mid.database_id IN (SELECT db_id([database_name]) FROM [dbo].[database] WHERE [database].ativo = 1)
   ORDER BY Avg_Estimated_Impact DESC;
 
   SELECT *

@@ -119,6 +119,7 @@ CREATE TABLE dbo.[index](
  ,filegroup_uid int NOT NULL
 );
 
+CREATE INDEX [IX_stat_stat_name] ON [dbo].[stat] ([stat_name]) INCLUDE ([table_uid], [filter], [is_autocreated], [columns]);
 
 /*
 ALTER TABLE dbo.[server_configurations]
