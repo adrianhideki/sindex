@@ -15,18 +15,17 @@ using System.Windows.Forms;
 
 namespace sindex.forms
 {
-    public partial class frmMissingIndexes : Form
+    public partial class frmFragmentedIndexes : Form
     {
         Configuration conf;
         frmMain main;
-        string[] gridColName = { "Database Name", "Média de Impacto", "Última Leitura", "Tabela", "Script de Criação", "Selecionado" };
-        bool[] gridVisible = { true, true, true, true, true, true };
-        int checkedColumn = 5;
-        int scriptColumn = 4;
+        string[] gridColName = { "Tabela", "Database Name", "Índice", "Fragmentação", "Tipo", "Script", "Selecionado" };
+        bool[] gridVisible = { true, true, true, true, true, true, true };
+        int checkedColumn = 6;
+        int scriptColumn = 5;
+        DataTable dtFragmentedIndexes;
 
-        System.Data.DataTable dtMissingIndexes;
-
-        public frmMissingIndexes(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
+        public frmFragmentedIndexes(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
             this.main = main;
             this.conf = conf;
@@ -51,9 +50,6 @@ namespace sindex.forms
         {
             Color bgColor = Color.FromArgb(17, 17, 17);
             Color frColor = Color.FromArgb(119, 119, 119);
-
-            txtIndexes.BackColor = bgColor;
-            txtIndexes.ForeColor = frColor;
         }
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
@@ -89,51 +85,55 @@ namespace sindex.forms
 
             string database = "";
             string table = "";
+            string type = "";
+            double fragmented = 0;
 
             if (cbxFiltro.Text == "Database")
             {
                 database = txtFiltro.Text;
-            } 
+            }
             else if (cbxFiltro.Text == "Table")
             {
                 table = txtFiltro.Text;
             }
+            else if (cbxFiltro.Text == "Type")
+            {
+                type = txtFiltro.Text;
+            }
+            else if (cbxFiltro.Text == "Fragmentation")
+            {
+                fragmented = double.Parse(txtFiltro.Text);
+            }
 
-            dtMissingIndexes = dbIndexes.GetMissingIndexes(main.GetCredentials(), main.databaseSindex, database, table);
+            dtFragmentedIndexes = dbIndexes.GetFragmentedIndexes(main.GetCredentials(), main.databaseSindex, database, table, type, fragmented);
 
-            mnuIndexes.Enabled = !(dtMissingIndexes.Rows.Count <= 0);
+            mnuIndexes.Enabled = !(dtFragmentedIndexes.Rows.Count <= 0);
 
-            grdIndexes.DataSource = dtMissingIndexes;
+            grdIndexes.DataSource = dtFragmentedIndexes;
             grdIndexes.Refresh();
             ResizeGrid(grdIndexes);
 
-            lblLinhas.Text = dtMissingIndexes.Rows.Count.ToString() + " linhas.";
+            lblLinhas.Text = dtFragmentedIndexes.Rows.Count.ToString() + " linhas.";
         }
         private void grdIndexes_Resize(object sender, EventArgs e)
         {
             ResizeGrid(grdIndexes);
         }
-        private void grdIndexes_SelectionChanged(object sender, EventArgs e)
+        List<FragmentedIndexModel> GetIndexList()
         {
-            if (grdIndexes.SelectedRows.Count > 0)
-            {
-                txtIndexes.Text = grdIndexes.SelectedRows[0].Cells[4].Value.ToString();
-            }
-        }
-        List<MissingIndexModel> GetIndexList()
-        {
-            List<MissingIndexModel> list = new List<MissingIndexModel>();
+            List<FragmentedIndexModel> list = new List<FragmentedIndexModel>();
 
-            if (dtMissingIndexes.Rows.Count > 0)
+            if (dtFragmentedIndexes.Rows.Count > 0)
             {
-                for (int i = 0; i < dtMissingIndexes.Rows.Count; i++)
+                for (int i = 0; i < dtFragmentedIndexes.Rows.Count; i++)
                 {
-                    MissingIndexModel index = new MissingIndexModel();
-                    index.database = dtMissingIndexes.Rows[i][0].ToString();
-                    index.table = dtMissingIndexes.Rows[i][3].ToString();
-                    index.impact = double.Parse(dtMissingIndexes.Rows[i][1].ToString());
-                    index.lastSeek = DateTime.Parse(dtMissingIndexes.Rows[i][2].ToString());
-                    index.scriptIndex = dtMissingIndexes.Rows[i][4].ToString();
+                    FragmentedIndexModel index = new FragmentedIndexModel();
+                    index.table = dtFragmentedIndexes.Rows[i][0].ToString();
+                    index.database = dtFragmentedIndexes.Rows[i][1].ToString();
+                    index.index = dtFragmentedIndexes.Rows[i][2].ToString();
+                    index.fragmentation = double.Parse(dtFragmentedIndexes.Rows[i][3].ToString());
+                    index.type = dtFragmentedIndexes.Rows[i][4].ToString();
+                    index.script = dtFragmentedIndexes.Rows[i][5].ToString();
 
                     list.Add(index);
                 }
@@ -147,7 +147,7 @@ namespace sindex.forms
         {
             try
             {
-                PrintSindex.PrintReportViewer(GetIndexList(), "DataSet1", "sindex.reports.MissingIndexes.rdlc", true, DeviceInfoSindex.landscape);
+                PrintSindex.PrintReportViewer(GetIndexList(), "DataSet1", "sindex.reports.FragmentedIndexes.rdlc", true, DeviceInfoSindex.landscape);
             }
             catch (Exception err)
             {
@@ -161,7 +161,7 @@ namespace sindex.forms
                 grdIndexes.Theme = MetroFramework.MetroThemeStyle.Light;
                 grdIndexes.Style = MetroFramework.MetroColorStyle.Silver;
 
-                PrintSindex.PrintGrid("Missing Indexes", "", "", grdIndexes);
+                PrintSindex.PrintGrid("Fragmented Indexes", "", "", grdIndexes);
 
                 grdIndexes.Theme = MetroFramework.MetroThemeStyle.Default;
                 grdIndexes.Style = MetroFramework.MetroColorStyle.Default;
@@ -175,7 +175,7 @@ namespace sindex.forms
         {
             try
             {
-                PrintSindex.PrintExcel(dtMissingIndexes, "Missing Indexes");
+                PrintSindex.PrintExcel(dtFragmentedIndexes, "Fragmented Indexes");
             }
             catch (Exception err)
             {
@@ -221,10 +221,11 @@ namespace sindex.forms
             {
                 Credentials cred = main.GetCredentials();
                 string database = main.databaseSindex;
-                string erro = "";
 
                 if (grdIndexes.Rows.Count > 0)
                 {
+                    string erro = "";
+
                     for (int i = 0; i < grdIndexes.Rows.Count; i++)
                     {
                         try
@@ -233,16 +234,15 @@ namespace sindex.forms
                             {
                                 dbIndexes.ExecuteScript(cred, database, grdIndexes.Rows[i].Cells[scriptColumn].Value.ToString());
                             }
-                        } 
-                        catch (Exception err)
+                        } catch (Exception err)
                         {
-                            erro += "\nÍndice: " + grdIndexes.Rows[i].Cells[scriptColumn].Value.ToString() + " Erro: " + err.Message;
+                            erro = "\nÍndice: " + grdIndexes.Rows[i].Cells[scriptColumn].Value.ToString() + " Erro: " + err.Message;
                         }                        
                     }
 
                     if (erro != "") throw new Exception(erro);
 
-                    main.ShowMessage(String.Format("Término da criação do(s) índice(s): {0}", DateTime.Now.ToString()), "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    main.ShowMessage(String.Format("Término da desfragmentação do(s) índice(s): {0}", DateTime.Now.ToString()), "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception err)

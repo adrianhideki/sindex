@@ -157,6 +157,12 @@
     <Compile Include="forms\frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmFragmentedIndexes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmFragmentedIndexes.Designer.cs">
+      <DependentUpon>frmFragmentedIndexes.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\frmMissingIndexes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,7 @@
       <DependentUpon>frmMissingIndexes.cs</DependentUpon>
     </Compile>
     <Compile Include="model\ConfigurationModel.cs" />
+    <Compile Include="model\FragmentedIndexModel.cs" />
     <Compile Include="model\MissingIndexModel.cs" />
     <Compile Include="model\ServerModel.cs" />
     <Compile Include="model\SessionModel.cs" />
@@ -214,6 +221,9 @@
     <EmbeddedResource Include="forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmFragmentedIndexes.resx">
+      <DependentUpon>frmFragmentedIndexes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\frmMissingIndexes.resx">
       <DependentUpon>frmMissingIndexes.cs</DependentUpon>
     </EmbeddedResource>
@@ -227,11 +237,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="reports\FragmentedIndexes.rdlc" />
     <EmbeddedResource Include="reports\MissingIndexes.rdlc" />
     <EmbeddedResource Include="reports\Sessions.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\sindex.model.ConfigurationModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.DatabaseModel.datasource" />
+    <None Include="Properties\DataSources\sindex.model.FragmentedIndexModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.MissingIndexModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.ServerModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.SessionModel.datasource" />

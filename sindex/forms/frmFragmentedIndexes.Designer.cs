@@ -1,6 +1,6 @@
 ﻿namespace sindex.forms
 {
-    partial class frmMissingIndexes
+    partial class frmFragmentedIndexes
     {
         /// <summary>
         /// Required designer variable.
@@ -35,8 +35,6 @@
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlBG = new MetroFramework.Controls.MetroPanel();
             this.chkMarcarTodos = new MetroFramework.Controls.MetroCheckBox();
-            this.lblIndex = new MetroFramework.Controls.MetroLabel();
-            this.txtIndexes = new System.Windows.Forms.RichTextBox();
             this.lblLinhas = new MetroFramework.Controls.MetroLabel();
             this.grdIndexes = new MetroFramework.Controls.MetroGrid();
             this.mnuIndexes = new MetroFramework.Controls.MetroContextMenu(this.components);
@@ -61,8 +59,6 @@
             // pnlBG
             // 
             this.pnlBG.Controls.Add(this.chkMarcarTodos);
-            this.pnlBG.Controls.Add(this.lblIndex);
-            this.pnlBG.Controls.Add(this.txtIndexes);
             this.pnlBG.Controls.Add(this.lblLinhas);
             this.pnlBG.Controls.Add(this.grdIndexes);
             this.pnlBG.Controls.Add(this.btnFiltrar);
@@ -84,7 +80,7 @@
             // 
             this.chkMarcarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkMarcarTodos.AutoSize = true;
-            this.chkMarcarTodos.Location = new System.Drawing.Point(628, 294);
+            this.chkMarcarTodos.Location = new System.Drawing.Point(628, 413);
             this.chkMarcarTodos.Name = "chkMarcarTodos";
             this.chkMarcarTodos.Size = new System.Drawing.Size(94, 15);
             this.chkMarcarTodos.TabIndex = 12;
@@ -92,32 +88,10 @@
             this.chkMarcarTodos.UseSelectable = true;
             this.chkMarcarTodos.CheckedChanged += new System.EventHandler(this.chkMarcarTodos_CheckedChanged);
             // 
-            // lblIndex
-            // 
-            this.lblIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblIndex.AutoSize = true;
-            this.lblIndex.Location = new System.Drawing.Point(12, 294);
-            this.lblIndex.Name = "lblIndex";
-            this.lblIndex.Size = new System.Drawing.Size(168, 19);
-            this.lblIndex.TabIndex = 11;
-            this.lblIndex.Text = "Script de criação do índice:";
-            // 
-            // txtIndexes
-            // 
-            this.txtIndexes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtIndexes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtIndexes.Location = new System.Drawing.Point(12, 321);
-            this.txtIndexes.Name = "txtIndexes";
-            this.txtIndexes.ReadOnly = true;
-            this.txtIndexes.Size = new System.Drawing.Size(710, 99);
-            this.txtIndexes.TabIndex = 10;
-            this.txtIndexes.Text = "";
-            // 
             // lblLinhas
             // 
             this.lblLinhas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblLinhas.Location = new System.Drawing.Point(481, 289);
+            this.lblLinhas.Location = new System.Drawing.Point(481, 408);
             this.lblLinhas.Name = "lblLinhas";
             this.lblLinhas.Size = new System.Drawing.Size(135, 23);
             this.lblLinhas.TabIndex = 9;
@@ -172,9 +146,8 @@
             this.grdIndexes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdIndexes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdIndexes.ShowEditingIcon = false;
-            this.grdIndexes.Size = new System.Drawing.Size(710, 234);
+            this.grdIndexes.Size = new System.Drawing.Size(710, 353);
             this.grdIndexes.TabIndex = 8;
-            this.grdIndexes.SelectionChanged += new System.EventHandler(this.grdIndexes_SelectionChanged);
             this.grdIndexes.DoubleClick += new System.EventHandler(this.grdIndexes_DoubleClick);
             this.grdIndexes.Resize += new System.EventHandler(this.grdIndexes_Resize);
             // 
@@ -186,13 +159,13 @@
             this.criarToolStripMenuItem,
             this.relatóriosToolStripMenuItem});
             this.mnuIndexes.Name = "mnuIndexes";
-            this.mnuIndexes.Size = new System.Drawing.Size(211, 70);
+            this.mnuIndexes.Size = new System.Drawing.Size(264, 70);
             // 
             // criarToolStripMenuItem
             // 
             this.criarToolStripMenuItem.Name = "criarToolStripMenuItem";
-            this.criarToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.criarToolStripMenuItem.Text = "Criar indices selecionados";
+            this.criarToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+            this.criarToolStripMenuItem.Text = "Desfragmentar indices selecionados";
             this.criarToolStripMenuItem.Click += new System.EventHandler(this.criarToolStripMenuItem_Click);
             // 
             // relatóriosToolStripMenuItem
@@ -202,27 +175,27 @@
             this.gridToolStripMenuItem,
             this.excelToolStripMenuItem});
             this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
-            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.relatóriosToolStripMenuItem.Text = "Gerar relatório";
             // 
             // padrãoToolStripMenuItem
             // 
             this.padrãoToolStripMenuItem.Name = "padrãoToolStripMenuItem";
-            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.padrãoToolStripMenuItem.Text = "Padrão";
             this.padrãoToolStripMenuItem.Click += new System.EventHandler(this.padrãoToolStripMenuItem_Click);
             // 
             // gridToolStripMenuItem
             // 
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
             // excelToolStripMenuItem
             // 
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.excelToolStripMenuItem.Text = "Excel";
             this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
             // 
@@ -282,14 +255,14 @@
             this.cbxFiltro.TabIndex = 5;
             this.cbxFiltro.UseSelectable = true;
             // 
-            // frmMissingIndexes
+            // frmFragmentedIndexes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 440);
             this.Controls.Add(this.pnlBG);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmMissingIndexes";
+            this.Name = "frmFragmentedIndexes";
             this.Text = "frmMissingIndexes";
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.pnlBG.ResumeLayout(false);
@@ -315,8 +288,6 @@
         private System.Windows.Forms.ToolStripMenuItem gridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem padrãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
-        private System.Windows.Forms.RichTextBox txtIndexes;
-        private MetroFramework.Controls.MetroLabel lblIndex;
         private MetroFramework.Controls.MetroCheckBox chkMarcarTodos;
     }
 }

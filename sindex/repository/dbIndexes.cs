@@ -33,8 +33,32 @@ namespace sindex.repository
 
             return res;
         }
+        public static DataTable GetFragmentedIndexes(Credentials cred, string database, string dbName = "", string tbName = "", string tpName = "", double fragmentation = 0)
+        {
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new DynamicParameters();
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
 
-        public static void CreateIndex(Credentials cred, string database, string cmd)
+            param.Add("@p_table", tbName, DbType.String, ParameterDirection.Input);
+            param.Add("@p_database", dbName, DbType.String, ParameterDirection.Input);
+            param.Add("@p_type", tpName, DbType.String, ParameterDirection.Input);
+            param.Add("@p_fragmentation", fragmentation, DbType.Decimal, ParameterDirection.Input);
+
+            cmd = @"EXEC dbo.st_GetFragmentedIndexes @table = @p_table, @database = @p_database, @type = @p_type, @fragmentation = @p_fragmentation";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+
+        public static void ExecuteScript(Credentials cred, string database, string cmd)
         {
             dbConnect db = new dbConnect(cred);
             DynamicParameters param = new DynamicParameters();

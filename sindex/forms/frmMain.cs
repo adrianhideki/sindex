@@ -153,6 +153,12 @@ namespace sindex
         {
             LoadForm(new frmConnections(this.metroStyleManager, configuration, this), pnlForm);
         }
+
+        private void LoadFragmentedIndexes()
+        {
+            LoadForm(new frmFragmentedIndexes(this.metroStyleManager, configuration, this), pnlForm);
+        }
+
         public void LoadLogin()
         {
             this.configuration.currentUser = -1;
@@ -297,6 +303,11 @@ namespace sindex
         private void btnMissIndex_Click(object sender, EventArgs e)
         {
             LoadMissingIndexes();
+        }
+
+        private void btnDefrag_Click(object sender, EventArgs e)
+        {
+            LoadFragmentedIndexes();
         }
     }
 }
