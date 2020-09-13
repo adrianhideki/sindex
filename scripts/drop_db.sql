@@ -12,6 +12,8 @@ IF OBJECT_ID('[dbo].[st_GetConStatus]') IS NOT NULL DROP PROCEDURE [dbo].[st_Get
 IF OBJECT_ID('[dbo].[sp_WhoIsActive]') IS NOT NULL DROP PROCEDURE [dbo].[sp_WhoIsActive];
 IF OBJECT_ID('[dbo].[st_GetSessionsInfo]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetSessionsInfo];
 IF OBJECT_ID('[dbo].[st_GetMissingIndexes]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetMissingIndexes];
+IF OBJECT_ID('[dbo].[st_GetFragmentedIndexes]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetFragmentedIndexes];
+IF OBJECT_ID('[dbo].[st_GetUpdateStatistics]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetUpdateStatistics];
 
 IF OBJECT_ID('[dbo].[server]') IS NOT NULL DROP TABLE [dbo].[server];
 IF OBJECT_ID('[dbo].[configuration]') IS NOT NULL DROP TABLE [dbo].[configuration];
