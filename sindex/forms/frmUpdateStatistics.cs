@@ -15,17 +15,17 @@ using System.Windows.Forms;
 
 namespace sindex.forms
 {
-    public partial class frmFragmentedIndexes : Form
+    public partial class frmUpdateStatistics : Form
     {
         Configuration conf;
         frmMain main;
-        string[] gridColName = { "Tabela", "Database Name", "Índice", "Fragmentação", "Tipo", "Script", "Selecionado" };
-        bool[] gridVisible = { true, true, true, true, true, true, true };
-        int checkedColumn = 6;
-        int scriptColumn = 5;
-        DataTable dtFragmentedIndexes;
+        string[] gridColName = { "Estatística", "Tabela", "Criado Automático", "Dias Última Atualização", "Data de Atualização", "Banco de Dados", "Script", "Selecionado" };
+        bool[] gridVisible = { true, true, true, true, true, true, true, true };
+        int checkedColumn = 7;
+        int scriptColumn = 6;
+        DataTable dtStats;
 
-        public frmFragmentedIndexes(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
+        public frmUpdateStatistics(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
             this.main = main;
             this.conf = conf;
@@ -55,6 +55,7 @@ namespace sindex.forms
         {
             try
             {
+                ValidaFiltro();
                 GetDataGrid();
             }
             catch (Exception err)
@@ -62,6 +63,12 @@ namespace sindex.forms
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void ValidaFiltro()
+        {
+
+        }
+
         private void ResizeGrid(DataGridView grd)
         {
             if (grd.Rows.Count <= 0) return;
@@ -72,7 +79,7 @@ namespace sindex.forms
                 grd.Columns[i].Visible = gridVisible[i];
             }
 
-            int widthMedia = (grdIndexes.Width / (grdIndexes.Columns.GetColumnCount(DataGridViewElementStates.Visible))) - 10;
+            int widthMedia = (grdStats.Width / (grdStats.Columns.GetColumnCount(DataGridViewElementStates.Visible))) - 10;
 
             for (int i = 0; i < grd.Columns.Count; i++)
             {
@@ -85,8 +92,13 @@ namespace sindex.forms
 
             string database = "";
             string table = "";
-            string type = "";
-            double fragmented = 0;
+            string stat = "";
+            bool fullscan = false;
+            bool sample = false;
+            bool resample = false;
+            int percent = 0;
+            int rows = 0;
+            int days = 0;
 
             if (cbxFiltro.Text == "Database")
             {
@@ -96,46 +108,50 @@ namespace sindex.forms
             {
                 table = txtFiltro.Text;
             }
-            else if (cbxFiltro.Text == "Type")
+            else if (cbxFiltro.Text == "Stat")
             {
-                type = txtFiltro.Text;
-            }
-            else if (cbxFiltro.Text == "Fragmentation")
-            {
-                fragmented = double.Parse(txtFiltro.Text);
+                stat = txtFiltro.Text;
             }
 
-            dtFragmentedIndexes = dbIndex.GetFragmentedIndexes(main.GetCredentials(), main.databaseSindex, database, table, type, fragmented);
+            fullscan = rbtFullScan.Checked;
+            resample = rbtResample.Checked;
+            sample = rbtSamplePercent.Checked || rbtSampleRows.Checked;
+            if (rbtSamplePercent.Checked) percent = Int32.Parse(txtPercent.Text);
+            if (rbtSampleRows.Checked) rows = Int32.Parse(txtRows.Text);
+            days = Int32.Parse(txtDias.Text);
 
-            mnuIndexes.Enabled = !(dtFragmentedIndexes.Rows.Count <= 0);
+            dtStats = dbStat.GetUpdateStatistics(main.GetCredentials(), main.databaseSindex, fullscan, sample, resample, percent, rows, database, table, stat, days);
 
-            grdIndexes.DataSource = dtFragmentedIndexes;
-            grdIndexes.Refresh();
-            ResizeGrid(grdIndexes);
+            mnuStats.Enabled = !(dtStats.Rows.Count <= 0);
 
-            lblLinhas.Text = dtFragmentedIndexes.Rows.Count.ToString() + " linhas.";
+            grdStats.DataSource = dtStats;
+            grdStats.Refresh();
+            ResizeGrid(grdStats);
+
+            lblLinhas.Text = dtStats.Rows.Count.ToString() + " linhas.";
         }
         private void grdIndexes_Resize(object sender, EventArgs e)
         {
-            ResizeGrid(grdIndexes);
+            ResizeGrid(grdStats);
         }
-        List<FragmentedIndexModel> GetIndexList()
+        List<StatModel> GetStatList()
         {
-            List<FragmentedIndexModel> list = new List<FragmentedIndexModel>();
+            List<StatModel> list = new List<StatModel>();
 
-            if (dtFragmentedIndexes.Rows.Count > 0)
+            if (dtStats.Rows.Count > 0)
             {
-                for (int i = 0; i < dtFragmentedIndexes.Rows.Count; i++)
+                for (int i = 0; i < dtStats.Rows.Count; i++)
                 {
-                    FragmentedIndexModel index = new FragmentedIndexModel();
-                    index.table = dtFragmentedIndexes.Rows[i][0].ToString();
-                    index.database = dtFragmentedIndexes.Rows[i][1].ToString();
-                    index.index = dtFragmentedIndexes.Rows[i][2].ToString();
-                    index.fragmentation = double.Parse(dtFragmentedIndexes.Rows[i][3].ToString());
-                    index.type = dtFragmentedIndexes.Rows[i][4].ToString();
-                    index.script = dtFragmentedIndexes.Rows[i][5].ToString();
+                    StatModel stat = new StatModel();
+                    stat.stat = dtStats.Rows[i][0].ToString();
+                    stat.table =  dtStats.Rows[i][1].ToString();
+                    stat.autoCreate =  Boolean.Parse(dtStats.Rows[i][2].ToString());
+                    stat.days =  Int32.Parse(dtStats.Rows[i][3].ToString());
+                    stat.updateDate =  DateTime.Parse(dtStats.Rows[i][4].ToString());
+                    stat.database =  dtStats.Rows[i][5].ToString();
+                    stat.script = dtStats.Rows[i][6].ToString();
 
-                    list.Add(index);
+                    list.Add(stat);
                 }
             }
 
@@ -147,7 +163,7 @@ namespace sindex.forms
         {
             try
             {
-                PrintSindex.PrintReportViewer(GetIndexList(), "DataSet1", "sindex.reports.FragmentedIndexes.rdlc", true, DeviceInfoSindex.landscape);
+                PrintSindex.PrintReportViewer(GetStatList(), "DataSet1", "sindex.reports.UpdateStats.rdlc", true, DeviceInfoSindex.landscape);
             }
             catch (Exception err)
             {
@@ -158,13 +174,13 @@ namespace sindex.forms
         {
             try
             {
-                grdIndexes.Theme = MetroFramework.MetroThemeStyle.Light;
-                grdIndexes.Style = MetroFramework.MetroColorStyle.Silver;
+                grdStats.Theme = MetroFramework.MetroThemeStyle.Light;
+                grdStats.Style = MetroFramework.MetroColorStyle.Silver;
 
-                PrintSindex.PrintGrid("Fragmented Indexes", "", "", grdIndexes);
+                PrintSindex.PrintGrid("Update Stats", "", "", grdStats);
 
-                grdIndexes.Theme = MetroFramework.MetroThemeStyle.Default;
-                grdIndexes.Style = MetroFramework.MetroColorStyle.Default;
+                grdStats.Theme = MetroFramework.MetroThemeStyle.Default;
+                grdStats.Style = MetroFramework.MetroColorStyle.Default;
             }
             catch (Exception err)
             {
@@ -175,7 +191,7 @@ namespace sindex.forms
         {
             try
             {
-                PrintSindex.PrintExcel(dtFragmentedIndexes, "Fragmented Indexes");
+                PrintSindex.PrintExcel(dtStats, "Update Stats");
             }
             catch (Exception err)
             {
@@ -186,11 +202,11 @@ namespace sindex.forms
         {
             try
             {
-                if (grdIndexes.SelectedRows.Count > 0)
+                if (grdStats.SelectedRows.Count > 0)
                 {
-                    for (int i = 0; i < grdIndexes.SelectedRows.Count; i++)
+                    for (int i = 0; i < grdStats.SelectedRows.Count; i++)
                     {
-                        grdIndexes.SelectedRows[i].Cells[checkedColumn].Value = !Boolean.Parse(grdIndexes.SelectedRows[i].Cells[checkedColumn].Value.ToString());
+                        grdStats.SelectedRows[i].Cells[checkedColumn].Value = !Boolean.Parse(grdStats.SelectedRows[i].Cells[checkedColumn].Value.ToString());
                     }
                 }
             } catch (Exception err)
@@ -202,11 +218,11 @@ namespace sindex.forms
         {
             try
             {
-                if (grdIndexes.Rows.Count > 0)
+                if (grdStats.Rows.Count > 0)
                 {
-                    for (int i = 0; i < grdIndexes.Rows.Count; i++)
+                    for (int i = 0; i < grdStats.Rows.Count; i++)
                     {
-                        grdIndexes.Rows[i].Cells[checkedColumn].Value = chkMarcarTodos.Checked;
+                        grdStats.Rows[i].Cells[checkedColumn].Value = chkMarcarTodos.Checked;
                     }
                 }
             }
@@ -222,33 +238,43 @@ namespace sindex.forms
                 Credentials cred = main.GetCredentials();
                 string database = main.databaseSindex;
 
-                if (grdIndexes.Rows.Count > 0)
+                if (grdStats.Rows.Count > 0)
                 {
                     string erro = "";
 
-                    for (int i = 0; i < grdIndexes.Rows.Count; i++)
+                    for (int i = 0; i < grdStats.Rows.Count; i++)
                     {
                         try
                         {
-                            if (Boolean.Parse(grdIndexes.Rows[i].Cells[checkedColumn].Value.ToString()))
+                            if (Boolean.Parse(grdStats.Rows[i].Cells[checkedColumn].Value.ToString()))
                             {
-                                dbIndex.ExecuteScript(cred, database, grdIndexes.Rows[i].Cells[scriptColumn].Value.ToString());
+                                dbStat.ExecuteScript(cred, database, grdStats.Rows[i].Cells[scriptColumn].Value.ToString());
                             }
                         } catch (Exception err)
                         {
-                            erro = "\nÍndice: " + grdIndexes.Rows[i].Cells[scriptColumn].Value.ToString() + " Erro: " + err.Message;
-                        }                        
+                            erro = "\nÍndice: " + grdStats.Rows[i].Cells[scriptColumn].Value.ToString() + " Erro: " + err.Message;
+                        }
                     }
 
                     if (erro != "") throw new Exception(erro);
 
-                    main.ShowMessage(String.Format("Término da desfragmentação do(s) índice(s): {0}", DateTime.Now.ToString()), "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    main.ShowMessage(String.Format("Término da atualização da(s) estatística(s): {0}", DateTime.Now.ToString()), "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void rbtSampleRows_CheckedChanged(object sender, EventArgs e)
+        {
+            txtRows.Enabled = rbtSampleRows.Checked;
+        }
+
+        private void rbtSamplePercent_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPercent.Enabled = rbtSamplePercent.Checked;
         }
     }
 }

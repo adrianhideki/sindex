@@ -201,6 +201,10 @@ namespace sindex
         {
             LoadForm(new frmAjuda(metroStyleManager, configuration, this), pnlForm);
         }
+        private void LoadUpdateStatistics()
+        {
+            LoadForm(new frmUpdateStatistics(metroStyleManager, configuration, this), pnlForm);
+        }
         #endregion
 
         #region menuItens
@@ -308,6 +312,11 @@ namespace sindex
         private void btnDefrag_Click(object sender, EventArgs e)
         {
             LoadFragmentedIndexes();
+        }
+
+        private void btnStatisticas_Click(object sender, EventArgs e)
+        {
+            LoadUpdateStatistics();
         }
     }
 }

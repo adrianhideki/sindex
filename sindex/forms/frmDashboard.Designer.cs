@@ -78,6 +78,7 @@
             title1.Name = "Memory";
             title1.Text = "Memory";
             this.chtMemory.Titles.Add(title1);
+            this.chtMemory.DoubleClick += new System.EventHandler(this.chtArquivos_DoubleClick);
             // 
             // metroStyleManager
             // 
@@ -102,8 +103,8 @@
             // 
             this.tlpCharts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.tlpCharts.ColumnCount = 2;
-            this.tlpCharts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpCharts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCharts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpCharts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpCharts.Controls.Add(this.chtConnection, 0, 1);
             this.tlpCharts.Controls.Add(this.chtArquivos, 0, 1);
             this.tlpCharts.Controls.Add(this.chtCPU, 1, 0);
@@ -112,8 +113,8 @@
             this.tlpCharts.Location = new System.Drawing.Point(0, 0);
             this.tlpCharts.Name = "tlpCharts";
             this.tlpCharts.RowCount = 2;
-            this.tlpCharts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpCharts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCharts.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpCharts.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpCharts.Size = new System.Drawing.Size(762, 454);
             this.tlpCharts.TabIndex = 6;
             // 
@@ -134,6 +135,7 @@
             title2.Name = "Memory";
             title2.Text = "Connections";
             this.chtConnection.Titles.Add(title2);
+            this.chtConnection.DoubleClick += new System.EventHandler(this.chtArquivos_DoubleClick);
             // 
             // chtArquivos
             // 
@@ -158,6 +160,7 @@
             title3.Name = "Memory";
             title3.Text = "File Disk";
             this.chtArquivos.Titles.Add(title3);
+            this.chtArquivos.DoubleClick += new System.EventHandler(this.chtArquivos_DoubleClick);
             // 
             // chtCPU
             // 
@@ -190,6 +193,7 @@
             title4.Name = "Title1";
             title4.Text = "CPU";
             this.chtCPU.Titles.Add(title4);
+            this.chtCPU.DoubleClick += new System.EventHandler(this.chtArquivos_DoubleClick);
             // 
             // tmrUpdate
             // 

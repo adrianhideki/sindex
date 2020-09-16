@@ -20,13 +20,20 @@ namespace sindex.forms
     {
         Configuration conf;
         frmMain main;
+        List<Chart> charts;
+        int colCount = 0;
+        int rowCount = 0;
 
         public frmDashboard(MetroStyleManager metroStyleManager, Configuration conf, frmMain main)
         {
             InitializeComponent();
 
+            this.colCount = tlpCharts.ColumnCount;
+            this.rowCount = tlpCharts.RowCount;
+
             this.conf = conf;
             this.main = main;
+            this.charts = new List<Chart>();
 
             this.metroStyleManager.Theme = metroStyleManager.Theme;
             this.metroStyleManager.Style = metroStyleManager.Style;
@@ -42,6 +49,11 @@ namespace sindex.forms
                 SetTheme(chtArquivos);
                 SetTheme(chtConnection);
 
+                charts.Add(chtCPU);
+                charts.Add(chtMemory);
+                charts.Add(chtArquivos);
+                charts.Add(chtConnection);
+
                 tmrUpdate.Enabled = true;
                 tmrUpdate_Tick(null,null);
             }
@@ -49,6 +61,48 @@ namespace sindex.forms
             {
                 tmrUpdate.Enabled = false;
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ZoomChart(Chart chart, bool zoomIn)
+        {
+            int index = charts.IndexOf(chart);
+
+            for (int i = 0; i < charts.Count; i++)
+            {
+                if (i != index)
+                {
+                    charts[i].Visible = !zoomIn;
+                }
+            }
+
+            if (zoomIn)
+            {
+                tlpCharts.ColumnCount = 1;
+                tlpCharts.RowCount = 1;
+
+                tlpCharts.RowStyles[0].SizeType = SizeType.AutoSize;
+                tlpCharts.ColumnStyles[0].SizeType = SizeType.AutoSize;
+            } 
+            else 
+            {
+                int avgWidth  = 100 / colCount;
+                int avgHeight = 100 / rowCount;
+
+                tlpCharts.ColumnCount = colCount;
+                tlpCharts.RowCount = rowCount;
+
+                for (int i = 0; i < tlpCharts.RowStyles.Count; i++)
+                {
+                    tlpCharts.RowStyles[i].SizeType = SizeType.Percent;
+                    tlpCharts.RowStyles[i].Height = avgHeight;
+                }
+
+                for (int i = 0; i < tlpCharts.ColumnStyles.Count; i++)
+                {
+                    tlpCharts.ColumnStyles[i].SizeType = SizeType.Percent;
+                    tlpCharts.ColumnStyles[i].Width = avgWidth;
+                }
             }
         }
 
@@ -89,6 +143,7 @@ namespace sindex.forms
                 chart.ChartAreas[i].AxisY.LabelStyle.ForeColor = fore;
                 chart.ChartAreas[i].AxisX.LabelStyle.ForeColor = fore;
                 chart.ChartAreas[i].AxisX.TitleForeColor = fore;
+                chart.ChartAreas[i].AxisX.Interval = 1;
             }
 
             for (int i = 0; i < chart.Legends.Count; i++)
@@ -263,6 +318,12 @@ namespace sindex.forms
                 tmrUpdate.Enabled = false;
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void chtArquivos_DoubleClick(object sender, EventArgs e)
+        {
+            bool zoomIt = (tlpCharts.ColumnCount == colCount);
+            ZoomChart((Chart)sender, zoomIt);
         }
     }
 }

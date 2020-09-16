@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sindex.repository
 {
-    public static class dbIndexes
+    public static class dbIndex
     {
         public static DataTable GetMissingIndexes(Credentials cred, string database, string dbName = "", string tbName = "")
         {

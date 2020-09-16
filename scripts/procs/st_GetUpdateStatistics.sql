@@ -117,5 +117,6 @@ BEGIN
         ,statUpdateDate
         ,databaseName
         ,scriptUpdate
+        ,selecionado = CAST(0 AS bit)
   FROM #tb_main;
 END

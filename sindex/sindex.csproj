@@ -145,6 +145,12 @@
     <Compile Include="forms\frmDetailSession.Designer.cs">
       <DependentUpon>frmDetailSession.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmUpdateStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmUpdateStatistics.Designer.cs">
+      <DependentUpon>frmUpdateStatistics.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\frmLoadTables.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,7 +180,9 @@
     <Compile Include="model\MissingIndexModel.cs" />
     <Compile Include="model\ServerModel.cs" />
     <Compile Include="model\SessionModel.cs" />
-    <Compile Include="repository\dbIndexes.cs" />
+    <Compile Include="model\StatModel.cs" />
+    <Compile Include="repository\dbIndex.cs" />
+    <Compile Include="repository\dbStat.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="utils\Configuration.cs" />
     <Compile Include="utils\Credentials.cs" />
@@ -212,6 +220,9 @@
     <EmbeddedResource Include="forms\frmDetailSession.resx">
       <DependentUpon>frmDetailSession.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmUpdateStatistics.resx">
+      <DependentUpon>frmUpdateStatistics.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\frmLoadTables.resx">
       <DependentUpon>frmLoadTables.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,6 +248,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="reports\UpdateStats.rdlc" />
     <EmbeddedResource Include="reports\FragmentedIndexes.rdlc" />
     <EmbeddedResource Include="reports\MissingIndexes.rdlc" />
     <EmbeddedResource Include="reports\Sessions.rdlc" />
@@ -247,6 +259,7 @@
     <None Include="Properties\DataSources\sindex.model.MissingIndexModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.ServerModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.SessionModel.datasource" />
+    <None Include="Properties\DataSources\sindex.model.StatModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

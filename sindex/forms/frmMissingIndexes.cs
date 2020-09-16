@@ -99,7 +99,7 @@ namespace sindex.forms
                 table = txtFiltro.Text;
             }
 
-            dtMissingIndexes = dbIndexes.GetMissingIndexes(main.GetCredentials(), main.databaseSindex, database, table);
+            dtMissingIndexes = dbIndex.GetMissingIndexes(main.GetCredentials(), main.databaseSindex, database, table);
 
             mnuIndexes.Enabled = !(dtMissingIndexes.Rows.Count <= 0);
 
@@ -231,7 +231,7 @@ namespace sindex.forms
                         {
                             if (Boolean.Parse(grdIndexes.Rows[i].Cells[checkedColumn].Value.ToString()))
                             {
-                                dbIndexes.ExecuteScript(cred, database, grdIndexes.Rows[i].Cells[scriptColumn].Value.ToString());
+                                dbIndex.ExecuteScript(cred, database, grdIndexes.Rows[i].Cells[scriptColumn].Value.ToString());
                             }
                         } 
                         catch (Exception err)

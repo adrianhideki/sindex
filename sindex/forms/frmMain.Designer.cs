@@ -317,6 +317,7 @@
             this.btnStatisticas.Text = "Estatísticas";
             this.btnStatisticas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnStatisticas.UseVisualStyleBackColor = true;
+            this.btnStatisticas.Click += new System.EventHandler(this.btnStatisticas_Click);
             // 
             // btnMissIndex
             // 
