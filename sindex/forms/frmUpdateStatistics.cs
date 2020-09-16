@@ -96,6 +96,7 @@ namespace sindex.forms
             bool fullscan = false;
             bool sample = false;
             bool resample = false;
+            bool onlyTableData = false;
             int percent = 0;
             int rows = 0;
             int days = 0;
@@ -116,11 +117,12 @@ namespace sindex.forms
             fullscan = rbtFullScan.Checked;
             resample = rbtResample.Checked;
             sample = rbtSamplePercent.Checked || rbtSampleRows.Checked;
+            onlyTableData = chkSomenteTabelasDados.Checked;
             if (rbtSamplePercent.Checked) percent = Int32.Parse(txtPercent.Text);
             if (rbtSampleRows.Checked) rows = Int32.Parse(txtRows.Text);
             days = Int32.Parse(txtDias.Text);
 
-            dtStats = dbStat.GetUpdateStatistics(main.GetCredentials(), main.databaseSindex, fullscan, sample, resample, percent, rows, database, table, stat, days);
+            dtStats = dbStat.GetUpdateStatistics(main.GetCredentials(), main.databaseSindex, fullscan, sample, resample, percent, rows, database, table, stat, days, onlyTableData);
 
             mnuStats.Enabled = !(dtStats.Rows.Count <= 0);
 

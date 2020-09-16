@@ -46,6 +46,7 @@
             this.btnFiltrar = new MetroFramework.Controls.MetroButton();
             this.txtFiltro = new MetroFramework.Controls.MetroTextBox();
             this.cbxFiltro = new MetroFramework.Controls.MetroComboBox();
+            this.chkSomenteTabelasDados = new MetroFramework.Controls.MetroCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdIndexes)).BeginInit();
@@ -58,6 +59,7 @@
             // 
             // pnlBG
             // 
+            this.pnlBG.Controls.Add(this.chkSomenteTabelasDados);
             this.pnlBG.Controls.Add(this.chkMarcarTodos);
             this.pnlBG.Controls.Add(this.lblLinhas);
             this.pnlBG.Controls.Add(this.grdIndexes);
@@ -132,7 +134,7 @@
             this.grdIndexes.EnableHeadersVisualStyles = false;
             this.grdIndexes.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.grdIndexes.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdIndexes.Location = new System.Drawing.Point(12, 52);
+            this.grdIndexes.Location = new System.Drawing.Point(12, 71);
             this.grdIndexes.Name = "grdIndexes";
             this.grdIndexes.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -146,7 +148,7 @@
             this.grdIndexes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdIndexes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdIndexes.ShowEditingIcon = false;
-            this.grdIndexes.Size = new System.Drawing.Size(710, 353);
+            this.grdIndexes.Size = new System.Drawing.Size(710, 334);
             this.grdIndexes.TabIndex = 8;
             this.grdIndexes.DoubleClick += new System.EventHandler(this.grdIndexes_DoubleClick);
             this.grdIndexes.Resize += new System.EventHandler(this.grdIndexes_Resize);
@@ -159,7 +161,7 @@
             this.criarToolStripMenuItem,
             this.relatóriosToolStripMenuItem});
             this.mnuIndexes.Name = "mnuIndexes";
-            this.mnuIndexes.Size = new System.Drawing.Size(264, 70);
+            this.mnuIndexes.Size = new System.Drawing.Size(264, 48);
             // 
             // criarToolStripMenuItem
             // 
@@ -181,21 +183,21 @@
             // padrãoToolStripMenuItem
             // 
             this.padrãoToolStripMenuItem.Name = "padrãoToolStripMenuItem";
-            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.padrãoToolStripMenuItem.Text = "Padrão";
             this.padrãoToolStripMenuItem.Click += new System.EventHandler(this.padrãoToolStripMenuItem_Click);
             // 
             // gridToolStripMenuItem
             // 
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
             // excelToolStripMenuItem
             // 
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.excelToolStripMenuItem.Text = "Excel";
             this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
             // 
@@ -255,6 +257,17 @@
             this.cbxFiltro.TabIndex = 5;
             this.cbxFiltro.UseSelectable = true;
             // 
+            // chkSomenteTabelasDados
+            // 
+            this.chkSomenteTabelasDados.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSomenteTabelasDados.AutoSize = true;
+            this.chkSomenteTabelasDados.Location = new System.Drawing.Point(549, 48);
+            this.chkSomenteTabelasDados.Name = "chkSomenteTabelasDados";
+            this.chkSomenteTabelasDados.Size = new System.Drawing.Size(173, 15);
+            this.chkSomenteTabelasDados.TabIndex = 13;
+            this.chkSomenteTabelasDados.Text = "Somente Tabelas com dados";
+            this.chkSomenteTabelasDados.UseSelectable = true;
+            // 
             // frmFragmentedIndexes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -289,5 +302,6 @@
         private System.Windows.Forms.ToolStripMenuItem padrãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
         private MetroFramework.Controls.MetroCheckBox chkMarcarTodos;
+        private MetroFramework.Controls.MetroCheckBox chkSomenteTabelasDados;
     }
 }

@@ -24,7 +24,7 @@ namespace sindex.repository
             if (returnCode != 0) throw new Exception(errMsg);
         }
 
-        public static DataTable GetUpdateStatistics(Credentials cred, string database, bool fullScan = true, bool sample = false, bool resample = false, int percent = 0, int rows = 0, string dbName = "", string objName = "", string stat = "", int days = 0)
+        public static DataTable GetUpdateStatistics(Credentials cred, string database, bool fullScan = true, bool sample = false, bool resample = false, int percent = 0, int rows = 0, string dbName = "", string objName = "", string stat = "", int days = 0, bool tablesWithData = false)
         {
             dbConnect db = new dbConnect(cred);
             DynamicParameters param = new DynamicParameters();
@@ -41,8 +41,9 @@ namespace sindex.repository
             param.Add("@p_object", objName, DbType.String, ParameterDirection.Input);
             param.Add("@p_stat", stat, DbType.String, ParameterDirection.Input);
             param.Add("@p_minDays", days, DbType.Int32, ParameterDirection.Input);
+            param.Add("@p_tablesWithData", tablesWithData, DbType.Boolean, ParameterDirection.Input);
 
-            cmd = @"EXEC dbo.st_GetUpdateStatistics @fullscan = @p_fullscan, @sample = @p_sample, @resample = @p_resample, @percent = @p_percent, @rows = @p_rows, @database = @p_database, @object = @p_object, @stat = @p_stat, @minDays = @p_minDays";
+            cmd = @"EXEC dbo.st_GetUpdateStatistics @fullscan = @p_fullscan, @sample = @p_sample, @resample = @p_resample, @percent = @p_percent, @rows = @p_rows, @database = @p_database, @object = @p_object, @stat = @p_stat, @minDays = @p_minDays, @tablesWithData = @p_tablesWithData";
 
             DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
 

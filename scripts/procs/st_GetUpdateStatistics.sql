@@ -1,12 +1,13 @@
-CREATE PROCEDURE dbo.st_GetUpdateStatistics @fullscan   bit = 0
-                                           ,@sample     bit = 0
-                                           ,@resample   bit = 0
-                                           ,@percent    int = 0
-                                           ,@rows       int = 0
-                                           ,@database   varchar(100) = ''
-                                           ,@object     varchar(100) = ''
-                                           ,@stat       varchar(100) = ''
-                                           ,@minDays    int = 0
+CREATE PROCEDURE dbo.st_GetUpdateStatistics @fullscan       bit = 0
+                                           ,@sample         bit = 0
+                                           ,@resample       bit = 0
+                                           ,@percent        int = 0
+                                           ,@rows           int = 0
+                                           ,@tablesWithData bit = 0
+                                           ,@database       varchar(100) = ''
+                                           ,@object         varchar(100) = ''
+                                           ,@stat           varchar(100) = ''
+                                           ,@minDays        int = 0
 AS
 BEGIN
   SET NOCOUNT ON;
@@ -65,7 +66,10 @@ BEGIN
            ON objects.object_id = stats.object_id
            INNER JOIN [db].sys.schemas
            ON schemas.schema_id = objects.schema_id
-      WHERE objects.type NOT IN (''S'',''IT'');
+      WHERE objects.type NOT IN (''S'',''IT'')
+        AND EXISTS(SELECT 1 WHERE @tablesWithData = 0
+                   UNION ALL
+                   SELECT 1 FROM [db].sys.partitions WHERE @tablesWithData = 1 AND partitions.object_id = stats.object_id AND partitions.rows > 0);
 
       INSERT INTO #tb_main(statName, objectName, schemaName, autoCreated, statUpdateDate, databaseName)
       SELECT statName, objectName, schemaName, autoCreated, statUpdateDate, databaseName
@@ -83,10 +87,11 @@ BEGIN
       OPTION(RECOMPILE);'
 
     SELECT @cmd = REPLACE(@cmd,'[db]',QUOTENAME(@db_name))
-          ,@cmd = REPLACE(@cmd,'@database',   CHAR(39) + CAST(@database   AS varchar(300)) + CHAR(39))
-          ,@cmd = REPLACE(@cmd,'@object',     CHAR(39) + CAST(@object     AS varchar(300)) + CHAR(39))
-          ,@cmd = REPLACE(@cmd,'@stat',       CHAR(39) + CAST(@stat       AS varchar(300)) + CHAR(39))
-          ,@cmd = REPLACE(@cmd,'@minDays',               CAST(@minDays    AS varchar(300)));
+          ,@cmd = REPLACE(@cmd,'@database',   CHAR(39) + CAST(@database       AS varchar(300)) + CHAR(39))
+          ,@cmd = REPLACE(@cmd,'@object',     CHAR(39) + CAST(@object         AS varchar(300)) + CHAR(39))
+          ,@cmd = REPLACE(@cmd,'@stat',       CHAR(39) + CAST(@stat           AS varchar(300)) + CHAR(39))
+          ,@cmd = REPLACE(@cmd,'@minDays',               CAST(@minDays        AS varchar(300)))
+          ,@cmd = REPLACE(@cmd,'@tablesWithData',        CAST(@tablesWithData AS varchar(300)));
 
     EXEC(@cmd);
 

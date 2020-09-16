@@ -87,6 +87,7 @@ namespace sindex.forms
             string table = "";
             string type = "";
             double fragmented = 0;
+            bool tableWithData = false;
 
             if (cbxFiltro.Text == "Database")
             {
@@ -105,7 +106,9 @@ namespace sindex.forms
                 fragmented = double.Parse(txtFiltro.Text);
             }
 
-            dtFragmentedIndexes = dbIndex.GetFragmentedIndexes(main.GetCredentials(), main.databaseSindex, database, table, type, fragmented);
+            tableWithData = chkSomenteTabelasDados.Checked;
+
+            dtFragmentedIndexes = dbIndex.GetFragmentedIndexes(main.GetCredentials(), main.databaseSindex, database, table, type, fragmented, tableWithData);
 
             mnuIndexes.Enabled = !(dtFragmentedIndexes.Rows.Count <= 0);
 
