@@ -47,6 +47,8 @@
             this.txtFiltro = new MetroFramework.Controls.MetroTextBox();
             this.cbxFiltro = new MetroFramework.Controls.MetroComboBox();
             this.chkSomenteTabelasDados = new MetroFramework.Controls.MetroCheckBox();
+            this.lblIndex = new MetroFramework.Controls.MetroLabel();
+            this.txtScript = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdIndexes)).BeginInit();
@@ -59,6 +61,8 @@
             // 
             // pnlBG
             // 
+            this.pnlBG.Controls.Add(this.lblIndex);
+            this.pnlBG.Controls.Add(this.txtScript);
             this.pnlBG.Controls.Add(this.chkSomenteTabelasDados);
             this.pnlBG.Controls.Add(this.chkMarcarTodos);
             this.pnlBG.Controls.Add(this.lblLinhas);
@@ -148,8 +152,9 @@
             this.grdIndexes.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdIndexes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdIndexes.ShowEditingIcon = false;
-            this.grdIndexes.Size = new System.Drawing.Size(710, 334);
+            this.grdIndexes.Size = new System.Drawing.Size(710, 205);
             this.grdIndexes.TabIndex = 8;
+            this.grdIndexes.SelectionChanged += new System.EventHandler(this.grdIndexes_SelectionChanged);
             this.grdIndexes.DoubleClick += new System.EventHandler(this.grdIndexes_DoubleClick);
             this.grdIndexes.Resize += new System.EventHandler(this.grdIndexes_Resize);
             // 
@@ -268,6 +273,28 @@
             this.chkSomenteTabelasDados.Text = "Somente Tabelas com dados";
             this.chkSomenteTabelasDados.UseSelectable = true;
             // 
+            // lblIndex
+            // 
+            this.lblIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblIndex.AutoSize = true;
+            this.lblIndex.Location = new System.Drawing.Point(15, 279);
+            this.lblIndex.Name = "lblIndex";
+            this.lblIndex.Size = new System.Drawing.Size(232, 19);
+            this.lblIndex.TabIndex = 26;
+            this.lblIndex.Text = "Script de desfragmentação de índices:";
+            // 
+            // txtScript
+            // 
+            this.txtScript.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtScript.Location = new System.Drawing.Point(11, 306);
+            this.txtScript.Name = "txtScript";
+            this.txtScript.ReadOnly = true;
+            this.txtScript.Size = new System.Drawing.Size(711, 99);
+            this.txtScript.TabIndex = 25;
+            this.txtScript.Text = "";
+            // 
             // frmFragmentedIndexes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,5 +330,7 @@
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
         private MetroFramework.Controls.MetroCheckBox chkMarcarTodos;
         private MetroFramework.Controls.MetroCheckBox chkSomenteTabelasDados;
+        private MetroFramework.Controls.MetroLabel lblIndex;
+        private System.Windows.Forms.RichTextBox txtScript;
     }
 }

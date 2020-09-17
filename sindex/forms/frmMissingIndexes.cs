@@ -117,7 +117,12 @@ namespace sindex.forms
         {
             if (grdIndexes.SelectedRows.Count > 0)
             {
-                txtIndexes.Text = grdIndexes.SelectedRows[0].Cells[4].Value.ToString();
+                txtIndexes.Text = "";
+
+                for (int i = 0; i < grdIndexes.SelectedRows.Count; i++)
+                {
+                    txtIndexes.Text += grdIndexes.SelectedRows[i].Cells[scriptColumn].Value.ToString() + "\n";
+                }
             }
         }
         List<MissingIndexModel> GetIndexList()

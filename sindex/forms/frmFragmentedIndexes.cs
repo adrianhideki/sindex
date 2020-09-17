@@ -50,6 +50,9 @@ namespace sindex.forms
         {
             Color bgColor = Color.FromArgb(17, 17, 17);
             Color frColor = Color.FromArgb(119, 119, 119);
+
+            txtScript.ForeColor = frColor;
+            txtScript.BackColor = bgColor;
         }
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
@@ -251,6 +254,19 @@ namespace sindex.forms
             catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void grdIndexes_SelectionChanged(object sender, EventArgs e)
+        {
+            if (grdIndexes.SelectedRows.Count > 0)
+            {
+                txtScript.Clear();
+
+                for (int i = 0; i < grdIndexes.SelectedRows.Count; i++)
+                {
+                    txtScript.Text += grdIndexes.SelectedRows[i].Cells[scriptColumn].Value.ToString() + "\n";
+                }                
             }
         }
     }

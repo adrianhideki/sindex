@@ -56,6 +56,8 @@
             this.txtFiltro = new MetroFramework.Controls.MetroTextBox();
             this.cbxFiltro = new MetroFramework.Controls.MetroComboBox();
             this.chkSomenteTabelasDados = new MetroFramework.Controls.MetroCheckBox();
+            this.lblIndex = new MetroFramework.Controls.MetroLabel();
+            this.txtScript = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdStats)).BeginInit();
@@ -68,6 +70,8 @@
             // 
             // pnlBG
             // 
+            this.pnlBG.Controls.Add(this.lblIndex);
+            this.pnlBG.Controls.Add(this.txtScript);
             this.pnlBG.Controls.Add(this.chkSomenteTabelasDados);
             this.pnlBG.Controls.Add(this.txtDias);
             this.pnlBG.Controls.Add(this.metroLabel2);
@@ -328,8 +332,9 @@
             this.grdStats.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdStats.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdStats.ShowEditingIcon = false;
-            this.grdStats.Size = new System.Drawing.Size(710, 267);
+            this.grdStats.Size = new System.Drawing.Size(710, 138);
             this.grdStats.TabIndex = 8;
+            this.grdStats.SelectionChanged += new System.EventHandler(this.grdStats_SelectionChanged);
             this.grdStats.DoubleClick += new System.EventHandler(this.grdIndexes_DoubleClick);
             this.grdStats.Resize += new System.EventHandler(this.grdIndexes_Resize);
             // 
@@ -449,6 +454,28 @@
             this.chkSomenteTabelasDados.Text = "Somente tabelas com dados";
             this.chkSomenteTabelasDados.UseSelectable = true;
             // 
+            // lblIndex
+            // 
+            this.lblIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblIndex.AutoSize = true;
+            this.lblIndex.Location = new System.Drawing.Point(15, 279);
+            this.lblIndex.Name = "lblIndex";
+            this.lblIndex.Size = new System.Drawing.Size(216, 19);
+            this.lblIndex.TabIndex = 24;
+            this.lblIndex.Text = "Script de atualização de estatísticas:";
+            // 
+            // txtScript
+            // 
+            this.txtScript.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtScript.Location = new System.Drawing.Point(11, 308);
+            this.txtScript.Name = "txtScript";
+            this.txtScript.ReadOnly = true;
+            this.txtScript.Size = new System.Drawing.Size(711, 99);
+            this.txtScript.TabIndex = 23;
+            this.txtScript.Text = "";
+            // 
             // frmUpdateStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -493,5 +520,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTextBox txtDias;
         private MetroFramework.Controls.MetroCheckBox chkSomenteTabelasDados;
+        private MetroFramework.Controls.MetroLabel lblIndex;
+        private System.Windows.Forms.RichTextBox txtScript;
     }
 }
