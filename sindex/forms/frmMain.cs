@@ -205,6 +205,10 @@ namespace sindex
         {
             LoadForm(new frmUpdateStatistics(metroStyleManager, configuration, this), pnlForm);
         }
+        private void LoadTopQueries()
+        {
+            LoadForm(new frmGetTopQueries(metroStyleManager, configuration, this), pnlForm);
+        }
         #endregion
 
         #region menuItens
@@ -317,6 +321,11 @@ namespace sindex
         private void btnStatisticas_Click(object sender, EventArgs e)
         {
             LoadUpdateStatistics();
+        }
+
+        private void btnTopQueries_Click(object sender, EventArgs e)
+        {
+            LoadTopQueries();
         }
     }
 }

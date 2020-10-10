@@ -58,6 +58,7 @@
             this.btnMenuSair = new System.Windows.Forms.Button();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnAjuda = new System.Windows.Forms.Button();
+            this.btnTopQueries = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlButtom.SuspendLayout();
             this.pnlMenuLogo.SuspendLayout();
@@ -360,12 +361,13 @@
             // pnlSubMenuMonitoramento
             // 
             this.pnlSubMenuMonitoramento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.pnlSubMenuMonitoramento.Controls.Add(this.btnTopQueries);
             this.pnlSubMenuMonitoramento.Controls.Add(this.btnRecursos);
             this.pnlSubMenuMonitoramento.Controls.Add(this.btnConexoes);
             this.pnlSubMenuMonitoramento.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSubMenuMonitoramento.Location = new System.Drawing.Point(0, 450);
             this.pnlSubMenuMonitoramento.Name = "pnlSubMenuMonitoramento";
-            this.pnlSubMenuMonitoramento.Size = new System.Drawing.Size(183, 85);
+            this.pnlSubMenuMonitoramento.Size = new System.Drawing.Size(183, 117);
             this.pnlSubMenuMonitoramento.TabIndex = 7;
             // 
             // btnRecursos
@@ -415,7 +417,7 @@
             this.btnMenuLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMenuLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenuLogout.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMenuLogout.Location = new System.Drawing.Point(0, 535);
+            this.btnMenuLogout.Location = new System.Drawing.Point(0, 567);
             this.btnMenuLogout.Name = "btnMenuLogout";
             this.btnMenuLogout.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMenuLogout.Size = new System.Drawing.Size(183, 38);
@@ -434,7 +436,7 @@
             this.btnMenuSair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMenuSair.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMenuSair.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnMenuSair.Location = new System.Drawing.Point(0, 573);
+            this.btnMenuSair.Location = new System.Drawing.Point(0, 605);
             this.btnMenuSair.Name = "btnMenuSair";
             this.btnMenuSair.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMenuSair.Size = new System.Drawing.Size(183, 38);
@@ -473,7 +475,7 @@
             this.btnAjuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAjuda.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAjuda.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnAjuda.Location = new System.Drawing.Point(0, 611);
+            this.btnAjuda.Location = new System.Drawing.Point(0, 643);
             this.btnAjuda.Name = "btnAjuda";
             this.btnAjuda.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnAjuda.Size = new System.Drawing.Size(183, 38);
@@ -482,6 +484,25 @@
             this.btnAjuda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAjuda.UseVisualStyleBackColor = true;
             this.btnAjuda.Click += new System.EventHandler(this.btnAjuda_Click);
+            // 
+            // btnTopQueries
+            // 
+            this.btnTopQueries.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTopQueries.FlatAppearance.BorderSize = 0;
+            this.btnTopQueries.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnTopQueries.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnTopQueries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTopQueries.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTopQueries.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnTopQueries.Location = new System.Drawing.Point(0, 76);
+            this.btnTopQueries.Name = "btnTopQueries";
+            this.btnTopQueries.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnTopQueries.Size = new System.Drawing.Size(183, 38);
+            this.btnTopQueries.TabIndex = 4;
+            this.btnTopQueries.Text = "Consultas";
+            this.btnTopQueries.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTopQueries.UseVisualStyleBackColor = true;
+            this.btnTopQueries.Click += new System.EventHandler(this.btnTopQueries_Click);
             // 
             // frmMain
             // 
@@ -538,6 +559,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private System.Windows.Forms.Button btnAtualizarDados;
         private System.Windows.Forms.Button btnAjuda;
+        private System.Windows.Forms.Button btnTopQueries;
     }
 }
 

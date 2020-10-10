@@ -145,6 +145,12 @@
     <Compile Include="forms\frmDetailSession.Designer.cs">
       <DependentUpon>frmDetailSession.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmGetTopQueries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmGetTopQueries.Designer.cs">
+      <DependentUpon>frmGetTopQueries.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\frmUpdateStatistics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,7 @@
     <Compile Include="model\SessionModel.cs" />
     <Compile Include="model\StatModel.cs" />
     <Compile Include="repository\dbIndex.cs" />
+    <Compile Include="repository\dbQuery.cs" />
     <Compile Include="repository\dbStat.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="utils\Configuration.cs" />
@@ -219,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmDetailSession.resx">
       <DependentUpon>frmDetailSession.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmGetTopQueries.resx">
+      <DependentUpon>frmGetTopQueries.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmUpdateStatistics.resx">
       <DependentUpon>frmUpdateStatistics.cs</DependentUpon>
