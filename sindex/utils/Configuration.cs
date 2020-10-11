@@ -69,6 +69,7 @@ namespace sindex.utils
             int i = getUserIndex(user);
 
             if (i < 0) throw new Exception("Credenciais inválidas!");
+            if (users[i].bloqueado) throw new Exception("Acesso bloqueado, contate o administrador!");
 
             if (users[i].Login(senha))
             {
@@ -78,7 +79,22 @@ namespace sindex.utils
                 throw new Exception("Credenciais inválidas!");
             }
         }
+
+        public void SetBlockUser(bool blocked, string user)
+        {
+            int i = getUserIndex(user);
+
+            if (i >= 0)
+            {
+                if (blocked) users[i].BloquearAcesso();
+                else users[i].DesbloquearAcesso();
+            }            
+        }
     }
+
+    public enum PerfilAcesso { 
+        administrador, monitoria, performance
+    };
 
     public class User
     {
@@ -87,6 +103,8 @@ namespace sindex.utils
         public string passwordTwo { get; set; }
         public string email { get; set; }
         public bool darkTheme { get; set; }
+        public bool bloqueado { get; set; }
+        public PerfilAcesso perfil { get; set; }
         public List <Enviroment> enviroments { get; set; }
 
         public bool Login(string password)
@@ -99,7 +117,7 @@ namespace sindex.utils
 
         }
 
-        public User(string user, string password, string passwordTwo, string email, bool darkTheme)
+        public User(string user, string password, string passwordTwo, string email, bool darkTheme, PerfilAcesso perfil, bool bloqueado = false)
         {
             if (password != passwordTwo)
             {
@@ -109,6 +127,11 @@ namespace sindex.utils
             if (password.Length < 6)
             {
                 throw new Exception("Senha deve conter no mínimo seis caracteres!");
+            }
+
+            if (password.All(char.IsDigit))
+            {
+                throw new Exception("Senha não pode ser somente números!");
             }
 
             if (String.IsNullOrEmpty(user))
@@ -135,7 +158,18 @@ namespace sindex.utils
             this.password = password;
             this.email = email;
             this.darkTheme = darkTheme;
+            this.perfil = perfil;
+            this.bloqueado = bloqueado;
             enviroments = new List<Enviroment>();
+        }
+
+        public void UpdateUser(User userUpdate)
+        {
+            this.password = userUpdate.password;
+            this.email = userUpdate.email;
+            this.darkTheme = userUpdate.darkTheme;
+            this.perfil = userUpdate.perfil;
+            this.bloqueado = userUpdate.bloqueado;
         }
 
         public void AddEnviroment(Enviroment env)
@@ -195,6 +229,18 @@ namespace sindex.utils
 
         public void AtualizarSenha(string senhaNova){
             this.password = senhaNova;
+        }
+        public void BloquearAcesso()
+        {
+            this.bloqueado = true;
+        }
+        public void DesbloquearAcesso()
+        {
+            this.bloqueado = false;
+        }
+        public void AtualizarPerfil(PerfilAcesso perfil)
+        {
+            this.perfil = perfil;
         }
     }
 

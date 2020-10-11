@@ -34,6 +34,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlBG = new MetroFramework.Controls.MetroPanel();
+            this.txtTop = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.lblIndex = new MetroFramework.Controls.MetroLabel();
             this.txtIndexes = new System.Windows.Forms.RichTextBox();
             this.lblLinhas = new MetroFramework.Controls.MetroLabel();
@@ -46,8 +48,7 @@
             this.btnFiltrar = new MetroFramework.Controls.MetroButton();
             this.txtFiltro = new MetroFramework.Controls.MetroTextBox();
             this.cbxFiltro = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.txtTop = new MetroFramework.Controls.MetroTextBox();
+            this.verDetalhesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlBG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdIndexes)).BeginInit();
@@ -80,6 +81,49 @@
             this.pnlBG.VerticalScrollbarBarColor = true;
             this.pnlBG.VerticalScrollbarHighlightOnWheel = false;
             this.pnlBG.VerticalScrollbarSize = 10;
+            // 
+            // txtTop
+            // 
+            this.txtTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtTop.CustomButton.Image = null;
+            this.txtTop.CustomButton.Location = new System.Drawing.Point(14, 1);
+            this.txtTop.CustomButton.Name = "";
+            this.txtTop.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtTop.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtTop.CustomButton.TabIndex = 1;
+            this.txtTop.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtTop.CustomButton.UseSelectable = true;
+            this.txtTop.CustomButton.Visible = false;
+            this.txtTop.Lines = new string[] {
+        "50"};
+            this.txtTop.Location = new System.Drawing.Point(566, 15);
+            this.txtTop.MaxLength = 32767;
+            this.txtTop.Name = "txtTop";
+            this.txtTop.PasswordChar = '\0';
+            this.txtTop.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtTop.SelectedText = "";
+            this.txtTop.SelectionLength = 0;
+            this.txtTop.SelectionStart = 0;
+            this.txtTop.ShortcutsEnabled = true;
+            this.txtTop.Size = new System.Drawing.Size(36, 23);
+            this.txtTop.TabIndex = 14;
+            this.txtTop.Text = "50";
+            this.txtTop.UseSelectable = true;
+            this.txtTop.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtTop.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(521, 16);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(37, 19);
+            this.metroLabel1.TabIndex = 13;
+            this.metroLabel1.Text = "TOP:";
             // 
             // lblIndex
             // 
@@ -171,9 +215,10 @@
             this.mnuIndexes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mnuIndexes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.mnuIndexes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.relatóriosToolStripMenuItem});
+            this.relatóriosToolStripMenuItem,
+            this.verDetalhesToolStripMenuItem});
             this.mnuIndexes.Name = "mnuIndexes";
-            this.mnuIndexes.Size = new System.Drawing.Size(150, 26);
+            this.mnuIndexes.Size = new System.Drawing.Size(181, 70);
             // 
             // relatóriosToolStripMenuItem
             // 
@@ -182,27 +227,27 @@
             this.gridToolStripMenuItem,
             this.excelToolStripMenuItem});
             this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
-            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.relatóriosToolStripMenuItem.Text = "Gerar relatório";
             // 
             // padrãoToolStripMenuItem
             // 
             this.padrãoToolStripMenuItem.Name = "padrãoToolStripMenuItem";
-            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.padrãoToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.padrãoToolStripMenuItem.Text = "Padrão";
             this.padrãoToolStripMenuItem.Click += new System.EventHandler(this.padrãoToolStripMenuItem_Click);
             // 
             // gridToolStripMenuItem
             // 
             this.gridToolStripMenuItem.Name = "gridToolStripMenuItem";
-            this.gridToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gridToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.gridToolStripMenuItem.Text = "Grid";
             this.gridToolStripMenuItem.Click += new System.EventHandler(this.gridToolStripMenuItem_Click);
             // 
             // excelToolStripMenuItem
             // 
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.excelToolStripMenuItem.Text = "Excel";
             this.excelToolStripMenuItem.Click += new System.EventHandler(this.excelToolStripMenuItem_Click);
             // 
@@ -261,48 +306,12 @@
             this.cbxFiltro.TabIndex = 5;
             this.cbxFiltro.UseSelectable = true;
             // 
-            // metroLabel1
+            // verDetalhesToolStripMenuItem
             // 
-            this.metroLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(521, 16);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(37, 19);
-            this.metroLabel1.TabIndex = 13;
-            this.metroLabel1.Text = "TOP:";
-            // 
-            // txtTop
-            // 
-            this.txtTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            // 
-            // 
-            // 
-            this.txtTop.CustomButton.Image = null;
-            this.txtTop.CustomButton.Location = new System.Drawing.Point(14, 1);
-            this.txtTop.CustomButton.Name = "";
-            this.txtTop.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtTop.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtTop.CustomButton.TabIndex = 1;
-            this.txtTop.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtTop.CustomButton.UseSelectable = true;
-            this.txtTop.CustomButton.Visible = false;
-            this.txtTop.Lines = new string[] {
-        "50"};
-            this.txtTop.Location = new System.Drawing.Point(566, 15);
-            this.txtTop.MaxLength = 32767;
-            this.txtTop.Name = "txtTop";
-            this.txtTop.PasswordChar = '\0';
-            this.txtTop.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtTop.SelectedText = "";
-            this.txtTop.SelectionLength = 0;
-            this.txtTop.SelectionStart = 0;
-            this.txtTop.ShortcutsEnabled = true;
-            this.txtTop.Size = new System.Drawing.Size(36, 23);
-            this.txtTop.TabIndex = 14;
-            this.txtTop.Text = "50";
-            this.txtTop.UseSelectable = true;
-            this.txtTop.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtTop.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.verDetalhesToolStripMenuItem.Name = "verDetalhesToolStripMenuItem";
+            this.verDetalhesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verDetalhesToolStripMenuItem.Text = "Ver Detalhes";
+            this.verDetalhesToolStripMenuItem.Click += new System.EventHandler(this.verDetalhesToolStripMenuItem_Click);
             // 
             // frmGetTopQueries
             // 
@@ -340,5 +349,6 @@
         private MetroFramework.Controls.MetroLabel lblIndex;
         private MetroFramework.Controls.MetroTextBox txtTop;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private System.Windows.Forms.ToolStripMenuItem verDetalhesToolStripMenuItem;
     }
 }

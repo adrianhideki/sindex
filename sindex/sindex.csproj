@@ -139,6 +139,12 @@
     <Compile Include="forms\frmDatabases.Designer.cs">
       <DependentUpon>frmDatabases.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmDetailTopQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmDetailTopQuery.Designer.cs">
+      <DependentUpon>frmDetailTopQuery.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\frmDetailSession.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +156,12 @@
     </Compile>
     <Compile Include="forms\frmGetTopQueries.Designer.cs">
       <DependentUpon>frmGetTopQueries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\frmUpdateStatistics.cs">
       <SubType>Form</SubType>
@@ -187,6 +199,7 @@
     <Compile Include="model\ServerModel.cs" />
     <Compile Include="model\SessionModel.cs" />
     <Compile Include="model\StatModel.cs" />
+    <Compile Include="model\TopQueryModel.cs" />
     <Compile Include="repository\dbIndex.cs" />
     <Compile Include="repository\dbQuery.cs" />
     <Compile Include="repository\dbStat.cs" />
@@ -224,11 +237,17 @@
     <EmbeddedResource Include="forms\frmDatabases.resx">
       <DependentUpon>frmDatabases.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmDetailTopQuery.resx">
+      <DependentUpon>frmDetailTopQuery.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\frmDetailSession.resx">
       <DependentUpon>frmDetailSession.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmGetTopQueries.resx">
       <DependentUpon>frmGetTopQueries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmUpdateStatistics.resx">
       <DependentUpon>frmUpdateStatistics.cs</DependentUpon>
@@ -258,6 +277,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="reports\TopQueries.rdlc" />
     <EmbeddedResource Include="reports\UpdateStats.rdlc" />
     <EmbeddedResource Include="reports\FragmentedIndexes.rdlc" />
     <EmbeddedResource Include="reports\MissingIndexes.rdlc" />
@@ -270,6 +290,7 @@
     <None Include="Properties\DataSources\sindex.model.ServerModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.SessionModel.datasource" />
     <None Include="Properties\DataSources\sindex.model.StatModel.datasource" />
+    <None Include="Properties\DataSources\sindex.model.TopQueryModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

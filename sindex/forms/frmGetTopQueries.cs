@@ -141,7 +141,7 @@ namespace sindex.forms
                     TopQueryModel index = new TopQueryModel();
                     index.createTime = DateTime.Parse(dtTopQueries.Rows[i][0].ToString());
                     index.lastExecutionDateTime = DateTime.Parse(dtTopQueries.Rows[i][1].ToString());
-                    index.totalWokerTime = Int32.Parse(dtTopQueries.Rows[i][2].ToString());
+                    index.totalWokerTime = Double.Parse(dtTopQueries.Rows[i][2].ToString());
                     index.avgCpuTime = Double.Parse(dtTopQueries.Rows[i][3].ToString());
                     index.avgPhysicalReads = Int32.Parse(dtTopQueries.Rows[i][4].ToString());
                     index.avgLogicalWrites = Int32.Parse(dtTopQueries.Rows[i][5].ToString());
@@ -166,7 +166,7 @@ namespace sindex.forms
         {
             try
             {
-                PrintSindex.PrintReportViewer(GetIndexList(), "DataSet1", "sindex.reports.MissingIndexes.rdlc", true, DeviceInfoSindex.landscape);
+                PrintSindex.PrintReportViewer(GetIndexList(), "DataSet1", "sindex.reports.TopQueries.rdlc", true, DeviceInfoSindex.landscape);
             }
             catch (Exception err)
             {
@@ -214,6 +214,43 @@ namespace sindex.forms
         private async void criarToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void verDetalhesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (grdIndexes.SelectedRows.Count > 0)
+                {
+                    for (int i = 0; i < grdIndexes.SelectedRows.Count; i++)
+                    {
+                        int x = grdIndexes.SelectedRows[i].Index;
+                        TopQueryModel index = new TopQueryModel();
+                        index.createTime = DateTime.Parse(dtTopQueries.Rows[x][0].ToString());
+                        index.lastExecutionDateTime = DateTime.Parse(dtTopQueries.Rows[x][1].ToString());
+                        index.totalWokerTime = Double.Parse(dtTopQueries.Rows[x][2].ToString());
+                        index.avgCpuTime = Double.Parse(dtTopQueries.Rows[x][3].ToString());
+                        index.avgPhysicalReads = Int32.Parse(dtTopQueries.Rows[x][4].ToString());
+                        index.avgLogicalWrites = Int32.Parse(dtTopQueries.Rows[x][5].ToString());
+                        index.avgElapsedTime = Double.Parse(dtTopQueries.Rows[x][6].ToString());
+                        index.executionCount = Int32.Parse(dtTopQueries.Rows[x][7].ToString());
+                        index.query = dtTopQueries.Rows[x][8].ToString();
+                        index.plan = dtTopQueries.Rows[x][9].ToString();
+                        index.databaseName = dtTopQueries.Rows[x][10].ToString();
+                        index.avgUsedThreads = Int32.Parse(dtTopQueries.Rows[x][11].ToString());
+                        index.avgMaxDop = Int32.Parse(dtTopQueries.Rows[x][12].ToString());
+                        index.statement = dtTopQueries.Rows[x][13].ToString();
+
+                        Form frm = new frmDetailTopQuery(this.metroStyleManager, index);
+                        frm.Show();
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

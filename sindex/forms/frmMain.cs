@@ -73,6 +73,7 @@ namespace sindex
         {
             return metroFunctions.ShowMessage(this, message, title, buttons, icon);
         }
+
         public void SetConnectionSettings()
         {
             databaseSindex = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].GetDatabase();
@@ -209,6 +210,10 @@ namespace sindex
         {
             LoadForm(new frmGetTopQueries(metroStyleManager, configuration, this), pnlForm);
         }
+        private void LoadUsers()
+        {
+            LoadForm(new frmUsers(metroStyleManager, configuration, this), pnlForm);
+        }
         #endregion
 
         #region menuItens
@@ -326,6 +331,34 @@ namespace sindex
         private void btnTopQueries_Click(object sender, EventArgs e)
         {
             LoadTopQueries();
+        }
+
+        public void SetPerfilAcesso(PerfilAcesso perfil)
+        {
+            if (perfil == PerfilAcesso.monitoria)
+            {
+                btnMenuMonitoramento.Visible = true;
+                btnMenuTuning.Visible = false;
+            } else if (perfil == PerfilAcesso.performance)
+            {
+                btnMenuMonitoramento.Visible = false;
+                btnMenuTuning.Visible = true;
+            } else
+            {
+                btnMenuMonitoramento.Visible = true;
+                btnMenuTuning.Visible = true;
+                btnUsuarios.Visible = true;
+            }
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            LoadUsers();
+        }
+
+        private void btnMenuSistema_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(pnlMenuSistema);
         }
     }
 }

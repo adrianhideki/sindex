@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using Microsoft.Reporting.WinForms;
 using Microsoft.ReportingServices.Diagnostics.Internal;
 using sindx.utils;
@@ -82,17 +83,37 @@ namespace sindex.utils
             printer.PrintDataGridView(dgv);
         }
 
-        public static void PrintExcel(DataTable  dt, string title)
+        public static void PrintExcel(System.Data.DataTable dt, string title)
         {
             XLWorkbook wb = new XLWorkbook();
-            wb.Worksheets.Add(dt, title);
 
-            if (dt.Rows.Count <= 0) throw new Exception("Não há linhas para geração do arquivo.");
+            System.Data.DataTable rpDt = new System.Data.DataTable();
+            rpDt = dt.Copy();
+
+            if (rpDt.Rows.Count <= 0) throw new Exception("Não há linhas para geração do arquivo.");
+
+            for (int x = 0; x < rpDt.Columns.Count; x++)
+            {
+                if (rpDt.Columns[x].DataType.Name == "String")
+                {
+                    for (int i = 0; i < rpDt.Rows.Count; i++)
+                    {
+                        if (rpDt.Rows[i][x].ToString().Length > 32000)
+                        {
+                            rpDt.Rows[i][x] = rpDt.Rows[i][x].ToString().Substring(0, 32000);
+                        }
+
+                    }
+                }
+            }
+
+            wb.Worksheets.Add(rpDt, title);
 
             SaveFileDialog fileDialog = new SaveFileDialog();
 
             fileDialog.DefaultExt = "xlsx";
             fileDialog.Filter = "Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            fileDialog.FileName = title + "_" + DateTime.Now.ToString("yyyy_MM_dd_hhmmss");
 
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {

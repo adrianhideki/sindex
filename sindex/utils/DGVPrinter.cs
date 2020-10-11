@@ -1767,6 +1767,7 @@ namespace sindx.utils //AllocationRequest
             pd.AllowSomePages = printDialogSettings.AllowSomePages;
             pd.AllowCurrentPage = printDialogSettings.AllowCurrentPage;
             pd.AllowPrintToFile = printDialogSettings.AllowPrintToFile;
+            pd.PrinterSettings.DefaultPageSettings.Landscape = true;
             pd.ShowHelp = printDialogSettings.ShowHelp;
             pd.ShowNetwork = printDialogSettings.ShowNetwork;
 
