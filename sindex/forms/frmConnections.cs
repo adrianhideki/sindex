@@ -183,6 +183,8 @@ namespace sindex.forms
 
                         DataTable dt = dbServer.GetSpidInfo(main.cred, main.databaseSindex, spid);
 
+                        if (dt.Rows.Count == 0) throw new Exception("Sessão não está mais ativa, atualize os dados!");
+
                         SessionModel session = new SessionModel();
                         session.sessionId = Int32.Parse(dt.Rows[0][0].ToString());
                         session.databaseName = dt.Rows[0][1].ToString();
