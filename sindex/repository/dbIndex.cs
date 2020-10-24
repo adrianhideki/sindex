@@ -58,7 +58,31 @@ namespace sindex.repository
 
             return res;
         }
+        public static DataTable GetScriptIndexes(Credentials cred, string database, string dbName = "", string tbName = "", string ixName = "")
+        {
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new DynamicParameters();
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
 
+            param.Add("@p_database_name", dbName, DbType.String, ParameterDirection.Input);
+            param.Add("@p_table_name", tbName, DbType.String, ParameterDirection.Input);
+            param.Add("@p_index_name", ixName, DbType.String, ParameterDirection.Input);
+
+            cmd = @"EXEC dbo.st_GetScriptIndexes @database_name  = @p_database_name
+                                                ,@table_name     = @p_table_name
+                                                ,@index_name     = @p_index_name";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
         public static void ExecuteScript(Credentials cred, string database, string cmd)
         {
             dbConnect db = new dbConnect(cred);

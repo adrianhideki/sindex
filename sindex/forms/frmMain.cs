@@ -214,6 +214,10 @@ namespace sindex
         {
             LoadForm(new frmUsers(metroStyleManager, configuration, this), pnlForm);
         }
+        private void LoadEditIndexes()
+        {
+            LoadForm(new frmEditIndexes(metroStyleManager, configuration, this), pnlForm);
+        }
         #endregion
 
         #region menuItens
@@ -359,6 +363,11 @@ namespace sindex
         private void btnMenuSistema_Click(object sender, EventArgs e)
         {
             ShowSubMenu(pnlMenuSistema);
+        }
+
+        private void btnEditarIndexes_Click(object sender, EventArgs e)
+        {
+            LoadEditIndexes();
         }
     }
 }

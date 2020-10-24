@@ -15,6 +15,7 @@ IF OBJECT_ID('[dbo].[st_GetMissingIndexes]') IS NOT NULL DROP PROCEDURE [dbo].[s
 IF OBJECT_ID('[dbo].[st_GetFragmentedIndexes]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetFragmentedIndexes];
 IF OBJECT_ID('[dbo].[st_GetUpdateStatistics]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetUpdateStatistics];
 IF OBJECT_ID('[dbo].[st_GetTopQueries]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetTopQueries];
+IF OBJECT_ID('[dbo].[st_GetScriptIndexes]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetScriptIndexes];
 
 IF OBJECT_ID('[dbo].[server]') IS NOT NULL DROP TABLE [dbo].[server];
 IF OBJECT_ID('[dbo].[configuration]') IS NOT NULL DROP TABLE [dbo].[configuration];

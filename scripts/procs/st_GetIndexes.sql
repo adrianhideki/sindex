@@ -27,7 +27,7 @@ BEGIN
   BEGIN
 
     SELECT @cmd = '
-    INSERT INTO [sindex].[dbo].[index](
+INSERT INTO [sindex].[dbo].[index](
      table_uid
     ,filegroup_uid
     ,index_id
@@ -45,7 +45,7 @@ BEGIN
     ,script_create
     ,script_drop
     ,database_uid
-    )
+    )'+CHAR(13)+CHAR(10)+'
     SELECT table_uid            = [table].table_uid
           ,filegroup_uid        = [filegroup].filegroup_uid
           ,index_id             = indexes.index_id
@@ -73,7 +73,7 @@ BEGIN
                                             CASE WHEN indexes.type = 1 THEN ''CLUSTERED ''
                                                  WHEN indexes.type = 2 THEN ''NONCLUSTERED ''
                                                  ELSE ''''
-                                            END + ''INDEX '' + QUOTENAME(indexes.name) + '' ON '' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '' ('' + 
+                                            END + ''INDEX '' + QUOTENAME(indexes.name) + '' ON '' + '+CHAR(39)+'[db]'+CHAR(39)+' + ''.'' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '' ('' + 
                                               _colunas.key_cols
                                             + '') '' + 
                                             CASE WHEN LEN(_colunas.inc_cols) > 0 THEN ''INCLUDE('' + _colunas.inc_cols + '') '' ELSE '''' END + 
@@ -92,7 +92,7 @@ BEGIN
                                             END + 
                                             CASE WHEN filegroups.is_default = 1 THEN '''' ELSE '' ON '' + QUOTENAME(filegroups.name) END + '';''
                                   END
-          ,script_drop          = ''DROP INDEX '' + QUOTENAME(indexes.name) + '' ON '' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '';''
+          ,script_drop          = ''DROP INDEX '' + QUOTENAME(indexes.name) + '' ON '' + '+CHAR(39)+'[db]'+CHAR(39)+' + ''.'' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '';''
           ,database_uid         = @db_uid
     FROM [db].sys.indexes
          INNER JOIN [db].sys.filegroups
@@ -134,9 +134,14 @@ BEGIN
                      FROM [sindex].[dbo].[index]
                      WHERE [index].index_name   = indexes.name COLLATE Latin1_General_CI_AS
                        AND [index].table_uid    = [table].table_uid 
-                       AND [index].database_uid = @db_uid)
+                       AND [index].database_uid = @db_uid)';
+    
+  SELECT @cmd = REPLACE(@cmd,'[db]',QUOTENAME(@db_name))
+        ,@cmd = REPLACE(@cmd,'@db_uid',CAST(@db_uid AS varchar(10)));
 
+  EXEC(@cmd);
 
+  SELECT @cmd = '
   DELETE FROM sindex.dbo.[index]
   WHERE NOT EXISTS(SELECT 1
                    FROM [db].sys.indexes
@@ -147,8 +152,14 @@ BEGIN
                            [table].database_uid = @db_uid
                    WHERE indexes.name COLLATE Latin1_General_CI_AS = [index].index_name COLLATE Latin1_General_CI_AS
                      AND [table].table_uid = [index].table_uid)
-    AND [index].database_uid = @db_uid
+    AND [index].database_uid = @db_uid';
+    
+  SELECT @cmd = REPLACE(@cmd,'[db]',QUOTENAME(@db_name))
+        ,@cmd = REPLACE(@cmd,'@db_uid',CAST(@db_uid AS varchar(10)));
 
+  EXEC(@cmd);
+
+  SELECT @cmd = '
   UPDATE [index]
      SET filegroup_uid         = [filegroup].filegroup_uid
         ,index_id              = indexes.index_id
@@ -164,7 +175,7 @@ BEGIN
         ,is_disabled           = indexes.is_disabled
         ,filter_condition      = indexes.filter_definition
         ,script_create         = scrp.script_create
-        ,script_drop           = ''DROP INDEX '' + QUOTENAME(indexes.name) + '' ON '' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '';''
+        ,script_drop           = ''DROP INDEX '' + QUOTENAME(indexes.name) + '' ON '' + '+CHAR(39)+'[db]'+CHAR(39)+' + ''.'' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '';''
   FROM [db].sys.indexes
        INNER JOIN [db].sys.filegroups
        ON filegroups.data_space_id = indexes.data_space_id
@@ -218,7 +229,7 @@ BEGIN
                                                      CASE WHEN indexes.type = 1 THEN ''CLUSTERED ''
                                                           WHEN indexes.type = 2 THEN ''NONCLUSTERED ''
                                                           ELSE ''''
-                                                     END + ''INDEX '' + QUOTENAME(indexes.name) + '' ON '' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '' ('' + 
+                                                     END + ''INDEX '' + QUOTENAME(indexes.name) + '' ON '' + QUOTENAME('+CHAR(39)+@db_name+CHAR(39)+') + ''.'' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '' ('' + 
                                                        _colunas.key_cols
                                                      + '') '' + 
                                                      CASE WHEN LEN(_colunas.inc_cols) > 0 THEN ''INCLUDE('' + _colunas.inc_cols + '') '' ELSE '''' END + 
@@ -236,7 +247,8 @@ BEGIN
                                                           ELSE '''' 
                                                      END + 
                                                      CASE WHEN filegroups.is_default = 1 THEN '''' ELSE '' ON '' + QUOTENAME(filegroups.name) END + '';''
-                                           END) AS scrp
+                                           END) AS scrp'
+ SELECT @cmd += '
   WHERE [index].database_uid = @db_uid
     AND EXISTS(SELECT 1  WHERE [index].filegroup_uid                                    <> [filegroup].filegroup_uid UNION ALL
                SELECT 1  WHERE [index].index_id                                         <> indexes.index_id UNION ALL
@@ -251,12 +263,13 @@ BEGIN
                SELECT 1  WHERE [index].is_disabled                                      <> indexes.is_disabled UNION ALL
                SELECT 1  WHERE [index].filter_condition COLLATE Latin1_General_CI_AS    <> indexes.filter_definition COLLATE Latin1_General_CI_AS UNION ALL
                SELECT 1  WHERE [index].script_create COLLATE Latin1_General_CI_AS       <> scrp.script_create COLLATE Latin1_General_CI_AS UNION ALL
-               SELECT 1  WHERE [index].script_drop COLLATE Latin1_General_CI_AS         <> ''DROP INDEX '' + QUOTENAME(indexes.name) + '' ON '' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '';'' COLLATE Latin1_General_CI_AS
+               SELECT 1  WHERE [index].script_drop COLLATE Latin1_General_CI_AS         <> ''DROP INDEX '' + QUOTENAME(indexes.name) + '' ON '' + QUOTENAME('+CHAR(39)+'[db]'+CHAR(39)+') + ''.'' + QUOTENAME(schemas.name) + ''.'' + QUOTENAME(objects.name) + '';'' COLLATE Latin1_General_CI_AS
                );';
 
     SELECT @cmd = REPLACE(@cmd,'[db]',QUOTENAME(@db_name))
           ,@cmd = REPLACE(@cmd,'@db_uid',CAST(@db_uid AS varchar(10)));
 
+    SELECT @cmd, LEN(@cmd);
     EXEC(@cmd);
 
     FETCH NEXT FROM curDatabases

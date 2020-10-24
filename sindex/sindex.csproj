@@ -151,6 +151,12 @@
     <Compile Include="forms\frmDetailSession.Designer.cs">
       <DependentUpon>frmDetailSession.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmEditIndexes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmEditIndexes.Designer.cs">
+      <DependentUpon>frmEditIndexes.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\frmGetTopQueries.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmDetailSession.resx">
       <DependentUpon>frmDetailSession.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmEditIndexes.resx">
+      <DependentUpon>frmEditIndexes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\frmGetTopQueries.resx">
       <DependentUpon>frmGetTopQueries.cs</DependentUpon>
