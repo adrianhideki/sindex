@@ -32,8 +32,21 @@ namespace sindex.forms
             this.conf = conf;
             this.main = main;
 
-            cbxPerfilAcesso.SelectedIndex = 0;
             tbLogin.SelectTab(tabLogin);
+            ValidaUsuarioAdministrador();
+            cbxPerfilAcesso.SelectedIndex = 0;
+        }
+
+        private void ValidaUsuarioAdministrador()
+        {
+            foreach (User u in conf.users)//se tem usuário adminstrador cadastrado não permite cadastrar outro
+            {
+                if (u.perfil == PerfilAcesso.administrador)
+                {
+                    cbxPerfilAcesso.Items.RemoveAt(0);
+                    break;
+                }
+            }
         }
 
         private void lnkVoltar_Click(object sender, EventArgs e)

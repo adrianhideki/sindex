@@ -40,10 +40,29 @@ namespace sindex.forms
 
                 SetTheme();
                 GetDataGrid();
+                BloqueiaComponentes();
             }
             catch (Exception err)
             {
                 main.ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void BloqueiaComponentes()
+        {
+            switch (conf.users[conf.currentUser].perfil)
+            {
+                case PerfilAcesso.administrador:
+                    cbxPerfil.Enabled = true;
+                    break;
+                case PerfilAcesso.monitoria:
+                    cbxPerfil.Enabled = false;
+                    break;
+                case PerfilAcesso.performance:
+                    cbxPerfil.Enabled = false;
+                    break;
+                default:
+                    cbxPerfil.Enabled = false;
+                    break;
             }
         }
         private void SetTheme()

@@ -48,6 +48,7 @@
             this.btnAmbientes = new System.Windows.Forms.Button();
             this.btnMenuTuning = new System.Windows.Forms.Button();
             this.pnlSubMenuTuning = new System.Windows.Forms.Panel();
+            this.btnEditarIndexes = new System.Windows.Forms.Button();
             this.btnDefrag = new System.Windows.Forms.Button();
             this.btnStatisticas = new System.Windows.Forms.Button();
             this.btnMissIndex = new System.Windows.Forms.Button();
@@ -62,7 +63,6 @@
             this.btnMenuSair = new System.Windows.Forms.Button();
             this.btnAjuda = new System.Windows.Forms.Button();
             this.btnMenuSistema = new System.Windows.Forms.Button();
-            this.btnEditarIndexes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlButtom.SuspendLayout();
             this.pnlMenuLogo.SuspendLayout();
@@ -290,7 +290,7 @@
             this.btnMenuTuning.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMenuTuning.Size = new System.Drawing.Size(183, 38);
             this.btnMenuTuning.TabIndex = 3;
-            this.btnMenuTuning.Text = "Tuning";
+            this.btnMenuTuning.Text = "Performance";
             this.btnMenuTuning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMenuTuning.UseVisualStyleBackColor = true;
             this.btnMenuTuning.Click += new System.EventHandler(this.btnMenuTuning_Click);
@@ -308,6 +308,25 @@
             this.pnlSubMenuTuning.Size = new System.Drawing.Size(183, 161);
             this.pnlSubMenuTuning.TabIndex = 5;
             this.pnlSubMenuTuning.Visible = false;
+            // 
+            // btnEditarIndexes
+            // 
+            this.btnEditarIndexes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnEditarIndexes.FlatAppearance.BorderSize = 0;
+            this.btnEditarIndexes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnEditarIndexes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.btnEditarIndexes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditarIndexes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditarIndexes.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnEditarIndexes.Location = new System.Drawing.Point(0, 114);
+            this.btnEditarIndexes.Name = "btnEditarIndexes";
+            this.btnEditarIndexes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btnEditarIndexes.Size = new System.Drawing.Size(183, 38);
+            this.btnEditarIndexes.TabIndex = 5;
+            this.btnEditarIndexes.Text = "Editar índices";
+            this.btnEditarIndexes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditarIndexes.UseVisualStyleBackColor = true;
+            this.btnEditarIndexes.Click += new System.EventHandler(this.btnEditarIndexes_Click);
             // 
             // btnDefrag
             // 
@@ -542,6 +561,7 @@
             this.btnAjuda.Text = "Ajuda";
             this.btnAjuda.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAjuda.UseVisualStyleBackColor = true;
+            this.btnAjuda.Visible = false;
             this.btnAjuda.Click += new System.EventHandler(this.btnAjuda_Click);
             // 
             // btnMenuSistema
@@ -562,25 +582,6 @@
             this.btnMenuSistema.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMenuSistema.UseVisualStyleBackColor = true;
             this.btnMenuSistema.Click += new System.EventHandler(this.btnMenuSistema_Click);
-            // 
-            // btnEditarIndexes
-            // 
-            this.btnEditarIndexes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnEditarIndexes.FlatAppearance.BorderSize = 0;
-            this.btnEditarIndexes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnEditarIndexes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.btnEditarIndexes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditarIndexes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditarIndexes.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnEditarIndexes.Location = new System.Drawing.Point(0, 114);
-            this.btnEditarIndexes.Name = "btnEditarIndexes";
-            this.btnEditarIndexes.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btnEditarIndexes.Size = new System.Drawing.Size(183, 38);
-            this.btnEditarIndexes.TabIndex = 5;
-            this.btnEditarIndexes.Text = "Editar índices";
-            this.btnEditarIndexes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditarIndexes.UseVisualStyleBackColor = true;
-            this.btnEditarIndexes.Click += new System.EventHandler(this.btnEditarIndexes_Click);
             // 
             // frmMain
             // 
