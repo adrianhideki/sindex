@@ -278,7 +278,7 @@ namespace sindex.forms
                     session.command = dtSession.Rows[i][18].ToString();
                     session.currentStatement = dtSession.Rows[i][19].ToString();
                     session.cmdSql = dtSession.Rows[i][20].ToString();
-                    session.qryPlan = dtSession.Rows[i][21].ToString();
+                    session.qryPlan = "";
 
                     list.Add(session);
                 }

@@ -37,7 +37,7 @@ BEGIN
                                       ELSE dm_exec_requests.statement_end_offset  
                                       END - dm_exec_requests.statement_start_offset)/2) + 1),'')
           ,cmd_sql                = ISNULL(dm_exec_sql_text.text,'')
-          ,qry_plan               = ISNULL(dm_exec_query_plan.query_plan,'')
+          ,qry_plan               = ISNULL(LEFT(CAST(dm_exec_query_plan.query_plan AS VarChar(MAX)),1000),'')
   INTO #tb_sessions
   FROM sys.dm_exec_sessions WITH (NOLOCK)
           LEFT JOIN sys.dm_exec_requests WITH (NOLOCK)
