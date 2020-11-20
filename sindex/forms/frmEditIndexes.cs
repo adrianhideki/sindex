@@ -189,6 +189,49 @@ namespace sindex.forms
             }
         }
 
+        private void ValidaComando(string tipo, string comando)
+        {
+            string err = "";
+            string acao = "";
+
+            if (tipo == "D") acao = "criação";
+            if (tipo == "C") acao = "exclusão";
+
+            if (comando.ToUpper().Replace(" ", "").IndexOf("DROPDATABASE") > -1) err += "Comando com DROP DATABASE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("DROPTABLE") > -1) err += "Comando com DROP TABLE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("DROPPROC") > -1) err += "Comando com DROP PROCEDURE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("DROPFUNCTION") > -1) err += "Comando com DROP FUNCTION.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("DROPTRIGGER") > -1) err += "Comando com DROP TRIGGER.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("DROPVIEW") > -1) err += "Comando com DROP VIEW.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("DROPSEQUENCE") > -1) err += "Comando com DROP SEQUENCE.\n";
+
+            if (comando.ToUpper().Replace(" ", "").IndexOf("ALTERTABLE") > -1) err += "Comando com ALTER TABLE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("ALTERDATABASE") > -1) err += "Comando com ALTER DATABASE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("ALTERPROC") > -1) err += "Comando com ALTER PROCEDURE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("ALTERVIEW") > -1) err += "Comando com ALTER VIEW.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("ALTERFUNCTION") > -1) err += "Comando com ALTER FUNCTION.\n";
+
+            if (comando.ToUpper().Replace(" ", "").IndexOf("CREATETABLE") > -1) err += "Comando com CREATE TABLE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("CREATEDATABASE") > -1) err += "Comando com CREATE DATABASE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("CREATEPROC") > -1) err += "Comando com CREATE PROCEDURE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("CREATEVIEW") > -1) err += "Comando com CREATE VIEW.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("CREATEFUNCTION") > -1) err += "Comando com CREATE FUNCTION.\n";
+
+            if (comando.ToUpper().Replace(" ", "").IndexOf("INSERTINTO") > -1) err += "Comando com INSERT.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("FROM") > -1) err += "Comando com SELECT.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("DELETE") > -1) err += "Comando com DELETE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("UPDATE") > -1) err += "Comando com UPDATE.\n";
+            if (comando.ToUpper().Replace(" ", "").IndexOf("USE") > -1) err += "Comando com USE DATABASE.\n";
+
+            if (err != "")
+            {
+                if (main.ShowMessage("Foi identificado os seguintes comandos na "+acao+" do(s) índice(s), deseja continuar?\n" + err, "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                {
+                    throw new Exception("Execução cancelada");
+                }
+            }
+        }
+
         private void btnCriarIndice_Click(object sender, EventArgs e)
         {
             try
@@ -198,6 +241,9 @@ namespace sindex.forms
                 script += txtScriptDrop.Text+"\n";
                 script += txtScriptCreate.Text+"\n";
                 script += "COMMIT TRAN;\nEND TRY\nBEGIN CATCH\nROLLBACK;THROW;\nEND CATCH";
+
+                ValidaComando("D", txtScriptDrop.Text);
+                ValidaComando("C", txtScriptCreate.Text);
 
                 if (String.IsNullOrEmpty(txtScriptDrop.Text) || String.IsNullOrEmpty(txtScriptCreate.Text))
                     throw new Exception("Selecione ao menos um índice.");
