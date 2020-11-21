@@ -121,6 +121,17 @@ CREATE TABLE dbo.[index](
 
 CREATE INDEX [IX_stat_stat_name] ON [dbo].[stat] ([stat_name]) INCLUDE ([table_uid], [filter], [is_autocreated], [columns]);
 
+CREATE TABLE dbo.[notification](
+  notification_id integer identity(1,1) NOT NULL
+ ,update_date     datetime NOT NULL
+ ,extract_date    datetime NOT NULL
+ ,notify_type     varchar(50) COLLATE Latin1_General_CI_AS
+ ,notify_desc     varchar(500) COLLATE Latin1_General_CI_AS
+ ,quantity        int
+);
+
+CREATE INDEX [IX_update_date] ON dbo.[notification](extract_date, notify_type, notify_desc);
+
 /*
 ALTER TABLE dbo.[server_configurations]
 ADD CONSTRAINT FK_server_server_configurations 

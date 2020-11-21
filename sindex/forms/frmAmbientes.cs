@@ -104,6 +104,7 @@ namespace sindex.forms
                         txtDatabase.Text = enviroments[index].database;
                         txtUpdateChart.Text = enviroments[index].secondsToRefreshCharts.ToString();
                         txtUpdateTables.Text = enviroments[index].minutesToRefreshTables.ToString();
+                        txtMinLoadData.Text = enviroments[index].minutesToLoadData.ToString();
 
                         setEnabledButtons(true);
                     } else
@@ -115,6 +116,7 @@ namespace sindex.forms
                         txtDatabase.Text = "";
                         txtUpdateChart.Text = "";
                         txtUpdateTables.Text = "";
+                        txtMinLoadData.Text = "";
                     }
 
                 } else {
@@ -143,6 +145,9 @@ namespace sindex.forms
 
             Int32.TryParse(txtUpdateTables.Text, out _num);
             if (String.IsNullOrEmpty(txtUpdateTables.Text) || _num <= 0) _out += "\nMinutos para atualizar tabelas configurado incorretamente.";
+            
+            Int32.TryParse(txtMinLoadData.Text, out _num);
+            if (String.IsNullOrEmpty(txtMinLoadData.Text) || _num < 0) _out += "\nMinutos para monitoramento em segundo plano configurado incorretamente.";
 
             if (_out != "")
                 throw new Exception(_out);
@@ -160,6 +165,8 @@ namespace sindex.forms
                 env.user = txtUsuario.Text;
                 env.password = txtSenha.Text;
                 env.database = txtDatabase.Text;
+                env.minutesToLoadData = Int32.Parse(txtMinLoadData.Text);
+                env.loadData = (Int32.Parse(txtMinLoadData.Text) > 0);
                 env.secondsToRefreshCharts = Int32.Parse(txtUpdateChart.Text);
                 env.minutesToRefreshTables = Int32.Parse(txtUpdateTables.Text);
 
@@ -193,6 +200,8 @@ namespace sindex.forms
                     env.user = txtUsuario.Text;
                     env.password = txtSenha.Text;
                     env.database = txtDatabase.Text;
+                    env.minutesToLoadData = Int32.Parse(txtMinLoadData.Text);
+                    env.loadData = (Int32.Parse(txtMinLoadData.Text) > 0);
                     env.secondsToRefreshCharts = Int32.Parse(txtUpdateChart.Text);
                     env.minutesToRefreshTables = Int32.Parse(txtUpdateTables.Text);
 
@@ -267,6 +276,7 @@ namespace sindex.forms
 
                     main.SetConnectionSettings();
                     main.SetAmbienteText(cbxAmbiente.Text);
+                    main.SetupNotifications();
 
                     DataTable dt = main.GetDbConnect().executeDataTable("SELECT * FROM sys.tables WHERE name = 'index'", new Dapper.DynamicParameters(), main.GetDatabaseName(), out string errMsg, out int errCode);
 

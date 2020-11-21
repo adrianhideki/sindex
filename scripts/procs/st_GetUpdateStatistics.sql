@@ -26,6 +26,7 @@ BEGIN
    ,statUpdateDate datetime
    ,databaseName   varchar(300) COLLATE Latin1_General_CI_AS
    ,scriptUpdate   varchar(MAX) COLLATE Latin1_General_CI_AS
+   ,rows           int
   );
 
   SELECT @minDays = ISNULL(@minDays, 0);
@@ -60,19 +61,23 @@ BEGIN
             ,autoCreated    = stats.auto_created
             ,statUpdateDate = ISNULL(STATS_DATE(stats.object_id, stats.stats_id),''1900-01-01'')
             ,databaseName   = ''[db]''
+            ,rows           = _partitions.rows
       INTO #tb_stats
       FROM [db].sys.stats
            INNER JOIN [db].sys.objects
            ON objects.object_id = stats.object_id
            INNER JOIN [db].sys.schemas
            ON schemas.schema_id = objects.schema_id
+           OUTER APPLY (SELECT TOP(1) partitions.rows
+                        FROM [db].sys.partitions 
+                        WHERE partitions.object_id = stats.object_id) _partitions
       WHERE objects.type NOT IN (''S'',''IT'')
         AND EXISTS(SELECT 1 WHERE @tablesWithData = 0
                    UNION ALL
-                   SELECT 1 FROM [db].sys.partitions WHERE @tablesWithData = 1 AND partitions.object_id = stats.object_id AND partitions.rows > 0);
+                   SELECT 1 WHERE @tablesWithData = 1 AND _partitions.rows > 0);
 
-      INSERT INTO #tb_main(statName, objectName, schemaName, autoCreated, statUpdateDate, databaseName)
-      SELECT statName, objectName, schemaName, autoCreated, statUpdateDate, databaseName
+      INSERT INTO #tb_main(statName, objectName, schemaName, autoCreated, statUpdateDate, databaseName, rows)
+      SELECT statName, objectName, schemaName, autoCreated, statUpdateDate, databaseName, rows
       FROM #tb_stats AS tb
       WHERE DATEDIFF(DAY,tb.statUpdateDate,GETDATE()) >= @minDays
         AND EXISTS(SELECT 1 WHERE ISNULL(@database,'''') = ''''
@@ -123,5 +128,6 @@ BEGIN
         ,databaseName
         ,scriptUpdate
         ,selecionado = CAST(0 AS bit)
+        ,rows
   FROM #tb_main;
 END

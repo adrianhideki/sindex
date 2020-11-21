@@ -16,6 +16,10 @@ IF OBJECT_ID('[dbo].[st_GetFragmentedIndexes]') IS NOT NULL DROP PROCEDURE [dbo]
 IF OBJECT_ID('[dbo].[st_GetUpdateStatistics]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetUpdateStatistics];
 IF OBJECT_ID('[dbo].[st_GetTopQueries]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetTopQueries];
 IF OBJECT_ID('[dbo].[st_GetScriptIndexes]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetScriptIndexes];
+IF OBJECT_ID('[dbo].[st_GetCPUInfo]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetCPUInfo];
+IF OBJECT_ID('[dbo].[st_GetMemoryInfo]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetMemoryInfo];
+IF OBJECT_ID('[dbo].[st_GetNotification]') IS NOT NULL DROP PROCEDURE [dbo].[st_GetNotification];
+IF OBJECT_ID('[dbo].[st_SetNotification]') IS NOT NULL DROP PROCEDURE [dbo].[st_SetNotification];
 
 IF OBJECT_ID('[dbo].[server]') IS NOT NULL DROP TABLE [dbo].[server];
 IF OBJECT_ID('[dbo].[configuration]') IS NOT NULL DROP TABLE [dbo].[configuration];
@@ -28,6 +32,7 @@ IF OBJECT_ID('[dbo].[table]') IS NOT NULL DROP TABLE [dbo].[table];
 IF OBJECT_ID('[dbo].[stat]') IS NOT NULL DROP TABLE [dbo].[stat];
 IF OBJECT_ID('[dbo].[constraint]') IS NOT NULL DROP TABLE [dbo].[constraint];
 IF OBJECT_ID('[dbo].[index]') IS NOT NULL DROP TABLE [dbo].[index];
+IF OBJECT_ID('[dbo].[notification]') IS NOT NULL DROP TABLE [dbo].[notification];
 
 IF OBJECT_ID('[dbo].[fn_GetServerId]') IS NOT NULL DROP FUNCTION [dbo].[fn_GetServerId];
 IF OBJECT_ID('[dbo].[fn_GetLastUpdate]') IS NOT NULL DROP FUNCTION [dbo].[fn_GetLastUpdate];

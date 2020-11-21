@@ -202,6 +202,8 @@ namespace sindex.utils
             enviroments[index].name = env.name;
             enviroments[index].minutesToRefreshTables = env.minutesToRefreshTables;
             enviroments[index].secondsToRefreshCharts = env.secondsToRefreshCharts;
+            enviroments[index].minutesToLoadData = env.minutesToLoadData;
+            enviroments[index].loadData = env.loadData;
         }
 
         public bool ValidarEmail(string email)
@@ -252,6 +254,8 @@ namespace sindex.utils
         public string password { get; set; }
         public string database { get; set; }
         public int minutesToRefreshTables { get; set; }
+        public bool loadData { get; set; }
+        public int minutesToLoadData { get; set; }
         public int secondsToRefreshCharts { get; set; }
 
         public string GetConnectionString(string database)

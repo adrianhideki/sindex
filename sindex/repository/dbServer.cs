@@ -158,6 +158,49 @@ namespace sindex.repository
             }
         }
 
+        public static void SetNotifications(Credentials cred, string database)
+        {
+            dbConnect db = new dbConnect(cred);
+            DynamicParameters param = new Dapper.DynamicParameters();
+
+            string errMsg = "";
+            int returnCode = 0;
+
+            string cmd = String.Format("EXEC dbo.st_SetNotification");
+            db.executeQuery(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+        }
+
+        public static DataTable GetNotifications(Credentials cred, string database, DateTime startDate, DateTime endDate)
+        {
+            dbConnect db = new dbConnect(cred);
+
+            string errMsg = "";
+            string cmd = "";
+            int returnCode = 0;
+
+            DynamicParameters param = new DynamicParameters();
+
+            param.Add("@p_Initial_Date", startDate, DbType.DateTime, ParameterDirection.Input);
+            param.Add("@p_Finish_Date", endDate, DbType.DateTime, ParameterDirection.Input);
+
+            cmd = @"EXEC dbo.st_GetNotifications @Initial_Date = @p_Initial_Date
+                                                ,@Finish_Date  = @p_Finish_Date";
+
+            DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
+
+            if (returnCode != 0)
+            {
+                throw new Exception(errMsg);
+            }
+
+            return res;
+        }
+
         public static DataTable GetSessionInfo(Credentials cred, string database, DynamicParameters param)
         {
             dbConnect db = new dbConnect(cred);
@@ -221,13 +264,7 @@ namespace sindex.repository
             string cmd = "";
             int returnCode = 0;
 
-            cmd = @"SELECT total_physical_memory_kb/1024 AS [Physical Memory (MB)],
-                           available_physical_memory_kb / 1024 AS[Available Memory(MB)],
-                           total_page_file_kb / 1024 / 1024 AS[Total Page File(GB)],
-                           available_page_file_kb / 1024 AS[Available Page File(MB)], 
-                           system_cache_kb / 1024 AS[System Cache(MB)],
-                           system_memory_state_desc AS[System Memory State]
-                    FROM sys.dm_os_sys_memory WITH(NOLOCK) OPTION(RECOMPILE); ";
+            cmd = @"EXEC dbo.st_GetMemoryInfo";
 
             DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
 
@@ -248,28 +285,7 @@ namespace sindex.repository
             string cmd = "";
             int returnCode = 0;
 
-            cmd = @"DECLARE @ts_now bigint = (SELECT cpu_ticks/(cpu_ticks/ms_ticks)FROM sys.dm_os_sys_info);
-
-                 ;WITH CTA
-                  AS (SELECT TOP(10) 
-                             [SQL Server Process CPU Utilization] = SQLProcessUtilization, 
-                             [System Idle Process]                = SystemIdle, 
-                             [Other Process CPU Utilization]      = 100 - SystemIdle - SQLProcessUtilization, 
-                             [Event Time]                         = CAST(DATEADD(ms, -1 * (@ts_now - [timestamp]), GETDATE()) AS time)
-                      FROM ( 
-                            SELECT record_id               = record.value('(./Record/@id)[1]', 'int'), 
-                                   [SystemIdle]            = record.value('(./Record/SchedulerMonitorEvent/SystemHealth/SystemIdle)[1]', 'int'), 
-                                   [SQLProcessUtilization] = record.value('(./Record/SchedulerMonitorEvent/SystemHealth/ProcessUtilization)[1]','int'),
-                                   [timestamp]
-                            FROM ( 
-                                  SELECT [timestamp], CONVERT(xml, record) AS [record] 
-                                  FROM sys.dm_os_ring_buffers 
-                                  WHERE ring_buffer_type = N'RING_BUFFER_SCHEDULER_MONITOR' 
-                                  AND record LIKE '%<SystemHealth>%') AS x 
-                       ) AS y 
-                  ORDER BY record_id DESC)
-                 SELECT * ,ROWID = ROW_NUMBER() OVER (ORDER BY [Event Time] ASC)
-                 FROM CTA;";
+            cmd = @"EXEC dbo.st_GetCPUInfo";
 
             DataTable res = db.executeDataTable(cmd, param, database, out errMsg, out returnCode);
 

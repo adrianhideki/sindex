@@ -160,7 +160,7 @@ namespace sindex.forms
             }
         }
 
-        private void SetConnectionChart()
+        private async void SetConnectionChart()
         {
             DataTable dt = dbServer.GetConnectionsInfo(main.cred, main.databaseSindex);
 
@@ -206,7 +206,7 @@ namespace sindex.forms
             chtConnection.Series[0].IsValueShownAsLabel = true;
         }
 
-        private void SetMemoryChart()
+        private async void SetMemoryChart()
         {
             DataTable dt = dbServer.GetMemoryInfo(main.cred, main.databaseSindex);
 
@@ -236,7 +236,7 @@ namespace sindex.forms
             chtMemory.Series[0].IsValueShownAsLabel = true;
         }
 
-        private void SetCPUChart()
+        private async void SetCPUChart()
         {
             DataTable dt = dbServer.GetCPUInfo(main.cred, main.databaseSindex);
 
@@ -260,7 +260,7 @@ namespace sindex.forms
             chtCPU.Series[1].IsValueShownAsLabel = true;
         }
 
-        private void SetupDiskChart()
+        private async void SetupDiskChart()
         {
             chtArquivos.Series.Clear();
             chtArquivos.Legends.Clear();
@@ -272,7 +272,7 @@ namespace sindex.forms
             chtArquivos.Legends.Add(new Legend() { BackColor = Color.FromArgb(17,17,17) });
         }
 
-        private void SetDiskChart()
+        private async void SetDiskChart()
         {
             DataTable dt = dbServer.GetDatabasesFileInfo(main.cred, main.databaseSindex);
 

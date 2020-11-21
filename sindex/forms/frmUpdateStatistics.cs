@@ -19,8 +19,8 @@ namespace sindex.forms
     {
         Configuration conf;
         frmMain main;
-        string[] gridColName = { "Estatística", "Tabela", "Criado Automático", "Dias Última Atualização", "Data de Atualização", "Banco de Dados", "Script", "Selecionado" };
-        bool[] gridVisible = { true, true, true, true, true, true, true, true };
+        string[] gridColName = { "Estatística", "Tabela", "Criado Automático", "Dias Última Atualização", "Data de Atualização", "Banco de Dados", "Script", "Selecionado", "Linhas" };
+        bool[] gridVisible = { true, true, true, true, true, true, true, true, true };
         int checkedColumn = 7;
         int scriptColumn = 6;
         DataTable dtStats;

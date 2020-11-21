@@ -14,14 +14,26 @@ using sindex.forms;
 using static System.Net.WebRequestMethods;
 using System.IO;
 using Newtonsoft.Json;
+using System.Threading;
+using sindex.repository;
+using System.Runtime.InteropServices;
 
 namespace sindex
 {
     public partial class frmMain : MetroForm
     {
+        [DllImport("USER32.DLL")]
+        public static extern bool ShowWindow(IntPtr handle, int nCmdShow);
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         public string jsonPath = "";
         private static string passPharse = "s1nd3x@hideki";
         public Configuration configuration = null;
+        Thread thread;
+        List<int> notifications;
+
+        private bool erro = false;
 
         #region variáveis de status
         public string databaseSindex = "";
@@ -39,6 +51,8 @@ namespace sindex
             configuration = new Configuration();
             this.Theme = metroStyleManager.Theme;
             this.Style = metroStyleManager.Style;
+            tmrNotification.Enabled = false;
+            thread = new Thread(new ThreadStart(start));
 
             jsonPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
             jsonPath += "\\sindex.config";
@@ -47,6 +61,11 @@ namespace sindex
             LoadConfig();
 
             LoadLogin();
+        }
+
+        private void start()
+        {
+
         }
 
         #region Configurações
@@ -106,7 +125,7 @@ namespace sindex
         public string GetDatabaseName()
         {
             if (ValidaAmbienteConfigurado())
-              return this.databaseSindex;
+                return this.databaseSindex;
             else
             {
                 throw new Exception("Ambiente não selecionado/configurado!");
@@ -162,6 +181,9 @@ namespace sindex
 
         public void LoadLogin()
         {
+            tmrNotification.Enabled = false;
+            erro = false;
+
             this.configuration.currentUser = -1;
             this.configuration.currentConfiguration = -1;
             this.dbCon = null;
@@ -226,6 +248,17 @@ namespace sindex
             if (pnlSubMenuConfig.Visible) pnlSubMenuConfig.Visible = false;
             if (pnlSubMenuTuning.Visible) pnlSubMenuTuning.Visible = false;
             if (pnlSubMenuMonitoramento.Visible) pnlSubMenuMonitoramento.Visible = false;
+        }
+
+        public void SetupNotifications()
+        {
+            if (configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].loadData)
+            {
+                tmrNotification.Interval = configuration.users[configuration.currentUser].enviroments[configuration.currentConfiguration].minutesToLoadData * 1000 * 60;
+            }
+
+            tmrNotification.Enabled = true;
+            notifications = new List<int>();
         }
 
         public void SetAmbienteText(string text)
@@ -368,6 +401,112 @@ namespace sindex
         private void btnEditarIndexes_Click(object sender, EventArgs e)
         {
             LoadEditIndexes();
+        }
+
+        private void SetNotifications()
+        {
+            try
+            {
+                dbServer.SetNotifications(this.cred, this.databaseSindex);
+            }
+            catch (Exception err)
+            {
+                tmrNotification.Enabled = false;
+                erro = true;
+                ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool VerificaNotify(int id)
+        {
+            bool _out = false;
+
+            foreach(int n in notifications)
+            {
+                if (n == id)
+                {
+                    _out = true;
+                    break;
+                }
+            }
+
+            return _out;
+        }
+
+        private void GetNotifications()
+        {
+            try
+            {
+                DataTable dt = dbServer.GetNotifications(this.cred, this.databaseSindex, DateTime.Now, DateTime.Now);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (!VerificaNotify(Int32.Parse(dt.Rows[i][0].ToString())))
+                    {
+                        notifyIcon.BalloonTipText = dt.Rows[i][4].ToString();
+                        notifyIcon.BalloonTipTitle = dt.Rows[i][3].ToString();
+                        notifyIcon.ShowBalloonTip(5000);
+
+                        notifications.Add(Int32.Parse(dt.Rows[i][0].ToString()));
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                tmrNotification.Enabled = false;
+                erro = true;
+                ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void tmrNotification_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (thread.ThreadState != ThreadState.Running)
+                {
+                    lblLastUpdate.Text = "";
+
+                    thread = new Thread(new ThreadStart(SetNotifications));
+                    thread.Start();
+
+                    while (thread.ThreadState == ThreadState.Running)
+                    {
+                        await Task.Delay(300);
+                        lblLastUpdate.Text = "Atualizando...";
+                    }
+
+                    lblLastUpdate.Text = "Atualizado em " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+
+                    if (erro)
+                    {
+                        tmrNotification.Enabled = false;
+                        lblLastUpdate.Text = "Erro ao atualizar os dados!";
+                    }
+                    else
+                    {
+                        GetNotifications();
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                tmrNotification.Enabled = false;
+                lblLastUpdate.Text = "Erro ao atualizar os dados!";
+                ShowMessage(err.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            ShowWindow(this.Handle, 9);
+            SetForegroundWindow(this.Handle);
         }
     }
 }

@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.pnlButtom = new System.Windows.Forms.Panel();
+            this.lblLastUpdate = new MetroFramework.Controls.MetroLabel();
             this.lblAmbiente = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.lblUsuario = new MetroFramework.Controls.MetroLabel();
@@ -63,6 +64,11 @@
             this.btnMenuSair = new System.Windows.Forms.Button();
             this.btnAjuda = new System.Windows.Forms.Button();
             this.btnMenuSistema = new System.Windows.Forms.Button();
+            this.tmrNotification = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.mnuNotify = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.pnlButtom.SuspendLayout();
             this.pnlMenuLogo.SuspendLayout();
@@ -72,6 +78,7 @@
             this.pnlSubMenuMonitoramento.SuspendLayout();
             this.pnlMenu.SuspendLayout();
             this.pnlMenuSistema.SuspendLayout();
+            this.mnuNotify.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroStyleManager
@@ -83,6 +90,7 @@
             // pnlButtom
             // 
             this.pnlButtom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.pnlButtom.Controls.Add(this.lblLastUpdate);
             this.pnlButtom.Controls.Add(this.lblAmbiente);
             this.pnlButtom.Controls.Add(this.metroLabel3);
             this.pnlButtom.Controls.Add(this.lblUsuario);
@@ -92,6 +100,15 @@
             this.pnlButtom.Name = "pnlButtom";
             this.pnlButtom.Size = new System.Drawing.Size(800, 33);
             this.pnlButtom.TabIndex = 1;
+            // 
+            // lblLastUpdate
+            // 
+            this.lblLastUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLastUpdate.Location = new System.Drawing.Point(581, 8);
+            this.lblLastUpdate.Name = "lblLastUpdate";
+            this.lblLastUpdate.Size = new System.Drawing.Size(211, 19);
+            this.lblLastUpdate.TabIndex = 4;
+            this.lblLastUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblAmbiente
             // 
@@ -583,6 +600,39 @@
             this.btnMenuSistema.UseVisualStyleBackColor = true;
             this.btnMenuSistema.Click += new System.EventHandler(this.btnMenuSistema_Click);
             // 
+            // tmrNotification
+            // 
+            this.tmrNotification.Interval = 1000;
+            this.tmrNotification.Tick += new System.EventHandler(this.tmrNotification_Tick);
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.ContextMenuStrip = this.mnuNotify;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Visible = true;
+            // 
+            // mnuNotify
+            // 
+            this.mnuNotify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirToolStripMenuItem,
+            this.sairToolStripMenuItem});
+            this.mnuNotify.Name = "mnuNotify";
+            this.mnuNotify.Size = new System.Drawing.Size(101, 48);
+            // 
+            // abrirToolStripMenuItem
+            // 
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Text = "Abrir";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            // 
+            // sairToolStripMenuItem
+            // 
+            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sairToolStripMenuItem.Text = "Sair";
+            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,6 +656,7 @@
             this.pnlSubMenuMonitoramento.ResumeLayout(false);
             this.pnlMenu.ResumeLayout(false);
             this.pnlMenuSistema.ResumeLayout(false);
+            this.mnuNotify.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -644,6 +695,12 @@
         private System.Windows.Forms.Button btnAjuda;
         private System.Windows.Forms.Button btnMenuSistema;
         private System.Windows.Forms.Button btnEditarIndexes;
+        private System.Windows.Forms.Timer tmrNotification;
+        private MetroFramework.Controls.MetroLabel lblLastUpdate;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private MetroFramework.Controls.MetroContextMenu mnuNotify;
+        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
     }
 }
 
