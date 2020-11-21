@@ -3,12 +3,16 @@ from sys.partitions
 order by rows desc
 
 select *
-from sys.objects
-where name = 'SalesOrderDetail'
+from sys.indexes
+where name LIKE '%SalesOrderDetail%'
 
 select *
 from sys.schemas 
 where schema_id = 9
+
+drop index IX_SalesOrderDetail_ProductID ON Sales.SalesOrderDetail
+drop index IX_SalesOrderDetail_UnitPrice ON Sales.SalesOrderDetail
+
 
 SELECT* 
 FROM Sales.SalesOrderDetail
